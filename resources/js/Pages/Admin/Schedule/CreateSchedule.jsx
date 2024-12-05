@@ -47,11 +47,11 @@ export default function CreateSchedule({ sections, days }) {
 		<form onSubmit={submitHandler}>
 		    <div className="form-group">
 		      <label htmlFor="section">Select Section</label>
-		      <select 
+		      <select
 		      	value={sectionId}
 		      	onChange={e => setSectionId(e.target.value)}
 		      	className="select form-control">
-		      	<option  hidden>---Select Section---</option>
+		      	<option  hidden>Please select</option>
 		      	{
 		      		sections.map(section => (
 		      			<option  value={section.id}>{section.name}</option>
@@ -61,12 +61,12 @@ export default function CreateSchedule({ sections, days }) {
 		    </div>
 
 		     <div className="form-group">
-		      <label htmlFor="section">Select Section</label>
-		      <select 
+		      <label htmlFor="section">Select Subject</label>
+		      <select
 		      	value={subjectId}
 		      	onChange={e => setSubjectId(e.target.value)}
 		      	className="select form-control">
-		      	<option  hidden>---Select Subject---</option>
+		      	<option  hidden>Please select</option>
 		      	{
 		      		subjects && subjects.map(subject => (
 		      			<option  value={subject.id}>{subject.name}</option>
@@ -93,7 +93,7 @@ export default function CreateSchedule({ sections, days }) {
 		    		}
 		    	</tbody>
 		    </table>
-		    <button className="btn btn-primary form-control" type="submit">Create Schedule</button>
+		    <button className="p-2 bg-slate-800 text-white block" type="submit">Create Schedule</button>
 		</form>
 </div>
 )

@@ -8,12 +8,14 @@ use App\Models\Section;
 use App\Models\Subject;
 use App\Models\Day;
 use App\Models\Schedule;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class ScheduleController extends Controller
 {
     public function index() {
         $sections = Section::all();
-        return Inertia::render('Admin/Schedule/List', compact('sections'));   
+        return Inertia::render('Admin/Schedule/List', compact('sections'));
     }
     public function create() {
         return Inertia::render('Admin/Schedule/CreateSchedule', [
@@ -24,11 +26,11 @@ class ScheduleController extends Controller
     }
 
     public function store(Request $request) {
-        // dd($request->all());
+        /*dd($request->all());*/
         foreach($request->schedule as $sched) {
 
             if ($sched['start_time'] && $sched['end_time']) {
-                
+
 
             Schedule::updateOrCreate([
                 "section_id" => $request->section_id,
@@ -48,12 +50,20 @@ class ScheduleController extends Controller
     }
 
     public function get_schedule(string $section_id) {
-        $schedule = Schedule::with(['days', 'sections', 'subjects'])->where('section_id', $section_id)->get();
+        $schedule = Schedule::with(['day', 'section', 'subject'])->where('section_id', $section_id)->get();
 
         return response()->json($schedule);
-
-
     }
 
+    public function show(string $id) {
+        $schedules = Schedule::with(['day', 'section', 'subject'])
+            ->where('section_id', $id)
+            ->get();
+        $data['schedules'] = $schedules;
+
+        $pdf = Pdf::loadView('pdf.schedule', $data)->setPaper('a4', 'landscape');
+
+        return $pdf->stream();
+    }
 
 }

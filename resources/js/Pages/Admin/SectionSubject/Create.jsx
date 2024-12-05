@@ -8,7 +8,7 @@ export default function CombinationCreate({ sections, subjects }) {
 	});
 
 
-	const submitHandler = (e) => {	
+	const submitHandler = (e) => {
 		e.preventDefault();
 		post( route('section-subject.store') );
 	}
@@ -17,14 +17,14 @@ export default function CombinationCreate({ sections, subjects }) {
 	return (
 		<div className="container">
       <div className="bg-white p-6">
-		
+
 		{ errors.subject_id  && errors.section_id && (
 		      	<div role="alert" className="rounded border-s-4 border-red-400 bg-red-100 p-4 mb-4">
 		            <strong className="block font-bold text-red-800"> Validation Error! </strong>
 		            <p className="mt-2 text-sm text-red-700 font-medium">
 		            <ul>
 		            	<li>
-		             		{errors.subject_id} 
+		             		{errors.subject_id}
 		            	</li>
 		            	<li>
 		            	 	{errors.section_id}
@@ -39,7 +39,7 @@ export default function CombinationCreate({ sections, subjects }) {
 		            <p className="mt-2 text-sm text-red-700 font-medium">
 		            <ul>
 		            	<li>
-		             		{errors.subject_id} 
+		             		{errors.subject_id}
 		            	</li>
 		            </ul>
 		            </p>
@@ -51,7 +51,7 @@ export default function CombinationCreate({ sections, subjects }) {
 		            <p className="mt-2 text-sm text-red-700 font-medium">
 		            <ul>
 		            	<li>
-		             		{errors.section_id} 
+		             		{errors.section_id}
 		            	</li>
 		            </ul>
 		            </p>
@@ -60,11 +60,11 @@ export default function CombinationCreate({ sections, subjects }) {
 	     <h1 className="text-lg font-semibold text-gray-900">
         </h1>
         <p className="text-gray-500  mb-6 text-sm">
-          NOTE: This page is for assigning subjects to sections.
+          NOTE: This page is for assigning subjects to sections/classes.
         </p>
 		<form onSubmit={submitHandler}>
 		    <div className="mb-4">
-	          <select 
+	          <select
 			      value={data.section_id}
 			      onChange={e => setData('section_id', e.target.value)}
 			      className="border p-2 rounded w-full">
@@ -76,7 +76,7 @@ export default function CombinationCreate({ sections, subjects }) {
           </div>
 
 		   <div className="mb-4">
-	          <select 
+	          <select
 			      value={data.subject_id}
 			      onChange={e => setData('subject_id', e.target.value)}
 			      className="border p-2 rounded w-full">
@@ -87,7 +87,7 @@ export default function CombinationCreate({ sections, subjects }) {
 			      </select>
           </div>
 
-		  
+
 		    <button disabled={processing} className="btn btn-dark" type="submit">{ processing ? 'Saving...' : 'Save'}</button>
 	</form>
 </div>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import DashboardLayout from '../DashboardLayout.jsx'
 import { useForm, usePage } from "@inertiajs/react"
+import { Inertia } from '@inertiajs/inertia';
 import Tiptap from '../Components/Tiptap.jsx'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
@@ -15,6 +16,16 @@ const AnnounementEdit = ({ announcement }) => {
         image: null
     });
     const { flash } = usePage().props;
+
+    if (flash.success != null && submitted) {
+        MySwal.fire({
+            title: "Success",
+            text: flash.success,
+            icon: "success"
+        });
+        setSubmitted(false)
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
 
@@ -22,25 +33,11 @@ const AnnounementEdit = ({ announcement }) => {
             data: { ...data, _method: 'put'}
         });
 
-        setSubmitted(true);
+        setSubmitted(true)
     }
 
-    useEffect(() => {
-        if (submitted) {
-            if (flash.success != null) {
-                MySwal.fire({
-                    title: "Success",
-                    text: flash.success,
-                    icon: "success"
-                });
-            }
-
-            setSubmitted(false);
-        }
-    }, [submitted])
-
     return (<>
-<h2 className="text-lg font-bold">Create Announcement</h2>
+<h2 className="text-lg font-bold">Edit Announcement</h2>
         <div className="flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl p-4 md:p-5 gap-4">
             <form onSubmit={submitHandler}>
             <div className="max-w-full">

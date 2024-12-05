@@ -13,6 +13,7 @@ function StudentLayout({ children  }) {
             .then(() => window.location.reload())
             .catch((error) => console.error(error))
   }
+    console.log('layout', student)
   return (<>
     <div className="p-5">
 <div className="bg-white md:mx-auto rounded shadow-xl w-full overflow-hidden">
@@ -57,7 +58,9 @@ function StudentLayout({ children  }) {
         type="button"
         className="inline-flex w-auto cursor-pointer select-none appearance-none items-center justify-center space-x-1 rounded border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-white transition hover:border-gray-300 hover:bg-gray-100 focus:blue-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
       >
-        View Schedule
+         <a href={ route('student-schedule.show', { id: student.section.id})}>
+                View Class Schedule
+        </a>
       </button>
       <button
         onClick={logoutHandler}

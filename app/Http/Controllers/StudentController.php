@@ -1,18 +1,17 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\Grade;
+use App\Models\Schedule;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class StudentController extends Controller
 {
     public function login() {
         return Inertia::render('Home/Portal');
-    }
-    public function register() {
-        return Inertia::render('Student/Register');
     }
 
     public function authenticate(Request $request) {
@@ -24,7 +23,7 @@ class StudentController extends Controller
     }
 
     public function grade_page() {
-        $student = Auth::guard('student')->user();
+        $student = Auth::guard('student')->user()->with('section')->first();
         $grades = Grade::whereHas('subject', function($query) use ($student) {
             $query->where('student_id', $student->id);
         })->with('subject')->get();
@@ -38,5 +37,20 @@ class StudentController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+    public function schedule_show(string $id) {
+        if (Auth::guard('student')->user()->section_id != $id) {
+            abort(403);
+        }
+
+         $schedules = Schedule::with(['day', 'section', 'subject'])
+            ->where('section_id', $id)
+            ->get();
+        $data['schedules'] = $schedules;
+
+        $pdf = Pdf::loadView('pdf.schedule', $data)->setPaper('a4', 'landscape');
+
+        return $pdf->stream();
+
     }
 }

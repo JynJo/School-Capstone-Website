@@ -103,6 +103,7 @@ class AnnouncementController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Announcement updated.');
+            /*return response()->json(['success' => 'Announcement updated.']);*/
 
         }
 

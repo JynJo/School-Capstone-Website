@@ -8,13 +8,13 @@ class Schedule extends Model
 {
     protected $fillable = ['subject_id', 'section_id', 'day_id', 'start_time', 'end_time'];
 
-    public function days() {
+    public function day() {
         return $this->belongsTo(Day::class, 'day_id');
     }
-    public function sections() {
+    public function section() {
         return $this->belongsTo(Section::class, 'section_id');
     }
-    public function subjects() {
+    public function subject() {
         return $this->belongsTo(Subject::class, 'subject_id');
     }
 

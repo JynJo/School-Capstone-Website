@@ -16,15 +16,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([AdminSeeder::class]);
-        // Day::insert([
-        //     ['name' => 'Monday'],
-        //     ['name' => 'Tuesday'],
-        //     ['name' => 'Wednesday'],
-        //     ['name' => 'Thursday'],
-        //     ['name' => 'Friday'],
-        // ]);
-
+        /*$this->call([AdminSeeder::class]);*/
+        Day::insert([
+            ['name' => 'Monday'],
+            ['name' => 'Tuesday'],
+            ['name' => 'Wednesday'],
+            ['name' => 'Thursday'],
+            ['name' => 'Friday'],
+        ]);
         // $user = User::factory()->create([
         //     'name' => fake()->name(),
         //     'email' => "admin@admin.com",
@@ -34,11 +33,11 @@ class DatabaseSeeder extends Seeder
 
 
 
-        // User::factory(30) 
+        // User::factory(30)
         //     ->has(Student::factory()) // For each user, create a related student
         //     ->create();
-            
-         // User::factory(30) 
+
+         // User::factory(30)
          //    ->has(Teacher::factory()) // For each user, create a related student
          //    ->create();
     }

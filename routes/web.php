@@ -43,7 +43,7 @@ Route::post('teacher/logout', [App\Http\Controllers\TeacherController::class, 'l
 Route::middleware('student.guard')->prefix('student')->group(function() {
     Route::get('/', [PageController::class, 'student_page'])->name('student.profile');
     Route::get('/grades', [\App\Http\Controllers\StudentController::class, 'grade_page'])->name('student.grades');
-    Route::get('/schedule', [PageController::class, 'student_schedule_page'])->name('student.schedule');
+    Route::get('schedule/{id}', [\App\Http\Controllers\StudentController::class, 'schedule_show'])->name('student-schedule.show');
 });
 
 // Teacher
@@ -140,6 +140,7 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
 
         Route::prefix('schedule')->group(function() {
         Route::get('list', [ScheduleController::class, 'index'])->name('schedule.index');
+        Route::get('show/{id}', [ScheduleController::class, 'show'])->name('schedule.show');
         Route::post('store', [ScheduleController::class, 'store'])->name('schedule.store');
         Route::get('create', [ScheduleController::class, 'create'])->name('schedule.create');
         Route::get('get_schedule/i{section_id}', [ScheduleController::class, 'get_schedule'])->name('get.schedule');

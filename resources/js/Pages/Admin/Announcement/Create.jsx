@@ -16,28 +16,24 @@ const AnnounementCreate = () => {
         image: null
     });
     const { flash } = usePage().props;
-    const submitHandler = (e) => {
-        e.preventDefault();
 
-        post( route('announcement.store'), { forceFormData: true }  );
-
-        setSubmitted(true);
-    }
-
-    useEffect(() => {
-        if (submitted) {
-            if (flash.success != null) {
-                MySwal.fire({
+    if (flash.success != null && submitted) {
+        MySwal.fire({
                     title: "Success",
                     text: flash.success,
                     icon: "success"
                 });
-            }
+        setSubmitted(false)
+    }
 
-            setSubmitted(false)
+    const submitHandler = (e) => {
+        e.preventDefault();
 
-        }
-    }, [submitted])
+        post( route('announcement.store'), { forceFormData: true }  );
+        if (flash.success != null ) setSubmitted(true);
+        setSubmitted(true)
+    }
+
 
     return (<>
        <h2 className="text-lg font-bold">Create Announcement</h2>

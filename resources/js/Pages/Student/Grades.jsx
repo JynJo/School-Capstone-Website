@@ -6,19 +6,14 @@ import {
     Card,
     Button,
 } from "react-bootstrap";
-import { useForm, Link } from "@inertiajs/react";
+import { useForm, Link, usePage } from "@inertiajs/react";
 import StudentLayout from './StudentLayout.jsx';
 
-const Index = ({ student, grades }) => {
+const Index = ({ grades }) => {
     const { post } = useForm();
 
-    const logoutHandler = () => {
-        post(route("student.logout"));
-    };
-
-
+    const { student } = usePage().props;
     console.log(student)
-    console.log(grades)
     const processGrades = (grades) => {
   return grades.reduce((result, item) => {
     const subjectName = item.subject.name;

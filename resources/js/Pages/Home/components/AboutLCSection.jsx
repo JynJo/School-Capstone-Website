@@ -7,9 +7,9 @@ const AboutSBLC = () => {
                 {/* Left Side - Image */}
                 <div className="w-full md:w-1/2">
                     <img
-                        src="https://placehold.co/500x600"
+                        src="/images/about-img.jpg"
                         alt="SBLC Building"
-                        className="rounded h-[600px] w-[500px]"
+                        className="rounded h-[600px] w-[500px] object-cover"
                     />
                 </div>
 
