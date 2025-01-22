@@ -7,9 +7,12 @@ export default function Hero({ title }) {
 		<Parallax
 			strength={400}
 			bgImage="images/img3.jpg"
-			className="hero"
-		>
-		<div className="hero-section"  style={{ fontFamily: "Faculty Glyphic" }}>{ title }</div>
+			className="hero">
+			<div 
+				className="hero-section text-center text-6xl md:text-2xl"  
+				style={{ fontFamily: "Faculty Glyphic" }}>
+				<h1>Lourdes College</h1>
+			</div>
 		</Parallax>
 
 	</>)

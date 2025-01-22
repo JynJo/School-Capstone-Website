@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        /*$this->call([AdminSeeder::class]);*/
+        $this->call([AdminSeeder::class]);
         Day::insert([
             ['name' => 'Monday'],
             ['name' => 'Tuesday'],

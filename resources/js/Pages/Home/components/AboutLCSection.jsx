@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from '@inertiajs/react'
 const AboutSBLC = () => {
     return (
-        <section className="py-10 mt-4">
+        <section className="mt-4">
             <div className="container mx-auto flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-8">
                 {/* Left Side - Image */}
                 <div className="w-full md:w-1/2">
@@ -27,7 +27,7 @@ const AboutSBLC = () => {
                     </button>
                     </Link>
                     {/* Logos Section */}
-                    <div className="flex flex-wrap mt-8 space-x-4 items-center">
+                  {/*  <div className="flex flex-wrap mt-8 space-x-4 items-center">
                         <img
                             src="https://via.placeholder.com/100x50" // Replace with logo URL
                             alt="DepED"
@@ -48,7 +48,7 @@ const AboutSBLC = () => {
                             alt="UKAS"
                             className="h-12"
                         />
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </section>

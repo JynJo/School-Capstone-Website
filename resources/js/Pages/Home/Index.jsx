@@ -8,15 +8,14 @@ import Nav from './components/Nav.jsx'
 import Footer from './Footer.jsx'
 
 function Index({ news }) {
-    console.log(news)
 	return (<>
     <Nav/>
-        <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5">
         <Hero title="Lourdes College"/>
         <NewsSection news={news}/>
         <AcademicsOffered/>
         <AboutLC/>
-        </div>
+    </div>
     <Footer/>
 	</>)
 }
