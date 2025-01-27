@@ -30,9 +30,9 @@ const Events = ({ events }) => {
 
     return (<>
 
-        <h1 className="text-pink font-bold text-4xl m-4">Lourdes College Events</h1>
+        <h1 className="text-pink-800 text-4xl m-4">Events</h1>
+        <span className="text-gray-500 text-sm m-4">Page still in development.</span>
         <div className="p-10 flex flex-row justify-center gap-4">
-
             <div className="flex flex-col">
                 <div>
                     <Calendar
