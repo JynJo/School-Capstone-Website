@@ -9,7 +9,7 @@ export default function Hero({ title }) {
 			bgImage="images/img3.jpg"
 			className="hero">
 			<div 
-				className="hero-section text-center text-6xl md:text-2xl"  
+				className="hero-section text-center text-3xl md:text-[4em]"  
 				style={{ fontFamily: "Faculty Glyphic" }}>
 				<h1>Lourdes College</h1>
 			</div>

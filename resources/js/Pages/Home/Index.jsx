@@ -1,5 +1,3 @@
-import { Element } from 'react-scroll'
-import { Link } from '@inertiajs/react'
 import AcademicsOffered from './AcademicsOffered.jsx'
 import Hero from './Hero.jsx'
 import NewsSection from './News/NewsSection.jsx'

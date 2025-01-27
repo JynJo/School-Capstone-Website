@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from '@inertiajs/react'
+
 const AboutSBLC = () => {
     return (
         <section className="mt-4">

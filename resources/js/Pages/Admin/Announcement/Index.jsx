@@ -38,8 +38,8 @@ const Index = ({ announcements }) => {
                 <tr class="hover:bg-gray-100">
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><img width="80"src={`/storage/${announcement.image}`}/></td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{announcement.title.length > 20 
-    ? `${announcement.title.substring(0, 20)}...` 
-    : announcement.title}</td>
+                        ? `${announcement.title.substring(0, 20)}...` 
+                        : announcement.title}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-uppercase">{ announcement.notice_for}</td>
                     <td className="z-50">
                         <div class="hs-dropdown [--strategy:absolute] [--flip:false] hs-dropdown-example relative inline-flex">
