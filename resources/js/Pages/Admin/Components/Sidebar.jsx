@@ -27,7 +27,7 @@ function Sidebar({  auth  }) {
       <div className="px-6 pt-4">
         {/* Logo */}
         <a
-          className="flex flex-col items-center gap-4 text-pink-600 rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80 hover:text-pink-800"
+          className="flex flex-col items-center gap-4 text-pink-600 text-lg uppercase  focus:outline-none focus:opacity-80 hover:text-pink-800"
           href="#"
           aria-label="Preline"
         >
@@ -153,9 +153,9 @@ function Sidebar({  auth  }) {
                   <li>
                     <Link
                       className="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                      href={ route('teacher.index') }
+                      // href={ route('teacher.index') }
                     >
-                      Parents
+                      Parents (in development)
                     </Link>
                   </li>
                 </ul>
@@ -301,7 +301,7 @@ function Sidebar({  auth  }) {
                 Announcements & News
               </Link>
             </li>
-            <li>
+            {/*<li>
               <Link
                 className="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                 href={ route('schedule.create') }
@@ -331,7 +331,7 @@ function Sidebar({  auth  }) {
                 </svg>
                 Class Schedules
               </Link>
-            </li>
+            </li>*/}
 
           </ul>
         </nav>

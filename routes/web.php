@@ -27,11 +27,11 @@ Route::get('login', [App\Http\Controllers\StudentController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\StudentController::class, 'logout'])->name('student.logout');
 Route::post('/login', [App\Http\Controllers\StudentController::class, 'authenticate'])->name('login');
 // Admin Auth
-Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login-page');
+Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AdminController::class, 'authenticate'])->name('admin.login');
 Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 // Teacher Auth
-Route::get('teacher/login', [App\Http\Controllers\TeacherController::class, 'login'])->name('teacher.login-page');
+Route::get('teacher/login', [App\Http\Controllers\TeacherController::class, 'login'])->name('teacher.login');
 Route::post('teacher/login', [App\Http\Controllers\TeacherController::class, 'authenticate'])->name('teacher.login');
 Route::post('teacher/logout', [App\Http\Controllers\TeacherController::class, 'logout'])->name('teacher.logout');
 
