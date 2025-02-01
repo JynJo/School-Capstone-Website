@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
-//import Announcement from './Announcement.jsx'
+
 function TeacherLayout({ children  }) {
     const { url } = usePage();
     const { teacher } = usePage().props;

@@ -8,7 +8,7 @@ const LatestNews = ({ news }) => {
   <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     {/* Title */}
     <div className="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-      <h2 className="text-2xl font-bold md:text-4xl md:leading-tight text-pink">
+      <h2 className="text-2xl font-bold md:text-4xl md:leading-tight text-[#ea9999]">
         Latest News
       </h2>
        </div>
@@ -30,7 +30,7 @@ const LatestNews = ({ news }) => {
         <h3 className="mt-5 text-xl text-gray-800">
           { news.title}
         </h3>
-        <Link href={ route('news.show', { title: news.title }) } className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-pink">
+        <Link href={ route('news.show', { title: news.title }) } className="mt-3 inline-flex items-center gap-x-1 text-sm font-semibold text-[#ea9999]">
           Read More
           <svg
             className="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
