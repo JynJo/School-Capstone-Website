@@ -22,7 +22,7 @@ class TeacherController extends Controller
         if (Auth::guard('teacher')->attempt($request->only('email', 'password'))) {
             return redirect()->route("teacher.profile");
         } else {
-             return redirect()->route('teacher.login-page')->withErrors('error', 'User does not exists. Please proceed to the ITC office if error persist.');
+             return redirect()->route('teacher.login')->withErrors('error', 'User does not exists. Please proceed to the ITC office if error persist.');
         }
     }
 

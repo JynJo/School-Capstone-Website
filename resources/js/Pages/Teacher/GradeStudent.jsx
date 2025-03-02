@@ -3,7 +3,6 @@ import { usePage, useForm } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-
 function GradeStudent({ section, students, subjects }) {
     const { teacher } = usePage().props;
     const { post, data, setData, errors } = useForm({

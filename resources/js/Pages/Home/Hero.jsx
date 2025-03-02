@@ -15,7 +15,7 @@ export default function Hero({ title }) {
                 {title}
             </h2>
             <span
-				className="text-white text-md  text-center"
+				className="text-white text-md text-center"
             	style={{ fontFamily: 'Open Sans' }}
             >Nurturing Faith, Excellence, and Service</span>
         </div>

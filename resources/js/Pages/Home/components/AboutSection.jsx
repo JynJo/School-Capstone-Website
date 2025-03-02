@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react'
 
 export default function AboutSection() {
     return (
-        <div className="py-12 bg-white">
+        <div data-aos="fade-down" className="py-12 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="lg:text-center">
                     <h2 className="text-[#ea9999] text-center text-3xl my-4 font-semibold" style={{ fontFamily: 'Poppins' }}>

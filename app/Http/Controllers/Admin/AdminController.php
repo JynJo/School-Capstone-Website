@@ -15,7 +15,7 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
             return redirect()->route("admin.dashboard");
         } else {
-             return redirect()->route('admin.login-page')->withErrors('error', 'User does not exists. Please proceed to the ITC office if error persist.');
+             return redirect()->route('admin.login')->withErrors('error', 'User does not exists. Please proceed to the ITC office if error persist.');
         }
     }
     public function logout(Request $request) {

@@ -5,15 +5,15 @@ import Card from "./components/Card.jsx";
 
 const AcademicsOffered = () => {
   var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 2,
     slidesToScroll: 1,
   };
 
   return (
-   <div className="p-4">
+   <div data-aos="fade-down" className="p-4">
       <h2 className="text-[#ea9999] text-center text-3xl my-4 font-semibold" style={{ fontFamily: 'Poppins' }}>
           Programms Offered
       </h2>
@@ -24,7 +24,7 @@ const AcademicsOffered = () => {
               "dotsItemClasses": "hs-carousel-active:bg-blue-700 hs-carousel-active:border-blue-700 size-3 border border-gray-400 rounded-full cursor-pointer dark:border-neutral-600 dark:hs-carousel-active:bg-blue-500 dark:hs-carousel-active:border-blue-500",
               "slidesQty": {
                   "xs": 1,
-                  "lg": 3
+                  "lg": 2
               }
           }'
           className="relative"
@@ -34,32 +34,24 @@ const AcademicsOffered = () => {
                   <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap opacity-0 transition-transform duration-700">
                       <div className="hs-carousel-slide px-1">
                           <div className="flex justify-center h-full bg-gray-100 p-6">
-                              <span className="self-center text-sm text-gray-800 transition duration-700">First slide</span>
+                            <img src='/images/tvl.jpg'/>
                           </div>
                       </div>
                       <div className="hs-carousel-slide px-1">
                           <div className="flex justify-center h-full bg-gray-200 p-6">
-                              <span className="self-center text-sm text-gray-800 transition duration-700">Second slide</span>
+                            <img src='/images/humms.jpg'/>
+
                           </div>
                       </div>
                       <div className="hs-carousel-slide px-1">
                           <div className="flex justify-center h-full bg-gray-300 p-6">
-                              <span className="self-center text-sm text-gray-800 transition duration-700">Third slide</span>
+                            <img src='/images/abm.jpg'/>
+
                           </div>
                       </div>
                       <div className="hs-carousel-slide px-1">
                           <div className="flex justify-center h-full bg-gray-100 p-6">
-                              <span className="self-center text-sm text-gray-800 transition duration-700">Fourth slide</span>
-                          </div>
-                      </div>
-                      <div className="hs-carousel-slide px-1">
-                          <div className="flex justify-center h-full bg-gray-200 p-6">
-                              <span className="self-center text-sm text-gray-800 transition duration-700">Fifth slide</span>
-                          </div>
-                      </div>
-                      <div className="hs-carousel-slide px-1">
-                          <div className="flex justify-center h-full bg-gray-300 p-6">
-                              <span className="self-center text-sm text-gray-800 transition duration-700">Sixth slide</span>
+                            <img src='/images/stem.jpg'/>
                           </div>
                       </div>
                   </div>

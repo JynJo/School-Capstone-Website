@@ -1,6 +1,7 @@
 import StudentLayout from './Layout.jsx';
 import axios from 'axios';
 import { Link } from '@inertiajs/react'
+
 const Index = ({ teacher }) => {
     const section = teacher.section;
 	return (

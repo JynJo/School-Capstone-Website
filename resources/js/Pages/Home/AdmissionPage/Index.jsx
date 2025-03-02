@@ -4,10 +4,19 @@ import { Head } from '@inertiajs/react'
 import Layout from '../Layouts/Layout.jsx'
 
 const Index = ({ auth }) => {
+
+	const images = [
+		'/images/enrollment1.jpg',
+		'/images/enrollment2.jpg',
+		'/images/enrollment3.jpg',
+		'/images/enrollment4.jpg',
+		'/images/enrollment5.jpg',
+	]
+
 	return (<>
     	<Head title="Admissions"/>
 		<Hero title="Admission Process"/>
-		<div className="flex flex-col w-full items-center p-5">
+		<div data-aos="fade-up" className="flex flex-col w-full items-center p-5">
 		<div className="mt-4 w-3/5 flex flex-col gap-[4rem]">
 			{/*<h2 className="h2 text-center text-gray-800">WELCOME TO LOURDES COLLEGE</h2>*/}
 			<p className="font-bold text-[1.4rem] text-[#ea9999]" style={{ fontFamily: 'Open Sans'}}>
@@ -24,8 +33,13 @@ const Index = ({ auth }) => {
 			  <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75"></div>
 			  <span className="relative z-10 bg-white px-6 text-uppercase font-bold">Admission Process</span>
 			</span>
-			<div className="flex flex-wrap flex-row items-center justify-center mt-4">
-				<div className="flex flex-col w-5/12 gap-6">
+			<div className="flex gap-5 flex-col items-center justify-center mt-4">
+				{ images.map((image) => {
+					return <img data-aos="fade-up" className='shadow-sm rounded-lg' src={`${image}`}/>
+				}
+				)}
+
+				{/*<div className="flex flex-col w-5/12 gap-6">
 					<div className="bg-pink px-4 py-2 w-10/12">
 						<h2 className="font-medium text-uppercase">freshmen</h2>
 					</div>
@@ -47,7 +61,7 @@ const Index = ({ auth }) => {
 					<div className="bg-pink px-4 py-2 w-10/12">
 						<h2 className="font-medium text-uppercase">Foreign Students</h2>
 					</div>
-				</div>
+				</div>*/}
 			</div>
 		</div>
 
