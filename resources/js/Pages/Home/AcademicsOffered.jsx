@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import Slider from "react-slick";
 import Card from "./components/Card.jsx";
 
 const AcademicsOffered = () => {
