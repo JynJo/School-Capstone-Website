@@ -1,4 +1,4 @@
-import Layout from './Layout.jsx';
+import Layout from "./Layout.jsx";
 
 const Announcement = ({ announcement }) => {
     console.log(announcement);
@@ -16,11 +16,16 @@ const Announcement = ({ announcement }) => {
 
                                 <p
                                     className="mt-4 text-gray-700 break-words"
-                                    dangerouslySetInnerHTML={{ __html: announcement.content }}
+                                    dangerouslySetInnerHTML={{
+                                        __html: announcement.content,
+                                    }}
                                 ></p>
 
                                 <small className="text-gray-500">
-                                    Announced on: {new Date(announcement.created_at).toLocaleString()}
+                                    Announced on:{" "}
+                                    {new Date(
+                                        announcement.created_at
+                                    ).toLocaleString()}
                                 </small>
                             </div>
                         </div>

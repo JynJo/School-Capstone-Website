@@ -1,13 +1,9 @@
-import React from 'react'
-import DashboardLayout from './DashboardLayout'
+import React from "react";
+import DashboardLayout from "./DashboardLayout";
 
 function Dashboard({ auth }) {
-  return (
-    <>
-</>
-
-  )
+    return <></>;
 }
 
-Dashboard.layout = page => <DashboardLayout children={page}/>
-export default Dashboard
+Dashboard.layout = (page) => <DashboardLayout children={page} />;
+export default Dashboard;
