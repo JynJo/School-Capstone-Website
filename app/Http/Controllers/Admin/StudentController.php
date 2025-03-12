@@ -115,13 +115,13 @@ class StudentController extends Controller
     }
 
     public function destroy(int $id) {
-        $student = Student::where('user_id', $id);
-        $student->delete();
-
-        $user = User::findOrFail($id);
+        // $student = Student::where('user_id', $id)->first();
+        // dd($student);
+        // $student->delete();
+        $user = Student::findOrFail($id);
         $user->delete();
 
-        return back()->with('success', 'Student deleted successfuly.');
+        return redirect()->back()->with('success', 'Student deleted successfuly.');
     }
 
 }

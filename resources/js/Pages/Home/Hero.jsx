@@ -6,12 +6,12 @@ export default function Hero({ title }) {
             className="h-[70vh] flex items-center justify-center bg-cover bg-center flex-col"
             style={{
                 backgroundImage:
-                    "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('/images/about-img.jpg')", // Dark shade overlay
+                    "linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('/images/about-img.jpg')", // Dark shade overlay
             }}
         >
             <h2
                 className="text-white text-4xl md:text-6xl font-bold text-center"
-                style={{ fontFamily: "Open Sans" }}
+                style={{ fontFamily: "Libre Baskerville" }}
             >
                 {title}
             </h2>

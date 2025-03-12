@@ -15,77 +15,69 @@ function Portal({ error }) {
     return (
         <>
             <Head title="Student Portal" />
-            <div className="flex justify-center items-center bg-white flex-col  bg-light gap-6 mt-4">
-                <div className="flex flex-col items-center">
-                    <div className="flex flex-row items-center gap-5">
-                        <img
-                            src="/images/lc-seal.png"
-                            alt="LC SEAL"
-                            width="100"
-                        />
-                        <p
-                            className="text-xl font-bold text-pink text-uppercase tracking-wide"
-                            style={{ fontFamily: "Faculty Glyphic" }}
-                        >
-                            Lourdes College
-                        </p>
-                    </div>
-                    <div className="w-full py-0.5 my-2 bg-pink rounded-xl"></div>
-                    <p
-                        className="text-pink text-lg font-light text-uppercase  tracking-wider"
-                        style={{ fontFamily: "Poppins" }}
+            <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8 h-[90vh]">
+                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                    <img
+                        alt="Your Company"
+                        src="/images/lc-seal.png"
+                        className="mx-auto h-20 w-auto"
+                    />
+                    <h2
+                        className="text-center text-2xl/9 font-bold tracking-wider text-pink-900 mt-2"
+                        style={{ fontFamily: ' "Faculty Glyphic"' }}
                     >
-                        student portal
-                    </p>
+                        LC: Student Portal
+                    </h2>
                 </div>
-                <form onSubmit={submitHandler} className="bg-white mt-4 w-1/4">
-                    <div className="flex flex-col gap-4">
-                        <label
-                            htmlFor="email"
-                            className="rounded relative block border border-gray-200 focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                        >
-                            <input
-                                type="text"
-                                id="email"
-                                value={data.email}
-                                onChange={(e) =>
-                                    setData("email", e.target.value)
-                                }
-                                className=" font-light peer p-2 border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                                placeholder="Email"
-                            />
-                            <span className="font-light pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-md text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                                Email
-                            </span>
-                        </label>
 
-                        {/* Password */}
+                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+                    <form action="#" method="POST" className="space-y-6">
+                        <div>
+                            <div className="mt-2">
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    autoComplete="email"
+                                    placeholder="Email"
+                                    value={data.email}
+                                    onChange={(e) =>
+                                        setData("email", e.target.value)
+                                    }
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6"
+                                />
+                            </div>
+                        </div>
 
-                        <label
-                            htmlFor="Username"
-                            className="rounded relative block border border-gray-200 focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
-                        >
-                            <input
-                                type="text"
-                                id="Username"
-                                value={data.password}
-                                onChange={(e) =>
-                                    setData("password", e.target.value)
-                                }
-                                className="font-light peer p-2 border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
-                                placeholder="Username"
-                            />
-                            <span className="font-light pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-md text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
-                                Password
-                            </span>
-                        </label>
+                        <div>
+                            <div className="mt-2">
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    value={data.password}
+                                    onChange={(e) =>
+                                        setData("password", e.target.value)
+                                    }
+                                    autoComplete="current-password"
+                                    placeholder="Password"
+                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6"
+                                />
+                            </div>
+                        </div>
 
-                        <button className="cursor-pointer rounded hover:opacity-75 bg-pink p-2 w-full block font-medium text-uppercase">
-                            Submit
-                        </button>
-                    </div>
-                </form>
-            </div>
+                        <div>
+                            <button
+                                type="submit"
+                                onClick={submitHandler}
+                                className="flex w-full justify-center rounded-md bg-pink-600 px-3 py-1.5 text-sm/6 text-white shadow-sm hover:bg-pink-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-600"
+                            >
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>{" "}
         </>
     );
 }

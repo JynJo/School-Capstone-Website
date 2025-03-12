@@ -38,18 +38,6 @@ function StudentLayout({ children }) {
                             </p>
                         </div>
                         <div className="flex gap-2">
-                            <Link href={route("student.profile")}>
-                                <button
-                                    type="button"
-                                    className={`${
-                                        secondSegment === "index"
-                                            ? "bg-pink-700 hover:border-pink-300 hover:bg-pink-600 focus:ring-pink-300 text-white"
-                                            : "focus:ring-gray-300 active:bg-white hover:bg-gray-100 focus:border-gray-300 hover:border-gray-300 bg-white"
-                                    } inline-flex w-auto cursor-pointer select-none appearance-none items-center justify-center space-x-1 rounded border border-gray-200  px-3 py-2 text-sm font-medium text-gray-800 transition focus:outline-none focus:ring-2`}
-                                >
-                                    Assigned Task
-                                </button>
-                            </Link>
                             <Link href={route("student.grades")}>
                                 <button
                                     type="button"
@@ -62,7 +50,7 @@ function StudentLayout({ children }) {
                                     View Report Card
                                 </button>
                             </Link>
-                            <button
+                            {/*<button
                                 type="button"
                                 className="inline-flex w-auto cursor-pointer select-none appearance-none items-center justify-center space-x-1 rounded border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-white transition hover:border-gray-300 hover:bg-gray-100 focus:blue-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300"
                             >
@@ -73,7 +61,7 @@ function StudentLayout({ children }) {
                                 >
                                     View Class Schedule
                                 </a>
-                            </button>
+                            </button>*/}
                             <button
                                 onClick={logoutHandler}
                                 type="button"
