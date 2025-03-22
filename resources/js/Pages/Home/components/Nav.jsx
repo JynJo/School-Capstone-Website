@@ -42,13 +42,13 @@ export default function Nav() {
                         </li>
 
                         <li>
-                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('events')}>
+                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href="admin/login">
                                 Staff Portal
                             </Link>
                         </li>
 
                         <li>
-                            <Link href="/grade-portal" className="hover:text-pink-700 text-md text-gray-900 transition" href={route('events')}>
+                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('student.portal')}>
                                 Grades Portal
                             </Link>
                         </li>

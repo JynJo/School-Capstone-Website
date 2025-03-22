@@ -9,69 +9,64 @@ export default function StudentList({ auth, students }) {
     return (
         <>
             <div className="overflow-x-auto overflow-y-auto p-4">
-                <div className="mb-4">
-                    <h3 class="text-lg font-semibold text-slate-600 mb-2 ">
-                        List of the current students.
-                    </h3>
-                    <p class="text-slate-500 text-sm">
-                        There's a scroll bar in the bottom (in case of table
-                        overlapping).
-                    </p>
+                <div className="mb-4 flex flex-row items-center gap-4">
+                    <h1 class="font-semibold">
+                        Student Management
+                    </h1>
+                    <Link
+                        href={route("student.create")}
+                        className="btn btn-primary btn-sm"
+                    >
+                        Add New
+                    </Link>
                 </div>
-                <Link
-                    href={route("student.create")}
-                    className="font-light p-2 btn btn-dark m-4"
-                >
-                    Add new student
-                </Link>
-                <table className="">
-                    <thead class="bg-gray-50">
+                <table className="table table-bordered table-responsive shadow-sm table-hover">
+                    <thead class="">
                         <tr>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                class=""
                             >
                                 ID Number
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                scope=""
+                                class=""
                             >
-                                Full Name
+                                Name
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                scope=""
+                                class=""
                             >
                                 Email
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                scope=""
+                                class=""
                             >
                                 Section
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                scope=""
+                                class=""
                             >
                                 Blood Type
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                scope=""
+                                class=""
                             >
                                 Address
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercas"
+                                scope=""
+                                class=""
                             >
                                 Parent Contact
                             </th>
                             <th
-                                scope="col"
-                                class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase"
+                                scope=""
+                                class=""
                             >
                                 Options
                             </th>
@@ -103,7 +98,7 @@ export default function StudentList({ auth, students }) {
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                                             {student.parent_no}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                        <td class=" ">
                                             <button
                                                 onClick={(e) =>
                                                     deleteHandler(student.id)

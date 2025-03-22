@@ -26,17 +26,8 @@ export default function StudentCreate({ sections }) {
         <>
             <div className="">
                 <div className="mx-auto">
-                    <div className="bg-white p-6">
-                        <h1 className="text-lg font-semibold text-gray-900">
-                            Student Information
-                        </h1>
-                        <p className="text-gray-500  mb-6 text-sm">
-                            Please use student's lccdo account for email
-                            address.
-                        </p>
+                    <div className="bg-gray-50 p-6">
                         <form onSubmit={submitHandler}>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                <div>
                                     <input
                                         type="text"
                                         value={data.name}
@@ -51,8 +42,6 @@ export default function StudentCreate({ sections }) {
                                             {errors.name}
                                         </p>
                                     )}
-                                </div>
-                                <div>
                                     <input
                                         type="text"
                                         value={data.id_number}
@@ -67,9 +56,6 @@ export default function StudentCreate({ sections }) {
                                             {errors.id_number}
                                         </p>
                                     )}
-                                </div>
-                            </div>
-                            <div className="mb-4">
                                 <input
                                     type="email"
                                     value={data.email}
@@ -84,8 +70,6 @@ export default function StudentCreate({ sections }) {
                                         {errors.email}
                                     </p>
                                 )}
-                            </div>
-                            <div className="mb-4">
                                 <select
                                     value={data.section_id}
                                     onChange={(e) =>
@@ -111,8 +95,6 @@ export default function StudentCreate({ sections }) {
                                         {errors.section_id}
                                     </p>
                                 )}
-                            </div>
-                            <div className="mb-4">
                                 <input
                                     type="text"
                                     value={data.address}
@@ -127,9 +109,6 @@ export default function StudentCreate({ sections }) {
                                         {errors.address}
                                     </p>
                                 )}
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                <div>
                                     <select
                                         value={data.blood_type}
                                         onChange={(e) =>
@@ -157,8 +136,6 @@ export default function StudentCreate({ sections }) {
                                             {errors.blood_type}
                                         </p>
                                     )}
-                                </div>
-                                <div>
                                     <select
                                         value={data.gender}
                                         onChange={(e) =>
@@ -177,9 +154,6 @@ export default function StudentCreate({ sections }) {
                                             {errors.gender}
                                         </p>
                                     )}
-                                </div>
-
-                                <div>
                                     <input
                                         type="number"
                                         value={data.parent_no}
@@ -194,8 +168,6 @@ export default function StudentCreate({ sections }) {
                                             {errors.parent_no}
                                         </p>
                                     )}
-                                </div>
-                                <div>
                                     <label htmlFor="birthday">Birthday</label>
                                     <input
                                         type="date"
@@ -212,10 +184,7 @@ export default function StudentCreate({ sections }) {
                                             {errors.birthday}
                                         </p>
                                     )}
-                                </div>
-                            </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                 <input
                                     type="text"
                                     value={data.password}
@@ -242,7 +211,6 @@ export default function StudentCreate({ sections }) {
                                         {errors.password}
                                     </p>
                                 )}
-                            </div>
 
                             <button
                                 type="submit"

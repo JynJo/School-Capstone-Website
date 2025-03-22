@@ -16,12 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->text('address');
-            $table->text('blood_type');
-            $table->text('id_number');
-            $table->text('birthday');
-            $table->text('gender');
-            $table->text('parent_no');
+            $table->string('address');
+            $table->string('blood_type');
+            $table->string('id_number');
+            $table->string('birthday');
+            $table->string('gender');
+            $table->string('parent_no');
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->unsignedBigInteger('section_id');

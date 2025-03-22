@@ -29,12 +29,6 @@ class Student extends Authenticatable
         'remember_token',
     ];
     protected $casts = [
-        'id_number' => 'encrypted',
-        'blood_type' => 'encrypted',
-        'address' => 'encrypted',
-        'parent_no' => 'encrypted',
-        'birthday' => 'encrypted',
-        'gender' => 'encrypted',
         'password' => 'hashed'
     ];
 

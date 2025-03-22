@@ -23,7 +23,7 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/news/{title}', [NewsController::class, 'show'])->name('news.show');
 
 // Student Auth
-Route::get('grade-portal', [App\Http\Controllers\StudentController::class, 'login']);
+Route::get('grade-portal', [App\Http\Controllers\StudentController::class, 'login'])->name('student.portal');
 Route::post('logout', [App\Http\Controllers\StudentController::class, 'logout'])->name('student.logout');
 Route::post('/login', [App\Http\Controllers\StudentController::class, 'authenticate'])->name('login');
 // Admin Auth
@@ -46,7 +46,7 @@ Route::middleware('student.guard')->prefix('student')->group(function() {
     Route::get('schedule/{id}', [\App\Http\Controllers\StudentController::class, 'schedule_show'])->name('student-schedule.show');
 });
 
-Route::get('/get_grades', [\App\Http\Controllers\StudentController::class, 'get_grades'])->name('student.get_grades');
+Route::post('/get_grades', [\App\Http\Controllers\StudentController::class, 'get_grades'])->name('student.get_grades');
 
 // Teacher
 Route::middleware('teacher.guard')->prefix('teacher')->group(function() {

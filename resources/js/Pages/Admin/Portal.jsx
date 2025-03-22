@@ -50,7 +50,7 @@ function Portal({ error }) {
                         </div>
 
                         <div>
-                            <div className="mt-2">
+                            <div className="">
                                 <input
                                     id="password"
                                     name="password"

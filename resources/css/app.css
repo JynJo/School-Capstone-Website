@@ -219,6 +219,7 @@ a:hover {
     /* Add more CSS variables here. */
 }
 
+
 @media only screen and (max-width: 768px) {
     nav {
        position: fixed;
