@@ -15,7 +15,7 @@ function StudentLayout({ children }) {
 
     console.log(grades)
     return (<div className='flex flex-row justify-center mt-4'>
-        <div className="p-4 w-10/12 shadow-sm">
+        <div className="p-4 w-10/12 shadow-xl">
 
             <div>
                 <h2>Name: <b>{student.name}</b></h2>

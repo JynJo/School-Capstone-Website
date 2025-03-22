@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use App\Models\Admin;
+
 class AdminController extends Controller
 {
     public function login() {
@@ -12,11 +14,14 @@ class AdminController extends Controller
     }
 
     public function authenticate(Request $request) {
-        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
+        if ($request->pin == env('ADMIN_PIN')) {
+            $admin = Admin::where('email', 'admin@admin.com')->first();
+            Auth::guard('admin')->login($admin);
+
             return redirect()->route("admin.dashboard");
-        } else {
-             return redirect()->route('admin.login')->withErrors('error', 'User does not exists. Please proceed to the ITC office if error persist.');
         }
+        
+        return redirect()->route('admin.login');
     }
     public function logout(Request $request) {
         Auth::guard('admin')->logout();

@@ -72,7 +72,7 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
 
 			             <PhotoProvider>
 					      <div className="foo">
-					          <PhotoView src={`/storage/${section.schedule.image}`}>
+					          <PhotoView src={`/storage/${section.schedule?.image ? section.schedule.image : '' }`}>
 						           <button class="btn btn-sm btn-warning">
 	                                	View Class Schedule
 	                            	</button>
