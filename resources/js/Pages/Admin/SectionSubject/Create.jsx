@@ -1,6 +1,6 @@
 import DashboardLayout from '../DashboardLayout.jsx'
 import { useForm } from '@inertiajs/react'
-
+import CreateSchedule from '../Schedule/CreateSchedule.jsx'
 export default function AssignSubject({ sections, subjects }) {
 	const { data, setData, post, errors, processing } = useForm({
 		section_id: '',
@@ -13,8 +13,14 @@ export default function AssignSubject({ sections, subjects }) {
 		post( route('section-subject.store') );
 	}
 
+	const uploadSchedule = (e) => {
+		e.preventDefault()
+		post( route('schedule.store') );
 
-	return (
+	}
+
+
+	return (<>
       <div className="mt-4">
 			<h1 className="mb-2 font-semibold">
 			 	Assign Subject
@@ -73,7 +79,7 @@ export default function AssignSubject({ sections, subjects }) {
 			      </select>
           </div>
 
-		   <div className="mb-4">
+		   <div>
 	          <select
 			      value={data.subject_id}
 			      onChange={e => setData('subject_id', e.target.value)}
@@ -84,10 +90,11 @@ export default function AssignSubject({ sections, subjects }) {
 			      	)) : <option disabled>---No section available---</option>}
 			      </select>
           </div>
-
-
-		    <button disabled={processing} className="btn btn-primary btn-sm" type="submit">{ processing ? 'Saving...' : 'Assign'}</button>
+		    <button disabled={processing} className="mt-2 btn btn-primary btn-sm" type="submit">{ processing ? 'Saving...' : 'Assign'}</button>
 	</form>
 </div>
-)
+	
+	<CreateSchedule sections={sections}/>
+	
+</>)
 }

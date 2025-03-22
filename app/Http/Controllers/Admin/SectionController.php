@@ -12,7 +12,7 @@ class SectionController extends Controller
 {
     public function index() {
         return Inertia::render('Admin/Section/SectionList', [
-            'sections' => Section::paginate(10),
+            'sections' => Section::with('schedule')->paginate(10),
             'subjects' => Subject::paginate(10),
             'allSections' => Section::all(),
             'allSubjects' => Subject::all()

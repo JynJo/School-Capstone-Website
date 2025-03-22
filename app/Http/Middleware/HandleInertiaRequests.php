@@ -43,6 +43,8 @@ class HandleInertiaRequests extends Middleware
             ],
             'teacher' => fn () => Auth::guard('teacher')->check() ? Auth::guard('teacher')->user()->load('section') : null,
             'student' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->load('section') : null,
+            'schedule' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->section->schedule()->get() : null,
+            'grades' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->grades->load('subjects')->get() : null,
             'auth' => [
                 // 'user' => fn () => Auth::user() && Auth::user()->load(['student', 'student.section']) ? Auth::user()->load(['student', 'student.section.teachers.user']) : Auth::user(),
                 // 'grades' => fn () =>

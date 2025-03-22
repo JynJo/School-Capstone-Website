@@ -105,7 +105,7 @@ export default function StudentList({ auth, students }) {
                                 </>
                             ))
                         ) : (
-                            <p className="text-muted p-4 text-sm bg-slate-200">
+                            <p className="">
                                 No records available.
                             </p>
                         )}

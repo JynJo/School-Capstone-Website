@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\SectionSubjectController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\ScheduleController;
-use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\NewsController;
@@ -30,11 +29,6 @@ Route::post('/login', [App\Http\Controllers\StudentController::class, 'authentic
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 Route::post('admin/login', [AdminController::class, 'authenticate'])->name('admin.login');
 Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-// Teacher Auth
-Route::get('teacher/login', [App\Http\Controllers\TeacherController::class, 'login'])->name('teacher.login');
-Route::post('teacher/login', [App\Http\Controllers\TeacherController::class, 'authenticate'])->name('teacher.login');
-Route::post('teacher/logout', [App\Http\Controllers\TeacherController::class, 'logout'])->name('teacher.logout');
-
 
 // Announcement
 /*Route::get('announcemen'announcement't');*/
@@ -47,24 +41,6 @@ Route::middleware('student.guard')->prefix('student')->group(function() {
 });
 
 Route::post('/get_grades', [\App\Http\Controllers\StudentController::class, 'get_grades'])->name('student.get_grades');
-
-// Teacher
-Route::middleware('teacher.guard')->prefix('teacher')->group(function() {
-    Route::get('/', [\App\Http\Controllers\TeacherController::class, 'index'])->name('teacher.profile');
-    Route::get('/announcement', [\App\Http\Controllers\TeacherController::class, 'announcement'])->name('teacher.announcement');
-    /*Route::get('/get-teacher-students/${section_id}', [\App\Http\Controllers\TeacherController::class, 'get_students'])->name('teacher.get-students');*/
-    /*Route::get('get-students/${id}', [PageController::class, 'get_students'])->name('teacher.get_students');*/
-
-    // Route::get('/grades', [PageController::class, 'student_grade_page'])->name('student.grades');
-    // Route::get('/schedule', [PageController::class, 'student_schedule_page'])->name('student.schedule');
-});
-
-// Grades
-Route::middleware('teacher.guard')->prefix('teacher')->group(function() {
-    Route::get('grade-create', [\App\Http\Controllers\GradeController::class, 'create'])->name('teacher-grade.create');
-    Route::post('grade-store', [\App\Http\Controllers\GradeController::class, 'store'])->name('grades.store');
-
-});
 
 
 Route::prefix('admin')->middleware('admin.guard')->group(function () {
@@ -79,27 +55,6 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
         Route::get('edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
         Route::put('update/{id}', [StudentController::class, 'update'])->name('student.update');
         Route::delete('destroy/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
-    });
-
-        // admin/teacher-specific routes go here
-     Route::prefix('teacher')->group(function () {
-        // Resources
-        Route::get('list', [TeacherController::class, 'index'])->name('teacher.index');
-        Route::get('create', [TeacherController::class, 'create'])->name('teacher.create');
-        Route::post('store', [TeacherController::class, 'store'])->name('teacher.store');
-        Route::get('edit/{id}', [TeacherController::class, 'edit'])->name('teacher.edit');
-        Route::put('update/{id}', [TeacherController::class, 'update'])->name('teacher.update');
-        Route::delete('destroy/{id}', [TeacherController::class, 'destroy'])->name('teacher.destroy');
-        Route::get('show/{id}', [TeacherController::class, 'show'])->name('teacher.show');
-
-
-        // Assigning section to teacher
-        Route::get('teacher-section', [TeacherController::class, 'assign_section'])->name('teacher-section.create');
-        Route::post('teacher-section', [TeacherController::class, 'store_assign_section'])->name('teacher-section.store');
-
-        // Assigning subject to teacher
-        /*Route::get('teacher-subject/${id}/${section_id}', [TeacherController::class, 'assign_subjects'])->name('teacher-subject.create');*/
-        /*Route::post('teacher-subject', [TeacherController::class, 'store_assign_subjects'])->name('teacher-subject.store');*/
     });
 
     // admin/section-specific routes go here
@@ -140,11 +95,7 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
     });
 
         Route::prefix('schedule')->group(function() {
-        Route::get('list', [ScheduleController::class, 'index'])->name('schedule.index');
-        Route::get('show/{id}', [ScheduleController::class, 'show'])->name('schedule.show');
         Route::post('store', [ScheduleController::class, 'store'])->name('schedule.store');
-        Route::get('create', [ScheduleController::class, 'create'])->name('schedule.create');
-        Route::get('get_schedule/{section_id}', [ScheduleController::class, 'get_schedule'])->name('get.schedule');
     });
 
     Route::prefix('announcement')->group(function() {

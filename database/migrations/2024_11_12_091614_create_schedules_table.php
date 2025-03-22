@@ -14,21 +14,13 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('section_id');
-            $table->unsignedBigInteger('subject_id');
-            $table->unsignedBigInteger('day_id')->nullable();
-            $table->string('start_time')->default('no class');
-            $table->string('end_time')->default('no class');
-
+            $table->text('image');
+            
             $table->foreign('section_id')
                     ->references('id')
                     ->on('sections')
                     ->onDelete('cascade');
                     
-            $table->foreign('subject_id')
-                    ->references('id')
-                    ->on('subjects')
-                    ->onDelete('cascade');
-
             $table->timestamps();
         });
     }

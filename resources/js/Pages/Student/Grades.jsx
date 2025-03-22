@@ -4,80 +4,31 @@ import { useForm, Link, usePage } from "@inertiajs/react";
 import StudentLayout from "./StudentLayout.jsx";
 
 const Index = ({ grades }) => {
-    const { post } = useForm();
+    
 
-    const { student } = usePage().props;
-    console.log(student);
-    const processGrades = (grades) => {
-        return grades.reduce((result, item) => {
-            const subjectName = item.subject.name;
-
-            if (!result[subjectName]) {
-                result[subjectName] = {
-                    Prelims: "-",
-                    MidTerm: "-",
-                    Finals: "-",
-                    Remarks: "-",
-                };
-            }
-
-            if (item.term === "Prelims")
-                result[subjectName].Prelims = item.subject_average;
-            if (item.term === "MidTerm")
-                result[subjectName].MidTerm = item.subject_average;
-            if (item.term === "Finals")
-                result[subjectName].Finals = item.subject_average;
-
-            const avg = parseFloat(item.subject_average);
-            if (!isNaN(avg)) {
-                result[subjectName].Remarks = avg >= 75 ? "Passed" : "Failed";
-            }
-
-            return result;
-        }, {});
-    };
-
-    const processedData = processGrades(grades);
-
-    return (
-        <div className="">
-            <div className="">
-                <h1 className="text-lg  text-gray-900"></h1>
-                <Container fluid>
-                    <Row>
-                        <Col className="p-2">
-                            <table className="w-full table-auto min-w-max border table-bordered">
+    return (<>
+                            <table className="table table-bordered table-auto table-responsive">
                                 <thead>
                                     <tr>
-                                        <th className="p-4">
-                                            <p className="text-sm font-normal">
+                                        <th >
                                                 Subject
-                                            </p>
                                         </th>
-                                        <th className="p-4">
-                                            <p className="text-sm font-normal">
+                                        <th>
                                                 Prelims
-                                            </p>
                                         </th>
-                                        <th className="p-4">
-                                            <p className="text-sm font-normal">
+                                        <th >
                                                 Mid term
-                                            </p>
                                         </th>
-                                        <th className="p-4">
-                                            <p className="text-sm font-normal">
+                                        <th >
                                                 Finals
-                                            </p>
                                         </th>
-                                        <th className="p-4">
-                                            <p className="text-sm font-normal">
+                                        <th>
                                                 Remarks
-                                            </p>
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {Object.keys(processedData).map(
+                                   {/* {Object.keys(processedData).map(
                                         (subject) => (
                                             <tr key={subject}>
                                                 <td className="p-3">
@@ -109,7 +60,7 @@ const Index = ({ grades }) => {
                                                 </td>
                                             </tr>
                                         )
-                                    )}
+                                    )}*/}
                                 </tbody>
                             </table>
 
@@ -131,11 +82,7 @@ const Index = ({ grades }) => {
                                     </p>
                                 </div>
                             )}
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-        </div>
+                        </>
     );
 };
 

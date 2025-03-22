@@ -46,11 +46,9 @@ const AnnounementCreate = () => {
 
             <label htmlFor="noticeFor" >Notice For</label>
             <select value={data.noticeFor} onChange={e => setData('noticeFor', e.target.value)} id="noticeFor" className="form-control">
-                <option selected="">Please select</option>
+                <option disabled></option>
                 <option value="public">Broadcast on website</option>
-                <option value="teachers">Teachers</option>
                 <option value="students">Students</option>
-                <option value="parents">Parents</option>
             </select>
 
                 { errors.noticeFor && <p className="text-red-500 my-2 text-sm"> { errors.noticeFor }</p>}

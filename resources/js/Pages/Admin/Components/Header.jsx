@@ -1,22 +1,27 @@
 import { Link } from '@inertiajs/react'
 import { useState } from 'react'
+import { useForm } from "@inertiajs/react"
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const { post } = useForm()
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
-    return (
+  const logoutHandler = () => {
+    post(route('admin.logout'))
+  }
+
+    return (<>
     <header className="bg-white md:py-3">
         <div className="mx-auto flex h-20 max-w-screen-xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <div className="w-1/2 ">
-                <Link className=" flex flex-row items-center gap-4" href={route('home')}>
+               
                     <h2 className="text-xl hidden md:block text-gray-900 font-semibold" style={{ fontFamily: "Libre Baskerville" }}>
                         Administrator
                     </h2>
-                </Link>
+                
                 <button className="md:hidden text-2xl" onClick={toggleMobileMenu}>
                     {isMobileMenuOpen ? "✖" : "☰"}
                 </button>
@@ -51,8 +56,13 @@ export default function Header() {
                 </nav>
             </div>
         </div>
+        <div className='p-4'>
+         <button onClick={logoutHandler} className='btn btn-sm btn-dark'>Logout</button>
+          
+        </div>
     </header>
 
+    </>
 
     )
 }

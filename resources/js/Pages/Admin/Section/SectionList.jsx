@@ -2,6 +2,7 @@ import DashboardLayout from '../DashboardLayout.jsx'
 import { Link, useForm, router } from '@inertiajs/react'
 import SubjectList from '../Subject/SubjectList.jsx'
 import AssignSubject from '../SectionSubject/Create.jsx'
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 export default function SectionList({ sections, subjects, allSections, allSubjects }) {
 
@@ -59,6 +60,7 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
 	        </tr>
 	        </thead>
 	        <tbody className="">
+	        { console.log(sections)}
 	       { sections?.data.length > 0 ? sections.data.map((section, index) => <>
 						<tr key={section.id}>
 			             <td className="px-3">
@@ -67,9 +69,18 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
 			            	</p>
 			            </td>
 			            <td class="flex flex-row gap-2">
-			             <a href={`/admin/schedule/show/${section.id}`} class="btn btn-sm btn-warning">
-                                View Class Schedule
-                            </a>
+
+			             <PhotoProvider>
+					      <div className="foo">
+					          <PhotoView src={`/storage/${section.schedule.image}`}>
+						           <button class="btn btn-sm btn-warning">
+	                                	View Class Schedule
+	                            	</button>
+					          </PhotoView>
+					      </div>
+					    </PhotoProvider>
+
+			            
                             <Link href={`/admin/subject/show/${section.id}`} class="btn btn-sm btn-warning">
                                 View Assigned Subjects
                             </Link>

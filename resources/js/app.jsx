@@ -4,7 +4,7 @@ import '../css/app.css'
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
 import { HSStaticMethods } from "preline";
-
+import 'react-photo-view/dist/react-photo-view.css';
 HSStaticMethods.autoInit();
 
 const observer = new MutationObserver((mutationsList) => {
