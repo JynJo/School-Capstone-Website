@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use App\Models\Section;
+use App\Models\Subject;
+
 class SectionController extends Controller
 {
     public function index() {
-        return Inertia::render('Admin/Section/SectionList', ['sections' => Section::paginate(10)]);
+        return Inertia::render('Admin/Section/SectionList', [
+            'sections' => Section::paginate(10),
+            'subjects' => Subject::paginate(10),
+        ]);
     }
 
     public function create() {
@@ -18,12 +23,14 @@ class SectionController extends Controller
 
     public function store(Request $request) {
         $validated = $request->validate([
-            'name' => 'required|min:2|max:50|unique:sections,name'
+            'section_name' => 'required|min:2|max:50|unique:sections,name'
         ], [
-            'name.unique' => 'Section already exists.'
+            'section_name.unique' => 'Section already exists'
         ]);
 
-        Section::create($validated);
+        Section::create([
+            'name' => $validated['section_name']
+        ]);
 
         return redirect()
                 ->back()

@@ -113,7 +113,6 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
     });
     // admin/subject-specific routes go here
     Route::prefix('subject')->group(function() {
-        Route::get('list', [SubjectController::class, 'index'])->name('subject.index');
         Route::get('create', [SubjectController::class, 'create'])->name('subject.create');
         Route::post('store', [SubjectController::class, 'store'])->name('subject.store');
         Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('subject.edit');

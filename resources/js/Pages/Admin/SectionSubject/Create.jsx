@@ -1,7 +1,7 @@
 import DashboardLayout from '../DashboardLayout.jsx'
 import { useForm } from '@inertiajs/react'
 
-export default function CombinationCreate({ sections, subjects }) {
+export default function AssignSubject({ sections, subjects }) {
 	const { data, setData, post, errors, processing } = useForm({
 		section_id: '',
 		subject_id: '',
@@ -15,9 +15,10 @@ export default function CombinationCreate({ sections, subjects }) {
 
 
 	return (
-		<div className="container">
-      <div className="bg-white p-6">
-
+      <div className="mt-4">
+			<h1 className="mb-2 font-semibold">
+			 	Assign Subject
+			 </h1>
 		{ errors.subject_id  && errors.section_id && (
 		      	<div role="alert" className="rounded border-s-4 border-red-400 bg-red-100 p-4 mb-4">
 		            <strong className="block font-bold text-red-800"> Validation Error! </strong>
@@ -57,19 +58,16 @@ export default function CombinationCreate({ sections, subjects }) {
 		            </p>
 		         </div>
 	    )}
-	     <h1 className="text-lg font-semibold text-gray-900">
-        </h1>
-        <p className="text-gray-500  mb-6 text-sm">
-          NOTE: This page is for assigning subjects to sections/classes.
-        </p>
+	     
+       
 		<form onSubmit={submitHandler}>
-		    <div className="mb-4">
+		    <div className="mb-2">
 	          <select
 			      value={data.section_id}
 			      onChange={e => setData('section_id', e.target.value)}
-			      className="border p-2 rounded w-full">
+			      className="form-control">
 			      	<option  hidden>Select Section</option>
-			      	{ sections.length > 0 ? sections.map((section) => (
+			      	{ sections && sections.length > 0 ? sections.map((section) => (
 			      		<option value={section.id}>{section.name}</option>
 			      	)) : <option disabled>---No section available---</option>}
 			      </select>
@@ -79,19 +77,17 @@ export default function CombinationCreate({ sections, subjects }) {
 	          <select
 			      value={data.subject_id}
 			      onChange={e => setData('subject_id', e.target.value)}
-			      className="border p-2 rounded w-full">
+			      className="form-control">
 			      	<option  hidden>Select Subject</option>
-			      	{ subjects.length > 0 ? subjects.map((section) => (
+			      	{ subjects && subjects.length > 0 ? subjects.map((section) => (
 			      		<option value={section.id}>{section.name}</option>
 			      	)) : <option disabled>---No section available---</option>}
 			      </select>
           </div>
 
 
-		    <button disabled={processing} className="btn btn-dark" type="submit">{ processing ? 'Saving...' : 'Save'}</button>
+		    <button disabled={processing} className="btn btn-primary btn-sm" type="submit">{ processing ? 'Saving...' : 'Assign'}</button>
 	</form>
-</div>
 </div>
 )
 }
-CombinationCreate.layout = page => <DashboardLayout children={page}/>

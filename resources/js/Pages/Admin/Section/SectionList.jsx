@@ -1,80 +1,95 @@
 import DashboardLayout from '../DashboardLayout.jsx'
 import { Link, useForm, router } from '@inertiajs/react'
+import SubjectList from '../Subject/SubjectList.jsx'
+import AssignSubject from '../SectionSubject/Create.jsx'
 
-export default function SectionList({ sections }) {
+export default function SectionList({ sections, subjects }) {
+
+	const { data, setData, post, errors, processing } = useForm({
+		subject_name: '',
+		section_name: ''
+	});
+
 
 	const deleteHandler = (id) => {
 		router.delete( route('section.destroy', { id: id }) );
 	}
 
+	const storeSubject = (e) => {	
+		e.preventDefault();
+		post( route('subject.store') );
+	}
+
+	const storeSection = (e) => {	
+		e.preventDefault();
+		post(route('section.store') );
+	}
+
 	return (<>
 		<div className="p-4 shadow-sm">
-			<div>
-	            <h3 class="text-lg font-semibold text-slate-600 mb-2 ">List of current sections.</h3>
-	            {/*<p class="text-slate-500">List of the current students.</p>*/}
-	        </div>
-			<Link href={route('section.create')} className="font-light p-2 btn btn-dark m-4">Add new section</Link>
-			<table className="w-full table-auto border table-bordered">
+			<div className="my-4 flex flex-col  gap-4">
+                    <h1 class="font-semibold">
+                        Section Management
+                    </h1>
+
+                <div>
+                <form onSubmit={storeSection}>
+                	<input value={data.section_name} onChange={(e) => setData('section_name', e.target.value)} className="form-control" placeholder="Subject name"/>
+                    <button
+                    	type='submit'
+                        className="btn btn-primary btn-sm mt-2"
+                    >
+                        Insert new
+                    </button>
+                	
+                </form>
+                </div>
+
+                </div>
+
+			<table className="table table-bordered table-hover table-responsive ">
 	        <thead>
 	        <tr>
-	            <th className="p-4 border-b border-slate-200 bg-slate-50">
-	            <p className="text-sm font-normal leading-none text-slate-500">
-	                #
-	            </p>
+	            <th>
+	                Section Name
 	            </th>
-	            <th className="p-4 border-b border-slate-200 bg-slate-50">
-	            <p className="text-sm font-normal leading-none text-slate-500">
-	                Full Name
-	            </p>
-	            </th>
-	            <th className="p-4 border-b border-slate-200 bg-slate-50">
-	            <p className="text-sm font-normal leading-none text-slate-500">
-	                Options
-	            </p>
+	            <th >
+	                Action
 	            </th>
 	        </tr>
 	        </thead>
 	        <tbody className="">
 	       { sections?.data.length > 0 ? sections.data.map((section, index) => <>
 						<tr key={section.id}>
-						 <td className="p-2 py-4">
-			            	<p className="text-sm text-slate-500">
-								{index+1}
-			            	</p>
-			            </td>
 			             <td className="px-3">
-			            	<p className="text-sm text-slate-500">
+			            	<p>
 								{section.name}
 			            	</p>
 			            </td>
-                            <td className="text-center">
-                         <div class="hs-dropdown [--strategy:absolute] [--flip:false] hs-dropdown-example relative inline-flex">
-                            <button id="hs-dropdown-example" type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                Actions
-                                <svg class="hs-dropdown-open:rotate-180 size-4 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m6 9 6 6 6-6"></path>
-                                </svg>
-                            </button>
-
-							 <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 bg-white shadow-md rounded-lg p-2"role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-example">
-                            <Link href={ route('section.edit', { id: section.id }) } class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
-                                Edit
-                            </Link>
-                            <a href={`/admin/schedule/show/${section.id}`} class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
+			            <td class="flex flex-row gap-2">
+			             <a href={`/admin/schedule/show/${section.id}`} class="btn btn-sm btn-warning">
                                 View Class Schedule
                             </a>
-                            <button class="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " onClick={e => deleteHandler(section.id)}>
-                                Delete
-                            </button>
-                            </div>
-                            </div>
-						</td>
+                                            <button
+                                                onClick={e => deleteHandler(section.id)}
+                                                className="btn btn-danger btn-sm"
+                                            >
+                                                Delete
+                                            </button>
+                                           <Link href={ route('section.edit', { id: section.id }) } class="btn btn-sm btn-primary">
+                                Update
+                            </Link>
+                                        </td>
+
+                            
+                           
+                           
 						</tr>
 						</>) : <p className="text-muted p-4 text-sm bg-slate-200">No records available.</p> }
 	        </tbody>
 	    </table>
 	    <div className="flex justify-between mt-4">
-	        <div className="text-sm text-slate-500">
+	        <div className="">
 	        Showing <b>{sections.current_page}</b> of { sections.total }
 	        </div>
 	        <div>
@@ -96,6 +111,35 @@ export default function SectionList({ sections }) {
 	        ))}
 	        </div>
 	    </div>
+
+	    {/* Subject */}
+		<div className="my-4 flex flex-col  gap-4">
+                    <h1 class="font-semibold">
+                        Subject Management
+                    </h1>
+
+                <div>
+                <form onSubmit={storeSubject}>
+                	<input value={data.subject_name} onChange={(e) => setData('subject_name', e.target.value)} className="form-control" placeholder="Subject name"/>
+                    <button
+                    	type='submit'
+                        className="btn btn-primary btn-sm mt-2"
+                    >
+                        Insert new
+                    </button>
+                	
+                </form>
+                </div>
+
+                </div>
+
+		<SubjectList subjects={subjects}/>
+
+
+		{/*Assign Subject to Section*/}
+
+		<AssignSubject />
+
 		</div>
 
 

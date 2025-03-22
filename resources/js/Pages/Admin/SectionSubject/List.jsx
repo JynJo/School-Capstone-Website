@@ -1,7 +1,7 @@
 import DashboardLayout from '../DashboardLayout.jsx'
 import { Link, useForm, router } from '@inertiajs/react'
 
-export default function StudentList({ section_subject }) {
+export default function AssignSubject({ section_subject }) {
 
 	const deleteHandler = (section_id, subject_id) => {
 		router.delete( route('section-subject.destroy', { section_id: section_id, subject_id: subject_id }) );
@@ -102,4 +102,4 @@ export default function StudentList({ section_subject }) {
 	</>)
 }
 
-StudentList.layout = page => <DashboardLayout children={page}/>
+AssignSubject.layout = page => <DashboardLayout children={page}/>

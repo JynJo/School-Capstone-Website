@@ -24,10 +24,11 @@ export default function StudentCreate({ sections }) {
 
     return (
         <>
-            <div className="">
-                <div className="mx-auto">
                     <div className="bg-gray-50 p-6">
                         <form onSubmit={submitHandler}>
+                            <label>
+                                Full Name
+                            </label>
                                     <input
                                         type="text"
                                         value={data.name}
@@ -42,6 +43,9 @@ export default function StudentCreate({ sections }) {
                                             {errors.name}
                                         </p>
                                     )}
+                                    <label>
+                                ID Number
+                            </label>
                                     <input
                                         type="text"
                                         value={data.id_number}
@@ -56,6 +60,9 @@ export default function StudentCreate({ sections }) {
                                             {errors.id_number}
                                         </p>
                                     )}
+                                    <label>
+                                Contacts
+                            </label>
                                 <input
                                     type="email"
                                     value={data.email}
@@ -70,6 +77,9 @@ export default function StudentCreate({ sections }) {
                                         {errors.email}
                                     </p>
                                 )}
+                                <label>
+                                Assign to a section
+                            </label>
                                 <select
                                     value={data.section_id}
                                     onChange={(e) =>
@@ -77,7 +87,7 @@ export default function StudentCreate({ sections }) {
                                     }
                                     className="border p-2 rounded w-full"
                                 >
-                                    <option hidden>Select Section</option>
+                                    <option hidden> Please select</option>
                                     {sections.length > 0 ? (
                                         sections.map((section) => (
                                             <option value={section.id}>
@@ -95,6 +105,9 @@ export default function StudentCreate({ sections }) {
                                         {errors.section_id}
                                     </p>
                                 )}
+                                <label>
+                                Address
+                            </label>
                                 <input
                                     type="text"
                                     value={data.address}
@@ -109,6 +122,9 @@ export default function StudentCreate({ sections }) {
                                         {errors.address}
                                     </p>
                                 )}
+                                <label>
+                                Blood Type
+                            </label>
                                     <select
                                         value={data.blood_type}
                                         onChange={(e) =>
@@ -120,7 +136,7 @@ export default function StudentCreate({ sections }) {
                                         className="border p-2 rounded w-full"
                                     >
                                         <option value="" hidden>
-                                            Select Blood Type
+                                           Please select
                                         </option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>
@@ -136,6 +152,9 @@ export default function StudentCreate({ sections }) {
                                             {errors.blood_type}
                                         </p>
                                     )}
+                                    <label>
+                                Gender
+                            </label>
                                     <select
                                         value={data.gender}
                                         onChange={(e) =>
@@ -144,7 +163,7 @@ export default function StudentCreate({ sections }) {
                                         className="border p-2 rounded w-full"
                                     >
                                         <option value="" hidden>
-                                            Gender
+                                            Please select
                                         </option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -154,6 +173,9 @@ export default function StudentCreate({ sections }) {
                                             {errors.gender}
                                         </p>
                                     )}
+                                    <label>
+                                Parent's Contact
+                            </label>
                                     <input
                                         type="number"
                                         value={data.parent_no}
@@ -184,7 +206,9 @@ export default function StudentCreate({ sections }) {
                                             {errors.birthday}
                                         </p>
                                     )}
-
+                                <label>
+                                Account password
+                            </label>
                                 <input
                                     type="text"
                                     value={data.password}
@@ -192,7 +216,7 @@ export default function StudentCreate({ sections }) {
                                         setData("password", e.target.value)
                                     }
                                     placeholder="Password"
-                                    className="border p-2 rounded w-full"
+                                    className="border p-2 rounded w-full mb-2"
                                 />
                                 <input
                                     type="text"
@@ -216,15 +240,13 @@ export default function StudentCreate({ sections }) {
                                 type="submit"
                                 id="theme-toggle"
                                 disabled={processing}
-                                className="py-2 px-4 text-md rounded bg-slate-800 text-white hover:bg-slate-900 focus:outline-none"
+                                className="btn btn-primary mt-4"
                             >
-                                {processing ? "Saving..." : "Save"}
+                                {processing ? "Saving..." : "Create"}
                             </button>
                         </form>
                     </div>
-                </div>
-            </div>
-        </>
+          </>
     );
 }
 StudentCreate.layout = (page) => <DashboardLayout children={page} />;

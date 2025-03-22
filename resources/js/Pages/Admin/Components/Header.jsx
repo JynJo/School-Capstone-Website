@@ -35,7 +35,7 @@ export default function Header() {
                             </Link>
                         </li>
                         <li>
-                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('events')}>
+                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('section.index')}>
                                 Section & Subjects
                             </Link>
                         </li>

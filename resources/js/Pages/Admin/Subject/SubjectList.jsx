@@ -8,59 +8,41 @@ export default function SubjectList({ subjects }) {
 	}
 
 	return (<>
-		<div className="overflow-x-auto overflow-y-auto p-4 shadow-sm"> 
-			<div>
-	            <h3 class="text-lg font-semibold text-slate-600 mb-2 ">List of current subjects</h3>
-	            {/*<p class="text-slate-500">List of the current students.</p>*/}
-	        </div>
-			<Link href={route('subject.create')} className="font-light p-2 btn btn-dark m-4">Add new subject</Link>
-			<table className="w-full table-auto min-w-max border table-bordered">
+		<div className=""> 
+			<table className="table table-responsive table-bordered table-hover">
 	        <thead>
 	        <tr>
-	            <th className="p-4 border-b border-slate-200 bg-slate-50">
-	            <p className="text-sm font-normal leading-none text-slate-500">
-	                #
-	            </p>
+	            <th >
+	                Subject Name
 	            </th>
-	            <th className="p-4 border-b border-slate-200 bg-slate-50">
-	            <p className="text-sm font-normal leading-none text-slate-500">
-	                Full Name
-	            </p>
-	            </th>
-	            <th className="p-4 border-b border-slate-200 bg-slate-50">
-	            <p className="text-sm font-normal leading-none text-slate-500">
+	            <th>
 	                Options
-	            </p>
 	            </th>
 	        </tr>
 	        </thead>
-	        <tbody className="max-h-12 overflow-y-auto">
+	        <tbody className="">
 	       { subjects?.data.length > 0 ? subjects.data.map((subject, index) => <>
 						<tr key={subject.id}>
-						 <td className="p-2 py-4">
-			            	<p className="text-sm text-slate-500">
-								{index+1}
-			            	</p>
-			            </td>
-			             <td className="px-3">
-			            	<p className="text-sm text-slate-500">
+			             <td className="">
 								{subject.name}
-			            	</p>
 			            </td>
-						<td className="">
-							<button     onClick={e => deleteHandler(subject.id)} className="inline-block rounded bg-red-600 px-3 py-2 text-xs font-medium text-white hover:bg-red-700 mx-2">Delete</button>
-							<Link href={ route('subject.edit', { id: subject.id }) } className="inline-block rounded bg-indigo-600 px-3 py-2 text-xs font-medium text-white hover:bg-indigo-700">Update</Link>
+						<td className="flex flex-row gap-2">
+							<button onClick={e => deleteHandler(subject.id)} className="btn btn-danger btn-sm">Delete</button>
+							<Link href={ route('subject.edit', { id: subject.id }) } className="btn btn-primary btn-sm">Update</Link>
 						</td>
 						</tr>
-						</>) : <p className="text-muted p-4 text-sm bg-slate-200">No records available.</p> }
+						</>) :"No records available." }
 	        </tbody>
 	    </table>
 	    <div className="flex justify-between mt-4">
 	        <div className="text-sm text-slate-500">
-	        Showing <b>{subjects.current_page}</b> of { subjects.total }
+	        { subjects && <>
+	    	   	 Showing <b>{subjects.current_page}</b> of {subjects.total}
+	        	</>
+	    	}
 	        </div>
 	        <div>
-	        { subjects.links.map((link) => (
+	        { subjects && subjects.links.map((link) => (
 	        	link.url ? (
 	        		<Link 
 	        			href={link.url}

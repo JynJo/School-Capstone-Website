@@ -10,19 +10,18 @@ use Inertia\Inertia;
 
 class SubjectController extends Controller
 {
-    public function index() {
-        return Inertia::render('Admin/Subject/SubjectList', ['subjects' => Subject::paginate(10)]);
-    }
     public function create() {
         return Inertia::render('Admin/Subject/SubjectCreate');
     }
 
     public function store(Request $request) {
         $validated = $request->validate([
-            'name' => 'required|min:2|unique:subjects,name'
+            'subject_name' => 'required|min:2|unique:subjects,name'
         ]);
 
-        Subject::create($validated);
+        Subject::create([
+            'name' => $validated['subject_name']
+        ]);
 
         return back()->with('success', 'Subject created successfuly.');
     }
