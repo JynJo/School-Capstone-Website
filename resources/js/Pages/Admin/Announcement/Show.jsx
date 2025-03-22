@@ -3,10 +3,16 @@ import { Link } from '@inertiajs/react'
 
 const Show = ({ announcement }) => {
     return (<>
-        <Link href={ route('announcement.index') }>Back</Link>
-        <section>
-  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
+        <section className='p-6'>
+        <Link className='btn btn-sm btn-primary my-2' href={ route('announcement.index') }>Back</Link>
+  <div className="">
+  <div>
+        <img
+            src={`/storage/${announcement.image}`}
+            className="rounded"
+            width="800"
+        />
+      </div>
       <div>
         <div className="max-w-lg md:max-w-none">
           <h2 className="text-2xl font-semibold text-gray-900 sm:text-3xl">
@@ -19,14 +25,7 @@ const Show = ({ announcement }) => {
         </div>
       </div>
 
-      <div>
-        <img
-            src={`/storage/${announcement.image}`}
-            className="rounded"
-            alt=""
-        />
-      </div>
-    </div>
+      
   </div>
 </section>
 

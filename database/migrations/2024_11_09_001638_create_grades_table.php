@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('student_id');
             $table->unsignedBigInteger('subject_id');
-            $table->text('subject_average');
-            $table->text('final_average');
+            $table->text('average');
             $table->text('term');
             $table->text('semester');
-            $table->text('is_passed');
             $table->timestamps();
 
             $table->foreign('student_id')

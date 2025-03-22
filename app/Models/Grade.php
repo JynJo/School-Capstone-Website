@@ -11,9 +11,7 @@ class Grade extends Model
         'subject_id',
         'term',
         'semester',
-        'subject_average',
-        'final_average',
-        'is_passed'
+        'average'
     ];
 
     protected $casts = [

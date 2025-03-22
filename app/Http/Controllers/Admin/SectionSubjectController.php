@@ -54,15 +54,20 @@ class SectionSubjectController extends Controller
 
         SectionSubject::create($validated);
 
-        return redirect()->route('section-subject.index')->with('success', 'Subject assigned successfuly.');
+        return redirect()->back()->with('success', 'Subject assigned successfuly.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+    public function show(string $id) {
+    
+        $subjects = Section::with('subjects')->find($id);
+
+        return Inertia::render('Admin/SectionSubject/Show', [
+            'subjects' => $subjects
+        ]);
+
     }
 
     /**

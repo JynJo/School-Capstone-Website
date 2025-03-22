@@ -25,7 +25,7 @@ export default function Header() {
                 <nav aria-label="Global" className={`${isMobileMenuOpen ? 'active' : ''}`}>
                     <ul className="flex items-center text-center gap-4 font-semibold uppercase" style={{ fontFamily: "Libre Baskerville" }}>
                         <li>
-                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('home')}>
+                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('admin.dashboard')}>
                                 Dashboard
                             </Link>
                         </li>
@@ -41,7 +41,7 @@ export default function Header() {
                         </li>
 
                         <li>
-                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('student.portal')}>
+                            <Link className="hover:text-pink-700 text-md text-gray-900 transition" href={route('announcement.index')}>
                                 Announcements
                             </Link>
                         </li>

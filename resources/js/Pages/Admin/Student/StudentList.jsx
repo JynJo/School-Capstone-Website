@@ -20,7 +20,7 @@ export default function StudentList({ auth, students }) {
                         Add New
                     </Link>
                 </div>
-                <table className="table table-bordered table-responsive shadow-sm table-hover">
+                <table className="table table-bordered table-responsive table-hover">
                     <thead class="">
                         <tr>
                             <th
@@ -50,24 +50,6 @@ export default function StudentList({ auth, students }) {
                                 scope=""
                                 class=""
                             >
-                                Blood Type
-                            </th>
-                            <th
-                                scope=""
-                                class=""
-                            >
-                                Address
-                            </th>
-                            <th
-                                scope=""
-                                class=""
-                            >
-                                Parent Contact
-                            </th>
-                            <th
-                                scope=""
-                                class=""
-                            >
                                 Options
                             </th>
                         </tr>
@@ -76,34 +58,37 @@ export default function StudentList({ auth, students }) {
                         {students?.data.length > 0 ? (
                             students.data.map((student, index) => (
                                 <>
-                                    <tr class="hover:bg-gray-100">
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                    <tr>
+                                        <td>
                                             {student.id_number}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                        <td >
                                             {student.name}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                        <td >
                                             {student.email}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                        <td >
                                             {student.section.name}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                            {student.blood_type}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                            {student.address}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                                            {student.parent_no}
-                                        </td>
-                                        <td class=" ">
+                                        <td class="flex flex-row gap-2">
+                                        <Link
+                                                href={`/admin/grade/show/${student.id}`}
+                                                className="btn btn-sm btn-success"
+                                            >
+                                                View Grades
+                                            </Link>
+                                        <Link
+                                                href={`/admin/grade/create/${student.id}`}
+                                                className="btn btn-sm btn-success"
+                                            >
+                                                Grade Student
+                                            </Link>
                                             <button
                                                 onClick={(e) =>
                                                     deleteHandler(student.id)
                                                 }
-                                                className="inline-block rounded bg-red-600 px-3 py-2 text-xs font-medium text-white hover:bg-red-700 mx-2"
+                                                className="btn btn-sm btn-danger"
                                             >
                                                 Delete
                                             </button>
@@ -111,7 +96,7 @@ export default function StudentList({ auth, students }) {
                                                 href={route("student.edit", {
                                                     id: student.id,
                                                 })}
-                                                className="inline-block rounded bg-indigo-600 px-3 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                                                className="btn btn-sm btn-primary"
                                             >
                                                 Update
                                             </Link>

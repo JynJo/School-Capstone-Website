@@ -3,7 +3,7 @@ import { Link, useForm, router } from '@inertiajs/react'
 import SubjectList from '../Subject/SubjectList.jsx'
 import AssignSubject from '../SectionSubject/Create.jsx'
 
-export default function SectionList({ sections, subjects }) {
+export default function SectionList({ sections, subjects, allSections, allSubjects }) {
 
 	const { data, setData, post, errors, processing } = useForm({
 		subject_name: '',
@@ -70,6 +70,9 @@ export default function SectionList({ sections, subjects }) {
 			             <a href={`/admin/schedule/show/${section.id}`} class="btn btn-sm btn-warning">
                                 View Class Schedule
                             </a>
+                            <Link href={`/admin/subject/show/${section.id}`} class="btn btn-sm btn-warning">
+                                View Assigned Subjects
+                            </Link>
                                             <button
                                                 onClick={e => deleteHandler(section.id)}
                                                 className="btn btn-danger btn-sm"
@@ -134,11 +137,10 @@ export default function SectionList({ sections, subjects }) {
                 </div>
 
 		<SubjectList subjects={subjects}/>
-
-
 		{/*Assign Subject to Section*/}
+		<AssignSubject subjects={allSubjects} sections={allSections} />
 
-		<AssignSubject />
+
 
 		</div>
 

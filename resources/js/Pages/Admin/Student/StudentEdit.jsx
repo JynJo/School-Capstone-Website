@@ -24,20 +24,11 @@ export default function StudentEdit({ student, sections }) {
 
     return (
         <>
-            {console.log(student)}
-            <div className="">
-                <div className="mx-auto">
-                    <div className="bg-white p-6">
-                        <h1 className="text-lg font-semibold text-gray-900">
-                            Update Information
-                        </h1>
-                        <p className="text-gray-500  mb-6 text-sm">
-                            Please use student's lccdo account for email
-                            address.
-                        </p>
+           <div className="bg-gray-50 p-6">
                         <form onSubmit={submitHandler}>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                                <div>
+                            <label>
+                                Full Name
+                            </label>
                                     <input
                                         type="text"
                                         value={data.name}
@@ -52,8 +43,9 @@ export default function StudentEdit({ student, sections }) {
                                             {errors.name}
                                         </p>
                                     )}
-                                </div>
-                                <div>
+                                    <label>
+                                ID Number
+                            </label>
                                     <input
                                         type="text"
                                         value={data.id_number}
@@ -68,9 +60,9 @@ export default function StudentEdit({ student, sections }) {
                                             {errors.id_number}
                                         </p>
                                     )}
-                                </div>
-                            </div>
-                            <div className="mb-4">
+                                    <label>
+                                Contacts
+                            </label>
                                 <input
                                     type="email"
                                     value={data.email}
@@ -85,9 +77,9 @@ export default function StudentEdit({ student, sections }) {
                                         {errors.email}
                                     </p>
                                 )}
-                            </div>
-
-                            <div className="mb-4">
+                                <label>
+                                Assign to a section
+                            </label>
                                 <select
                                     value={data.section_id}
                                     onChange={(e) =>
@@ -95,7 +87,7 @@ export default function StudentEdit({ student, sections }) {
                                     }
                                     className="border p-2 rounded w-full"
                                 >
-                                    <option hidden>Select Section</option>
+                                    <option hidden> Please select</option>
                                     {sections.length > 0 ? (
                                         sections.map((section) => (
                                             <option value={section.id}>
@@ -113,8 +105,9 @@ export default function StudentEdit({ student, sections }) {
                                         {errors.section_id}
                                     </p>
                                 )}
-                            </div>
-                            <div className="mb-4">
+                                <label>
+                                Address
+                            </label>
                                 <input
                                     type="text"
                                     value={data.address}
@@ -129,9 +122,9 @@ export default function StudentEdit({ student, sections }) {
                                         {errors.address}
                                     </p>
                                 )}
-                            </div>
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                <div>
+                                <label>
+                                Blood Type
+                            </label>
                                     <select
                                         value={data.blood_type}
                                         onChange={(e) =>
@@ -143,7 +136,7 @@ export default function StudentEdit({ student, sections }) {
                                         className="border p-2 rounded w-full"
                                     >
                                         <option value="" hidden>
-                                            Select Blood Type
+                                           Please select
                                         </option>
                                         <option value="A+">A+</option>
                                         <option value="A-">A-</option>
@@ -159,8 +152,9 @@ export default function StudentEdit({ student, sections }) {
                                             {errors.blood_type}
                                         </p>
                                     )}
-                                </div>
-                                <div>
+                                    <label>
+                                Gender
+                            </label>
                                     <select
                                         value={data.gender}
                                         onChange={(e) =>
@@ -169,19 +163,19 @@ export default function StudentEdit({ student, sections }) {
                                         className="border p-2 rounded w-full"
                                     >
                                         <option value="" hidden>
-                                            Gender
+                                            Please select
                                         </option>
-                                        <option value="O+">Male</option>
-                                        <option value="O-">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
                                     </select>
                                     {errors.gender && (
                                         <p className="text-danger text-sm ">
                                             {errors.gender}
                                         </p>
                                     )}
-                                </div>
-
-                                <div>
+                                    <label>
+                                Parent's Contact
+                            </label>
                                     <input
                                         type="number"
                                         value={data.parent_no}
@@ -196,9 +190,6 @@ export default function StudentEdit({ student, sections }) {
                                             {errors.parent_no}
                                         </p>
                                     )}
-                                </div>
-
-                                <div>
                                     <label htmlFor="birthday">Birthday</label>
                                     <input
                                         type="date"
@@ -215,10 +206,9 @@ export default function StudentEdit({ student, sections }) {
                                             {errors.birthday}
                                         </p>
                                     )}
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <label>
+                                Account password
+                            </label>
                                 <input
                                     type="text"
                                     value={data.password}
@@ -226,7 +216,7 @@ export default function StudentEdit({ student, sections }) {
                                         setData("password", e.target.value)
                                     }
                                     placeholder="Password"
-                                    className="border p-2 rounded w-full"
+                                    className="border p-2 rounded w-full mb-2"
                                 />
                                 <input
                                     type="text"
@@ -245,26 +235,17 @@ export default function StudentEdit({ student, sections }) {
                                         {errors.password}
                                     </p>
                                 )}
-                            </div>
 
                             <button
                                 type="submit"
                                 id="theme-toggle"
                                 disabled={processing}
-                                className="py-2 px-4 text-md rounded bg-slate-800 text-white hover:bg-slate-900 focus:outline-none"
+                                className="btn btn-primary mt-4"
                             >
-                                {processing ? "Updating..." : "Save Changes"}
+                                {processing ? "Updating..." : "Update"}
                             </button>
-                            <Link
-                                href={route("student.index")}
-                                className="py-2 mx-2 px-4 text-md rounded bg-red-600 text-white hover:bg-red-700 focus:outline-none"
-                            >
-                                Cancel
-                            </Link>
                         </form>
                     </div>
-                </div>
-            </div>
         </>
     );
 }

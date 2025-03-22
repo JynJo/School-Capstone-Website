@@ -116,6 +116,7 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
         Route::get('create', [SubjectController::class, 'create'])->name('subject.create');
         Route::post('store', [SubjectController::class, 'store'])->name('subject.store');
         Route::get('edit/{id}', [SubjectController::class, 'edit'])->name('subject.edit');
+        Route::get('show/{id}', [SectionSubjectController::class, 'show'])->name('subject.show');
         Route::put('update/{id}', [SubjectController::class, 'update'])->name('subject.update');
         Route::delete('destroy/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
         // assigned_subjects
@@ -133,10 +134,9 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
     });
 
     Route::prefix('grade')->group(function() {
-        Route::get('list', [GradeController::class, 'index'])->name('grade.index');
-        Route::get('create', [GradeController::class, 'create'])->name('grade.create');
+        Route::get('create/{id}', [GradeController::class, 'create'])->name('grade.create');
+        Route::get('show/{id}', [GradeController::class, 'show'])->name('grade.show');
         Route::post('store', [GradeController::class, 'store'])->name('grade.store');
-        Route::get('get_students/{section_id}', [GradeController::class, 'get_students'])->name('get.students');
     });
 
         Route::prefix('schedule')->group(function() {
@@ -144,7 +144,7 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
         Route::get('show/{id}', [ScheduleController::class, 'show'])->name('schedule.show');
         Route::post('store', [ScheduleController::class, 'store'])->name('schedule.store');
         Route::get('create', [ScheduleController::class, 'create'])->name('schedule.create');
-        Route::get('get_schedule/i{section_id}', [ScheduleController::class, 'get_schedule'])->name('get.schedule');
+        Route::get('get_schedule/{section_id}', [ScheduleController::class, 'get_schedule'])->name('get.schedule');
     });
 
     Route::prefix('announcement')->group(function() {

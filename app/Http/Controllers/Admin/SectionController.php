@@ -14,6 +14,8 @@ class SectionController extends Controller
         return Inertia::render('Admin/Section/SectionList', [
             'sections' => Section::paginate(10),
             'subjects' => Subject::paginate(10),
+            'allSections' => Section::all(),
+            'allSubjects' => Subject::all()
         ]);
     }
 

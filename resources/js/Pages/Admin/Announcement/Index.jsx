@@ -9,68 +9,63 @@ const Index = ({ announcements }) => {
         post( route('announcement.delete', { id: id }));
     }
     return (<>
-        <h2 className="text-lg font-bold">Announcements</h2>
-        <div class="bg-white border border-gray-200 shadow-sm rounded-xl p-4 md:p-5 ">
-           <Link href={ route('announcement.create')}>
-                <button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
-                    New announcement
-                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M5 12h14"></path>
-                        <path d="m12 5 7 7-7 7"></path>
-                    </svg>
-                </button>
-            </Link>
-            <div class="flex flex-col">
-  <div class="-m-1.5 overflow-x-auto">
-    <div class="p-1.5 min-w-full inline-block align-middle">
-      <div class="min-h-[90vh]">
-        <table class="min-w-full divide-y divide-gray-200">
+        <div className='p-4 shadow-sm'>
+           <div className="my-4 flex flex-row items-center gap-4">
+                    <h1 class="font-semibold">
+                        Announcement Management
+                    </h1>
+
+                <div>
+                    <Link
+                        href={route('announcement.create')}
+                        className="btn btn-primary btn-sm mt-2"
+                    >
+                        Create New Announcement
+                    </Link>
+                    
+                </div>
+            </div>
+  <div >
+        <table class="table table-responsive table-hover table-bordered">
           <thead>
             <tr>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase">Image</th>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase ">Title</th>
-              <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase ">Notice For</th>
-              <th scope="col" class="px-6 py-3 text-end text-xs font-medium text-gray-500 uppercase ">Action</th>
+              <th >Image</th>
+              <th >Title</th>
+              <th>Notice For</th>
+              <th >Action</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-gray-200 ">
+          <tbody >
             { announcements.data.map((announcement, index) => (
-                <tr class="hover:bg-gray-100">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800"><img width="80"src={`/storage/${announcement.image}`}/></td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 ">{announcement.title.length > 20 
+                <tr class="">
+                    <td><img width="80"src={`/storage/${announcement.image}`}/></td>
+                    <td>{announcement.title.length > 20 
                         ? `${announcement.title.substring(0, 20)}...` 
                         : announcement.title}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 text-uppercase">{ announcement.notice_for}</td>
-                    <td className="z-50">
-                        <div class="hs-dropdown [--strategy:absolute] [--flip:false] hs-dropdown-example relative inline-flex">
-                            <button id="hs-dropdown-example" type="button" class="hs-dropdown-toggle py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none "aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
-                                Actions
-                                <svg class="hs-dropdown-open:rotate-180 size-4 text-gray-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="m6 9 6 6 6-6"></path>
-                                </svg>
-                            </button>
-
-                            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 w-56 hidden z-10 mt-2 min-w-60 bg-white shadow-md rounded-lg p-2"role="menu" aria-orientation="vertical" aria-labelledby="hs-dropdown-example">
-                            <Link href={ route('announcement.edit', { id: announcement.id }) } class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ">
-                                Edit
-                            </Link>
-                            <Link href={ route('announcement.show', { id: announcement.id}) } class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
+                    <td className='uppercase' >{ announcement.notice_for}</td>
+                    <td className="flex flex-row gap-2">
+                            <Link 
+                                href={ route('announcement.show', { id: announcement.id}) } 
+                                className='btn btn-warning btn-sm'>
                                 View
                             </Link>
-                            <button class="flex w-full items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 " onClick={e => deleteHandler(announcement.id)}>
+                            <Link 
+                                href={ route('announcement.edit', { id: announcement.id }) } 
+                                className='btn btn-primary btn-sm'>
+                                Update
+                            </Link>
+
+                            <button 
+                                className='btn btn-danger btn-sm'
+                                onClick={e => deleteHandler(announcement.id)}>
                                 Delete
                             </button>
-                            </div>
-                            </div>
                             </td>
                 </tr>
             ))}
             </tbody>
         </table>
-      </div>
-    </div>
   </div>
-            </div>
 
 <div className="flex gap-2 mt-4">
 	        <div className="text-sm text-slate-500">

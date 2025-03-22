@@ -6,29 +6,19 @@ use App\Models\Grade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
-use App\Models\Section;
-use App\Models\Subject;
-use App\Models\User;
+use App\Models\Student;
 
 class GradeController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $grades = Grade::with('student.user')->paginate(10);
-        return Inertia::render('Admin/Grading/GradesList', compact('grades'));
-
-    }
-
-    /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(string $id)
     {
-        $sections = Section::all();
-        return Inertia::render('Admin/Grading/GradingCreate', compact('sections'));
+        $student = Student::with('section')->findOrFail($id);
+        $section = $student->section;
+        $subjects = $section->subjects()->get();
+        return Inertia::render('Admin/Grading/GradingCreate', compact('student', 'subjects'));
     }
 
     /**
@@ -36,34 +26,23 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'student_id' => ['required'],
-            'term' => ['required'],
-            'average' => ['required'],
             'subjects.*' => ['required'],
-        ], [
-            'subjects.*.required' => 'Please fill in all subject fields.',
-            'student_id.required' => 'Please select which student to grade.'
         ]);
-        $gradedSubjects = [];
-        foreach($request->subjects as $subjectId => $grade) {
-            $is_passed = '0';
-            if ($grade >= 75) {
-                $is_passed = '1';
-            }
+
+
+        foreach($request->subjects as $subject) {
             Grade::updateOrCreate([
-                'subject_id' => $subjectId,
+                'subject_id' => $subject['subject_id'],
                 'student_id' => $request->student_id,
-                'term' => $validated['term'],
+                'term' => $subject['term'],
+                'semester' => $subject['semester'],
             ], [
-                'subject_average' => $grade,
-                'term' => $validated['term'],
-                'final_average' => $validated['average'],
-                'semester' => 'second',
-                'is_passed' => $is_passed
+                'term' => $subject['term'],
+                'average' => $subject['average'],
+                'semester' => $subject['semester'],
             ]);
-            
         }
         return back()->with('success', 'Student graded successfuly.');
     }
@@ -71,47 +50,12 @@ class GradeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Grade $grade)
+    public function show(string $id)
     {
-        //
+        $student = Student::with('grades.subject', 'section')->findOrFail($id);
+
+        return Inertia::render('Admin/Grading/Show', compact('student'));
+
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Grade $grade)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Grade $grade)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Grade $grade)
-    {
-        //
-    }
-
-    public function get_students(string $section_id) {
-        $section = Section::where('id', $section_id)
-                    ->with(['students.grades', 'students.user'])
-                    ->get();
-
-        $_section = Section::with('subjects')
-                    ->where('id', $section_id)
-                    ->first();
-        $subjects = $_section->subjects;
-
-        return response()->json(['section' => $section, 'subjects' => $subjects]);
-    }
-
 
 }
