@@ -2,99 +2,118 @@ import DashboardLayout from '../DashboardLayout.jsx'
 import { Link, useForm, router } from '@inertiajs/react'
 
 export default function EventsIndex({ events }) {
-	const deleteHandler = (id) => {
-		router.delete( route('events.destroy', { id: id }) );
-	}
+    const deleteHandler = (id) => {
+        router.delete(route('events.destroy', { id: id }));
+    }
 
     const limitText = (text) => {
         const limit = 12;
-        return text.length > limit ? text.slice(0, limit) + '...': text;
+        return text.length > limit ? text.slice(0, limit) + '...' : text;
     }
-    console.log(events)
-	return (<>
-		<div className="">
-			 <div className="my-4 flex flex-row items-center gap-4">
-                    <h1 class="font-semibold">
-                        Event Management
-                    </h1>
 
-                <div>
-                    <Link
-                        href={route('events.create')}
-                        className="btn btn-primary btn-sm mt-2"
-                    >
-                        Create New Event
-                    </Link>
-                    
+    return (
+        <div className="mt-4">
+            <div className="row mb-4">
+                <div className="col-12">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h1 className="h4 font-weight-bold mb-0">
+                            Event Management
+                        </h1>
+                        <Link
+                            href={route('events.create')}
+                            className="btn btn-primary btn-sm"
+                        >
+                        <i className="fas fa-plus mr-2"></i> Create New
+                        </Link>
+                    </div>
                 </div>
             </div>
-			<table className="table table-bordered table-hover table-responsive">
-	        <thead className="">
-	        <tr>
-                <th >
-	                Category
-	            </th>
-	            <th>
-	                Title
-	            </th>
-	            <th>
-	                Description
-	            </th>
-	            <th>
-	                Image
-	            </th>
-	            <th>
-	                Date
-	            </th>
-	            <th>
-	                Options
-	            </th>
-	        </tr>
-	        </thead>
-	        <tbody className="">
-	       { events && events?.data.length > 0 ? events.data.map((event, index) => <>
-						 <tr>
-                        <td >{ event.category }</td>
-                        <td >{ event.title }</td>
-                        <td >{ limitText(event.description) }</td>
-                        <td ><img width="100" src={`/storage/${event.image}`}/></td>
-                        <td >{ event.date }</td>
-						<td >
-                            <button class="btn btn-sm btn-danger" onClick={e => deleteHandler(event.id)}>
-                                Delete
-                            </button>
-                            </td>
-						</tr>
-						</>) : "No records available." }
-	        </tbody>
-	    </table>
-	    <div className="flex justify-between mt-4">
-	        <div className="text-sm text-slate-500">
-	        Showing <b>{	events && events.current_page}</b> of { events &&  events.total }
-	        </div>
-	        <div>
-	        { events && events.links.map((link) => (
-	        	link.url ? (
-	        		<Link
-	        			href={link.url}
-						className={`${link.active ? 'bg-slate-800' : 'bg-white'} px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-white border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200 ease`}
-	        			// className={`
-	        			dangerouslySetInnerHTML={{ __html: link.label == 'Next &raquo;' ? 'Next' : link.label == '&laquo; Previous' ? 'Prev' : link.label }}
-	        		/>
-	        	) : (
-	        	<span
-					key={link.url}
-					// dangerouslySetInnerHTML={{ __html: link.label }}
-					className="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease"
-				>{link.label == 'Next &raquo;' ? 'Next' : 'Prev'}</span>
-	        	)
-	        ))}
-	        </div>
-	    </div>
-		</div>
-		</>)
-}
 
-EventsIndex.layout = page => <DashboardLayout children={page}/>
-//export default EventsIndex
+            <div className="">
+                <div className="">
+                    <div className="table-responsive">
+                        <table className="table table-bordered table-hover mb-0">
+                            <thead className="thead-light">
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Image</th>
+                                    <th>Date</th>
+                                    <th>Options</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {events && events?.data.length > 0 ? 
+                                    events.data.map((event, index) => (
+                                        <tr key={index}>
+                                            <td>{event.category}</td>
+                                            <td>{event.title}</td>
+                                            <td>{limitText(event.description)}</td>
+                                            <td>
+                                                <img 
+                                                    width="100" 
+                                                    src={`/storage/${event.image}`} 
+                                                    className="img-thumbnail"
+                                                    alt={event.title}
+                                                />
+                                            </td>
+                                            <td>{event.date}</td>
+                                            <td>
+                                                <button 
+                                                    className="btn btn-sm btn-danger" 
+                                                    onClick={() => deleteHandler(event.id)}
+                                                >
+                       								 <i className="fas fa-trash-alt mr-2"></i>
+                        							
+                                                    Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    )) : 
+                                    <tr>
+                                        <td colSpan="6" className="text-center">No records available.</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div className="row mt-4">
+                        <div className="col-md-6">
+                            <p className="text-muted small">
+                                Showing <b>{events && events.current_page}</b> of {events && events.total}
+                            </p>
+                        </div>
+                        <div className="col-md-6">
+                            <nav className="d-flex justify-content-end">
+                                <ul className="pagination pagination-sm">
+                                    {events && events.links.map((link, index) => (
+                                        <li key={index} className={`page-item ${link.active ? 'active' : ''} ${!link.url ? 'disabled' : ''}`}>
+                                            {link.url ? (
+                                                <Link
+                                                    href={link.url}
+                                                    className="page-link"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: link.label == 'Next &raquo;' ? 'Next' : 
+                                                                link.label == '&laquo; Previous' ? 'Prev' : 
+                                                                link.label
+                                                    }}
+                                                />
+                                            ) : (
+                                                <span className="page-link">
+                                                    {link.label == 'Next &raquo;' ? 'Next' : 'Prev'}
+                                                </span>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 

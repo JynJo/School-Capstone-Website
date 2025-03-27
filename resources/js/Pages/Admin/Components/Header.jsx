@@ -48,6 +48,19 @@ export default function Header() {
                   Section & Subjects
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link className="nav-link" href={route('announcement.index')} onClick={() => setIsMobileMenuOpen(false)}>
+                  Announcements
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                  <span className='nav-link' onClick={logoutHandler}>
+                    <i className="fas fa-sign-out-alt mr-2"></i>
+                    Logout
+                  </span>
+                </li>
               
             </ul>
           </div>

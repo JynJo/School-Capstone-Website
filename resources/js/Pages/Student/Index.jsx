@@ -1,112 +1,149 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, usePage, useForm } from "@inertiajs/react";
-import { Button } from "react-bootstrap";
 import { PhotoProvider, PhotoView } from 'react-photo-view';
-import axios from 'axios'
 
 function Index({ children }) {
     const { announcements, student, schedule, grades } = usePage().props;
     const { post } = useForm();
 
-
     const logoutHandler = () => {
-        post(route("student.logout"))
+        post(route("student.logout"));
     };
 
-    return (<div className='flex flex-row justify-center mt-4'>
-        <div className="p-4 w-10/12 shadow-xl">
-
-            <div>
-                <h2>Name: <b>{student.name}</b></h2>
-                <h2>Email: <b>{student.email}</b></h2>
-                <h2>ID Number: <b>{student.id_number}</b></h2>
-                <h2>Blood Type: <b>{student.blood_type}</b></h2>
-                <h2>Address: <b>{student.address}</b></h2>
-                <h2>Parent's Contact: <b>{student.parent_no}</b></h2>
-                <h2>Birthday: <b>{student.birthday}</b></h2>
-                <h2>Section: <b>{student.section.name}</b></h2>
-            </div>
-            <div className="my-4 flex flex-row  gap-4">
-            <PhotoProvider>
-                          <div>
-                              <PhotoView src={`/storage/${schedule[0] && schedule[0].image}`}>
-                                <button className='btn btn-primary btn-sm'>View Class Schedule</button>
-                              </PhotoView>
-                          </div>
-                        </PhotoProvider>
-                <button className='btn btn-dark btn-sm' onClick={logoutHandler}>Logout</button>
-            <div>
-                </div>
-
-                </div>
-
-                <div className='my-4'>
-                 <h1 class="font-semibold">
-                    Academic Performance
-                </h1> 
-                </div>
-                <table className='table table-bordered table-responsive table-hover'>
-                    <thead>
-                        <th>Subject</th>
-                        <th>Average</th>
-                        <th>Term</th>
-                        <th>Semester</th>
-                    </thead>
-                    <tbody>
-                        { grades && grades.map((grades, index) => <tr key={index}>
-                            <td>{grades.subject.name}</td>
-                            <td>{grades.average}%</td>
-                            <td>{grades.term}</td>
-                            <td>{grades.semester}</td>
-                        </tr>)}
-                    </tbody>
-                </table>
-
-                <div className='my-4'>
-                 <h1 class="font-semibold">
-                    Announcements
-                </h1> 
-                </div>
-
-                { announcements ? 
-                    announcements.map((announcement) => <>
-                        <div className='card'>
-                        <div className='card-body'>
-                            <h2 className=''>Title: <b>{announcement.title}</b></h2>
-
-                             <img
-                                className="max-w-[680px]"
-                                src={`/storage/${announcement.image}`}
-                            />
-
-                            <div className='my-2'>
-                                <b>Content: </b>
+    return (
+        <div className="container py-4">
+            <div className="row">
+                {/* Student Profile Card */}
+                <div className="col-md-4 mb-4">
+                    <div className="card shadow">
+                        <div className="card-header bg-primary text-white">
+                            <h4 className="mb-0">Student Profile</h4>
+                        </div>
+                        <div className="card-body">
+                            <div className="text-center mb-3">
+                                <div className="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style={{width: '100px', height: '100px'}}>
+                                    <i className="fas fa-user fa-3x text-primary"></i>
+                                </div>
                             </div>
-                           <article
-                            className=""
-                                dangerouslySetInnerHTML={{ __html: announcement.content }}
-                        ></article>
-
-                        <h2 className="">
-                        {new Intl.DateTimeFormat("en-US", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                        }).format(
-                            new Date(
-                                new Date(announcement.created_at).toLocaleDateString()
-                            )
-                        )}
-                    </h2>
-                        
+                            
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Name:</span>
+                                    <span className="fw-bold">{student.name}</span>
+                                </li>
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Email:</span>
+                                    <span className="fw-bold">{student.email}</span>
+                                </li>
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>ID Number:</span>
+                                    <span className="fw-bold">{student.id_number}</span>
+                                </li>
+                                <li className="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Section:</span>
+                                    <span className="fw-bold">{student.section.name}</span>
+                                </li>
+                            </ul>
+                            
+                            <div className="d-grid gap-2 mt-3">
+                                <PhotoProvider>
+                                    <PhotoView src={`/storage/${schedule[0] && schedule[0].image}`}>
+                                        <button className="btn btn-outline-primary">
+                                            <i className="fas fa-calendar-alt me-2"></i> View Schedule
+                                        </button>
+                                    </PhotoView>
+                                </PhotoProvider>
+                                <button 
+                                    className="btn btn-outline-danger" 
+                                    onClick={logoutHandler}
+                                >
+                                    <i className="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    </>
-                    )
-                : "No announcement"}
+                </div>
 
+                {/* Main Content */}
+                <div className="col-md-8">
+                    {/* Academic Performance */}
+                    <div className="card shadow mb-4">
+                        <div className="card-header bg-success text-white">
+                            <h4 className="mb-0">Academic Performance</h4>
+                        </div>
+                        <div className="card-body">
+                            <div className="table-responsive">
+                                <table className="table table-hover">
+                                    <thead className="table-light">
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Average</th>
+                                            <th>Term</th>
+                                            <th>Semester</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {grades && grades.map((grade, index) => (
+                                            <tr key={index}>
+                                                <td>{grade.subject.name}</td>
+                                                <td>
+                                                    <span className={`badge ${grade.average >= 75 ? 'bg-success' : 'bg-danger'}`}>
+                                                        {grade.average}%
+                                                    </span>
+                                                </td>
+                                                <td>{grade.term}</td>
+                                                <td>{grade.semester}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Announcements */}
+                    <div className="card shadow">
+                        <div className="card-header bg-info text-white">
+                            <h4 className="mb-0">Announcements</h4>
+                        </div>
+                        <div className="card-body">
+                            {announcements && announcements.length > 0 ? (
+                                announcements.map((announcement) => (
+                                    <div className="card mb-3" key={announcement.id}>
+                                        <div className="card-body">
+                                            <h5 className="card-title text-primary">{announcement.title}</h5>
+                                            <div className="mb-3">
+                                                {announcement.image && (
+                                                    <img 
+                                                        src={`/storage/${announcement.image}`} 
+                                                        className="img-fluid rounded"
+                                                        alt={announcement.title}
+                                                    />
+                                                )}
+                                            </div>
+                                            <div className="card-text mb-3" dangerouslySetInnerHTML={{ __html: announcement.content }} />
+                                            <div className="text-muted small">
+                                                <i className="far fa-calendar-alt me-1"></i>
+                                                {new Intl.DateTimeFormat("en-US", {
+                                                    month: "long",
+                                                    day: "numeric",
+                                                    year: "numeric",
+                                                }).format(new Date(announcement.created_at))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <div className="alert alert-info mb-0">
+                                    <i className="fas fa-info-circle me-2"></i>
+                                    No announcements available
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
     );
 }
 

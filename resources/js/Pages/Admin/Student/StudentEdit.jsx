@@ -24,228 +24,205 @@ export default function StudentEdit({ student, sections }) {
 
     return (
         <>
-           <div className="bg-gray-50 p-6">
-                        <form onSubmit={submitHandler}>
-                            <label>
-                                Full Name
-                            </label>
-                                    <input
-                                        type="text"
-                                        value={data.name}
-                                        onChange={(e) =>
-                                            setData("name", e.target.value)
-                                        }
-                                        placeholder="Full name"
-                                        className="border p-2 rounded w-full"
-                                    />
-                                    {errors.name && (
-                                        <p className="text-danger text-sm ">
-                                            {errors.name}
-                                        </p>
-                                    )}
-                                    <label>
-                                ID Number
-                            </label>
-                                    <input
-                                        type="text"
-                                        value={data.id_number}
-                                        onChange={(e) =>
-                                            setData("id_number", e.target.value)
-                                        }
-                                        placeholder="ID number"
-                                        className="border p-2 rounded w-full"
-                                    />
-                                    {errors.id_number && (
-                                        <p className="text-danger text-sm ">
-                                            {errors.id_number}
-                                        </p>
-                                    )}
-                                    <label>
-                                Contacts
-                            </label>
+           <div className="container-fluid py-4">
+            <div className="card">
+                <div className="card-header">
+                    <h4 className="card-title">Update Information</h4>
+                </div>
+                <div className="card-body">
+                    {sections.length > 0 ? (
+                        <form onSubmit={submitHandler} className="row g-3">
+                            <div className="col-md-6">
+                                <label className="form-label">Full Name</label>
+                                <input
+                                    type="text"
+                                    value={data.name}
+                                    onChange={(e) => setData("name", e.target.value)}
+                                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
+                                    placeholder="Full name"
+                                />
+                                {errors.name && (
+                                    <div className="invalid-feedback">{errors.name}</div>
+                                )}
+                            </div>
+
+                            <div className="col-md-6">
+                                <label className="form-label">ID Number</label>
+                                <input
+                                    type="text"
+                                    value={data.id_number}
+                                    onChange={(e) => setData("id_number", e.target.value)}
+                                    className={`form-control ${errors.id_number ? 'is-invalid' : ''}`}
+                                    placeholder="ID number"
+                                />
+                                {errors.id_number && (
+                                    <div className="invalid-feedback">{errors.id_number}</div>
+                                )}
+                            </div>
+
+                            <div className="col-md-6">
+                                <label className="form-label">Email Address</label>
                                 <input
                                     type="email"
                                     value={data.email}
-                                    onChange={(e) =>
-                                        setData("email", e.target.value)
-                                    }
+                                    onChange={(e) => setData("email", e.target.value)}
+                                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
                                     placeholder="Email address"
-                                    className="border p-2 rounded w-full"
                                 />
                                 {errors.email && (
-                                    <p className="text-danger text-sm ">
-                                        {errors.email}
-                                    </p>
+                                    <div className="invalid-feedback">{errors.email}</div>
                                 )}
-                                <label>
-                                Assign to a section
-                            </label>
+                            </div>
+
+                            <div className="col-md-6">
+                                <label className="form-label">Section</label>
                                 <select
                                     value={data.section_id}
-                                    onChange={(e) =>
-                                        setData("section_id", e.target.value)
-                                    }
-                                    className="border p-2 rounded w-full"
+                                    onChange={(e) => setData("section_id", e.target.value)}
+                                    className={`form-control ${errors.section_id ? 'is-invalid' : ''}`}
                                 >
-                                    <option hidden> Please select</option>
-                                    {sections.length > 0 ? (
-                                        sections.map((section) => (
-                                            <option value={section.id}>
-                                                {section.name}
-                                            </option>
-                                        ))
-                                    ) : (
-                                        <option disabled>
-                                            ---No section available---
+                                    <option value="" hidden>Please select</option>
+                                    {sections.map((section) => (
+                                        <option key={section.id} value={section.id}>
+                                            {section.name}
                                         </option>
-                                    )}
+                                    ))}
                                 </select>
                                 {errors.section_id && (
-                                    <p className="text-danger text-sm ">
-                                        {errors.section_id}
-                                    </p>
+                                    <div className="invalid-feedback">{errors.section_id}</div>
                                 )}
-                                <label>
-                                Address
-                            </label>
+                            </div>
+
+                            <div className="col-12">
+                                <label className="form-label">Address</label>
                                 <input
                                     type="text"
                                     value={data.address}
-                                    onChange={(e) =>
-                                        setData("address", e.target.value)
-                                    }
+                                    onChange={(e) => setData("address", e.target.value)}
+                                    className={`form-control ${errors.address ? 'is-invalid' : ''}`}
                                     placeholder="Address"
-                                    className="border p-2 rounded w-full"
                                 />
                                 {errors.address && (
-                                    <p className="text-danger text-sm ">
-                                        {errors.address}
-                                    </p>
+                                    <div className="invalid-feedback">{errors.address}</div>
                                 )}
-                                <label>
-                                Blood Type
-                            </label>
-                                    <select
-                                        value={data.blood_type}
-                                        onChange={(e) =>
-                                            setData(
-                                                "blood_type",
-                                                e.target.value
-                                            )
-                                        }
-                                        className="border p-2 rounded w-full"
-                                    >
-                                        <option value="" hidden>
-                                           Please select
-                                        </option>
-                                        <option value="A+">A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                    </select>
-                                    {errors.blood_type && (
-                                        <p className="text-danger text-sm ">
-                                            {errors.blood_type}
-                                        </p>
-                                    )}
-                                    <label>
-                                Gender
-                            </label>
-                                    <select
-                                        value={data.gender}
-                                        onChange={(e) =>
-                                            setData("gender", e.target.value)
-                                        }
-                                        className="border p-2 rounded w-full"
-                                    >
-                                        <option value="" hidden>
-                                            Please select
-                                        </option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                    </select>
-                                    {errors.gender && (
-                                        <p className="text-danger text-sm ">
-                                            {errors.gender}
-                                        </p>
-                                    )}
-                                    <label>
-                                Parent's Contact
-                            </label>
-                                    <input
-                                        type="number"
-                                        value={data.parent_no}
-                                        onChange={(e) =>
-                                            setData("parent_no", e.target.value)
-                                        }
-                                        placeholder="Parent's phone number"
-                                        className="border p-2 rounded w-full"
-                                    />
-                                    {errors.parent_no && (
-                                        <p className="text-danger text-sm ">
-                                            {errors.parent_no}
-                                        </p>
-                                    )}
-                                    <label htmlFor="birthday">Birthday</label>
-                                    <input
-                                        type="date"
-                                        value={data.birthday}
-                                        onChange={(e) =>
-                                            setData("birthday", e.target.value)
-                                        }
-                                        placeholder="Birthday"
-                                        id="birthday"
-                                        className="border p-2 rounded w-full"
-                                    />
-                                    {errors.birthday && (
-                                        <p className="text-danger text-sm ">
-                                            {errors.birthday}
-                                        </p>
-                                    )}
-                                <label>
-                                Account password
-                            </label>
+                            </div>
+
+                            <div className="col-md-4">
+                                <label className="form-label">Blood Type</label>
+                                <select
+                                    value={data.blood_type}
+                                    onChange={(e) => setData("blood_type", e.target.value)}
+                                    className={`form-control ${errors.blood_type ? 'is-invalid' : ''}`}
+                                >
+                                    <option value="" hidden>Please select</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                                {errors.blood_type && (
+                                    <div className="invalid-feedback">{errors.blood_type}</div>
+                                )}
+                            </div>
+
+                            <div className="col-md-4">
+                                <label className="form-label">Gender</label>
+                                <select
+                                    value={data.gender}
+                                    onChange={(e) => setData("gender", e.target.value)}
+                                    className={`form-control ${errors.gender ? 'is-invalid' : ''}`}
+                                >
+                                    <option value="" hidden>Please select</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                {errors.gender && (
+                                    <div className="invalid-feedback">{errors.gender}</div>
+                                )}
+                            </div>
+
+                            <div className="col-md-4">
+                                <label className="form-label">Birthday</label>
                                 <input
-                                    type="text"
-                                    value={data.password}
-                                    onChange={(e) =>
-                                        setData("password", e.target.value)
-                                    }
-                                    placeholder="Password"
-                                    className="border p-2 rounded w-full mb-2"
+                                    type="date"
+                                    value={data.birthday}
+                                    onChange={(e) => setData("birthday", e.target.value)}
+                                    className={`form-control ${errors.birthday ? 'is-invalid' : ''}`}
                                 />
+                                {errors.birthday && (
+                                    <div className="invalid-feedback">{errors.birthday}</div>
+                                )}
+                            </div>
+
+                            <div className="col-md-6">
+                                <label className="form-label">Parent's Contact</label>
                                 <input
-                                    type="text"
-                                    value={data.password_confirmation}
-                                    onChange={(e) =>
-                                        setData(
-                                            "password_confirmation",
-                                            e.target.value
-                                        )
-                                    }
-                                    placeholder="Confirm password"
-                                    className="border p-2 rounded w-full"
+                                    type="tel"
+                                    value={data.parent_no}
+                                    onChange={(e) => setData("parent_no", e.target.value)}
+                                    className={`form-control ${errors.parent_no ? 'is-invalid' : ''}`}
+                                    placeholder="Parent's phone number"
+                                />
+                                {errors.parent_no && (
+                                    <div className="invalid-feedback">{errors.parent_no}</div>
+                                )}
+                            </div>
+
+                            <div className="col-md-6">
+                                <label className="form-label">Password</label>
+                                <input
+                                    type="password"
+                                    value={data.password}
+                                    onChange={(e) => setData("password", e.target.value)}
+                                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                                    placeholder="Password"
                                 />
                                 {errors.password && (
-                                    <p className="text-danger text-sm ">
-                                        {errors.password}
-                                    </p>
+                                    <div className="invalid-feedback">{errors.password}</div>
                                 )}
+                            </div>
 
-                            <button
-                                type="submit"
-                                id="theme-toggle"
-                                disabled={processing}
-                                className="btn btn-primary mt-4"
-                            >
-                                {processing ? "Updating..." : "Update"}
-                            </button>
+                            <div className="col-md-6">
+                                <label className="form-label">Confirm Password</label>
+                                <input
+                                    type="password"
+                                    value={data.password_confirmation}
+                                    onChange={(e) => setData("password_confirmation", e.target.value)}
+                                    className={`form-control ${errors.password_confirmation ? 'is-invalid' : ''}`}
+                                    placeholder="Confirm password"
+                                />
+                            </div>
+
+                            <div className="col-12 mt-4">
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary"
+                                    disabled={processing}
+                                >
+                                    {processing ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                            Updating...
+                                        </>
+                                    ) : (
+                                        "Update Student"
+                                    )}
+                                </button>
+                            </div>
                         </form>
-                    </div>
+                    ) : (
+                        <div className="alert alert-danger">
+                            <i className="fas fa-exclamation-circle me-2"></i>
+                            Please create a section first to continue adding a student.
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
         </>
     );
 }

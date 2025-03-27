@@ -1,171 +1,145 @@
-// src/Tiptap.tsx
-import './style.scss'
-import { useEditor, EditorContent, FloatingMenu, BubbleMenu } from '@tiptap/react'
+import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import BulletList from '@tiptap/extension-bullet-list'
-import ListItem from '@tiptap/extension-list-item'
-import Document from '@tiptap/extension-document'
-import Paragraph from '@tiptap/extension-paragraph'
 import Underline from '@tiptap/extension-underline'
 import Blockquote from '@tiptap/extension-blockquote'
-// define your extension array
+import { FaBold, FaItalic, FaUnderline, FaHeading, FaListUl, FaListOl, FaQuoteLeft, FaMinus, FaUndo, FaRedo } from 'react-icons/fa'
+
 const extensions = [
-    StarterKit,
-    Document,
-    Paragraph,
-    BulletList,
-    ListItem,
-    Underline,
-    Blockquote
+  StarterKit,
+  Underline,
+  Blockquote
 ]
 
-
-const Tiptap = ({ content, setData}) => {
-  var editor = useEditor({
+const Tiptap = ({ content, setData }) => {
+  const editor = useEditor({
     content: content,
     onUpdate: ({ editor }) => setData('content', editor.getHTML()),
     editorProps: {
-        attributes: {
-            class: 'border min-h-[12rem] prose max-w-none p-4',
-    }},
+      attributes: {
+        class: 'form-control min-h-[12rem] p-3 border rounded-b',
+      },
+    },
     extensions,
   })
 
+  if (!editor) {
+    return null
+  }
+
+  const MenuButton = ({ onClick, active, disabled, children, className = '' }) => (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={`btn btn-sm ${active ? 'btn-primary' : 'btn-outline-secondary'} ${className}`}
+    >
+      {children}
+    </button>
+  )
+
   return (
-    <div className="border rounded mt-2">
-            <div className="control-group">
-      <div className="button-group bg-gray-100 p-2">
-
-    <div className="flex align-middle gap-x-4 border-gray-200 p-2 button-container">
-      <button
-        className="size-8 p-2 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
-        type="button"
-        onClick={() => editor.chain().focus().toggleBold().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleBold()
-              .run()
-            }
-            className={editor.isActive('bold') ? 'bg-gray-100' : ''}
-            >
-            <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 12a4 4 0 0 0 0-8H6v8"></path>
-                <path d="M15 20a4 4 0 0 0 0-8H6v8Z"></path>
-            </svg>
-      </button>
-      <button
-        className="size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none"
-        type="button"
-        onClick={() => editor.chain().focus().toggleItalic().run()}
-        disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .toggleItalic()
-              .run()
-          }
-          className={editor.isActive('italic') ? 'bg-gray-100' : ''}      >
-        <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="19" x2="10" y1="4" y2="4"></line>
-          <line x1="14" x2="5" y1="20" y2="20"></line>
-          <line x1="15" x2="9" y1="4" y2="20"></line>
-        </svg>
-      </button>
-        <button
-            type="button"
+    <div className="mb-3">
+      
+      {/* Toolbar */}
+      <div className="btn-toolbar mb-1 gap-1" role="toolbar">
+        {/* Text Formatting */}
+        <div className="btn-group btn-group-sm" role="group">
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleBold().run()}
+            disabled={!editor.can().chain().focus().toggleBold().run()}
+            active={editor.isActive('bold')}
+          >
+            <FaBold />
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleItalic().run()}
+            disabled={!editor.can().chain().focus().toggleItalic().run()}
+            active={editor.isActive('italic')}
+          >
+            <FaItalic />
+          </MenuButton>
+          <MenuButton
             onClick={() => editor.chain().focus().toggleUnderline().run()}
-            className={editor.isActive('underline') ? 'bg-gray-100' : ''}>
-            <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 4v6a6 6 0 0 0 12 0V4"></path>
-                <line x1="4" x2="20" y1="20" y2="20"></line>
-            </svg>
+            active={editor.isActive('underline')}
+          >
+            <FaUnderline />
+          </MenuButton>
+        </div>
 
-        </button>
-      {/* ... other buttons follow the same pattern ... */}
-        <button
-            type="button"
+        {/* Headings */}
+        <div className="btn-group btn-group-sm" role="group">
+          <MenuButton
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-            className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
-            >
-          H1
-        </button>
-        <button
-            type="button"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-            className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
-        >
-          H4
-        </button>
-        <button
-            type="button"
-            onClick={() => editor.chain().focus().toggleBulletList().run()}
-            className={editor.isActive('bulletList') ? 'is-active' : ''}
-        >
-          Bullet list
-        </button>
-        <button
-            type="button"
-            onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={editor.isActive('orderedList') ? 'is-active' : ''}
-        >
-          Ordered list
-        </button>
-        <button
-            type="button"
-            onClick={() => editor.chain().focus().toggleBlockquote().run()}
-            className={editor.isActive('blockquote') ? 'is-active' : ''}
-        >
-          Blockquote
-        </button>
-        <button
-            type="button"
-            onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-          Horizontal rule
-        </button>
-        <button
-            type="button"
-            onClick={() => editor.chain().focus().setHardBreak().run()}>
-          Hard break
-        </button>
-        <button
-          onClick={() => editor.chain().focus().undo().run()}
-          disabled={
-            !editor.can()
-              .chain()
-              .focus()
-              .undo()
-              .run()
-          }
-            type="button"
+            active={editor.isActive('heading', { level: 1 })}
+          >
+            H1
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+            active={editor.isActive('heading', { level: 2 })}
+          >
+            H2
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+            active={editor.isActive('heading', { level: 3 })}
+          >
+            H3
+          </MenuButton>
+        </div>
 
-        >
-          Undo
-        </button>
-        <button
-            type="button"
+        {/* Lists */}
+        <div className="btn-group btn-group-sm" role="group">
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleBulletList().run()}
+            active={editor.isActive('bulletList')}
+          >
+            <FaListUl />
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleOrderedList().run()}
+            active={editor.isActive('orderedList')}
+          >
+            <FaListOl />
+          </MenuButton>
+        </div>
+
+        {/* Block Elements */}
+        <div className="btn-group btn-group-sm" role="group">
+          <MenuButton
+            onClick={() => editor.chain().focus().toggleBlockquote().run()}
+            active={editor.isActive('blockquote')}
+          >
+            <FaQuoteLeft />
+          </MenuButton>
+          <MenuButton
+            onClick={() => editor.chain().focus().setHorizontalRule().run()}
+          >
+            <FaMinus />
+          </MenuButton>
+        </div>
+
+        {/* History */}
+        <div className="btn-group btn-group-sm" role="group">
+          <MenuButton
+            onClick={() => editor.chain().focus().undo().run()}
+            disabled={!editor.can().chain().focus().undo().run()}
+          >
+            <FaUndo />
+          </MenuButton>
+          <MenuButton
             onClick={() => editor.chain().focus().redo().run()}
-            disabled={
-                !editor.can()
-                .chain()
-                .focus()
-                .redo()
-                .run()
-            }
-        >
-          Redo
-        </button>
-          </div>
-    </div>
-    </div>
-      <EditorContent editor={editor} />
-      {/*<FloatingMenu editor={editor}>This is the floating menu</FloatingMenu>*/}
-      {/*<BubbleMenu editor={editor}>This is the bubble menu</BubbleMenu>*/}
+            disabled={!editor.can().chain().focus().redo().run()}
+          >
+            <FaRedo />
+          </MenuButton>
+        </div>
+      </div>
+
+      {/* Editor Content */}
+      <EditorContent className='h-50' editor={editor} />
     </div>
   )
 }
 
 export default Tiptap
-
-
