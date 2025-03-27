@@ -31,6 +31,7 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'title' => 'required',
             'date' => 'required|date|after_or_equal:' . now()->subMonths(0)->toDateString() .

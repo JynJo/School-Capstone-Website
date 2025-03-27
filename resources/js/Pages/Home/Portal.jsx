@@ -18,30 +18,6 @@ function Portal({ error }) {
 
     }
 
-    // const submitHandler = async(e) => {
-    //     e.preventDefault();
-
-    //     const response = await axios.post(route('student.get_grades'), { id_number: idNumber });
-    //     const data = response.data
-    //     console.log(data)
-        
-    //     setGrades(data)
-
-    // }
-
-    // useEffect(() => {
-    //     // console.log(grades)
-    // }, [grades])
-
-
-
-    //  useEffect(() => {
-    //     AOS.init({
-    //         // delay: 500,
-    //         duration: 1000,
-    //     });
-    // }, []);
-
     return (
         <>
             <Head title="Student Portal" />

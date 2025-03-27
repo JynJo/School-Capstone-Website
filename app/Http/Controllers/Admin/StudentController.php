@@ -60,7 +60,7 @@ class StudentController extends Controller
             'gender' => $validated['gender'],
             'parent_no' => $validated['parent_no'],
         ]);
-        return back()->with('success', 'Student saved successfuly.');
+        return redirect()->route('student.index')->with('success', 'Student saved successfuly.');
     }
 
     public function edit(int $id) {

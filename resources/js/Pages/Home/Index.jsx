@@ -11,8 +11,8 @@ import "aos/dist/aos.css";
 function Index({ news }) {
     useEffect(() => {
         AOS.init({
-            delay: 500,
-            duration: 1000,
+            delay: 200,
+            duration: 700,
         });
     }, []);
 

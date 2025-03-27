@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Event;
+
 class AnnouncementController extends Controller
 {
     /**
@@ -15,7 +17,8 @@ class AnnouncementController extends Controller
     public function index()
     {
         return Inertia::render('Admin/Announcement/Index', [
-            'announcements' => Announcement::paginate(5)
+            'announcements' => Announcement::paginate(5),
+            'events' => Event::paginate(5)
         ]);
     }
 

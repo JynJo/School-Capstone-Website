@@ -24,7 +24,7 @@ export default function StudentCreate({ sections }) {
 
     return (
         <>
-                    <div className="bg-gray-50 p-6">
+        { sections.length > 0 ? <div className="bg-gray-50 p-6">
                         <form onSubmit={submitHandler}>
                             <label>
                                 Full Name
@@ -245,7 +245,11 @@ export default function StudentCreate({ sections }) {
                                 {processing ? "Saving..." : "Create"}
                             </button>
                         </form>
+                    </div> : <div className='alert alert-danger'>
+                        Please create a section first to continue adding a student.
                     </div>
+                }
+                  
           </>
     );
 }

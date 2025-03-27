@@ -1,6 +1,6 @@
-@tailwind base;
+/*@tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities;*/
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 * {
     /*  font-family: "Poppins", sans-serif;*/
@@ -220,7 +220,7 @@ a:hover {
 }
 
 
-@media only screen and (max-width: 768px) {
+/*@media only screen and (max-width: 768px) {
     nav {
        position: fixed;
        left: -100%;
@@ -242,4 +242,5 @@ a:hover {
         padding: 12px;
         background-color: gray;
     }
-}
+}*/
+

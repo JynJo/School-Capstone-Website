@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Schedule;
+use App\Models\Announcement;
+
 class HandleInertiaRequests extends Middleware
 {
     /**
@@ -41,25 +43,12 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
             ],
-            'teacher' => fn () => Auth::guard('teacher')->check() ? Auth::guard('teacher')->user()->load('section') : null,
             'student' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->load('section') : null,
             'schedule' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->section->schedule()->get() : null,
-            'grades' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->grades->load('subjects')->get() : null,
-            'auth' => [
-                // 'user' => fn () => Auth::user() && Auth::user()->load(['student', 'student.section']) ? Auth::user()->load(['student', 'student.section.teachers.user']) : Auth::user(),
-                // 'grades' => fn () =>
-                //     Auth::user() &&
-                //     Auth::user()->student ?
-                //     Auth::user()->student->grades()->with('subject')->get()
-                //     : [],
-                // 'schedule' => fn () =>
-                //     Auth::user() &&
-                //     Auth::user()->student ?
-                //     Schedule::with(['sections', 'subjects', 'days'])
-                //     ->where('section_id', Auth::user()->student->section_id)->get()
-                //     : [],
-            ]
+            
+            'grades' => fn () => Auth::guard('student')->check() ? Auth::guard('student')->user()->grades->load('subjects') : null,
 
+            'announcements' => fn () => Auth::guard('student')->check() ? Announcement::where('notice_for', 'students')->get() : null,
         ]);
     }
 }

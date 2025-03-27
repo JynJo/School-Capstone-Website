@@ -19,6 +19,6 @@ class CheckStudent
         if (Auth::guard('student')->check()) {
             return $next($request);
         }
-                return redirect()->route('home');
+        return redirect()->route('home');
     }
 }

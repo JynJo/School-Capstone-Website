@@ -44,10 +44,10 @@ const AnnounementCreate = () => {
                 { errors.title && <p className="text-red-500 my-2 text-sm"> { errors.title }</p>}
             </div>
 
-            <label htmlFor="noticeFor" >Notice For</label>
+            <label htmlFor="noticeFor" >Broadcast to</label>
             <select value={data.noticeFor} onChange={e => setData('noticeFor', e.target.value)} id="noticeFor" className="form-control">
                 <option disabled></option>
-                <option value="public">Broadcast on website</option>
+                <option value="public">Website</option>
                 <option value="students">Students</option>
             </select>
 

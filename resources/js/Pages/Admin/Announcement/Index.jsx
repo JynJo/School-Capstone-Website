@@ -1,7 +1,7 @@
 import DashboardLayout from '../DashboardLayout.jsx'
 import { Link, useForm } from '@inertiajs/react'
-
-const Index = ({ announcements }) => {
+import EventsList from '../Events/Index.jsx'
+const Index = ({ announcements, events }) => {
 
     const { post } = useForm();
 
@@ -90,6 +90,8 @@ const Index = ({ announcements }) => {
 	        ))}
 	        </div>
 	    </div>
+
+        <EventsList events={events}/>
 
 </div>
     </>)

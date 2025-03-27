@@ -34,13 +34,9 @@ Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.log
 /*Route::get('announcemen'announcement't');*/
 
 // Student
-Route::middleware('student.guard')->prefix('student')->group(function() {
-    Route::get('/', [PageController::class, 'student_page'])->name('student.profile');
-    Route::get('/grades', [\App\Http\Controllers\StudentController::class, 'grade_page'])->name('student.grades');
-    Route::get('schedule/{id}', [\App\Http\Controllers\StudentController::class, 'schedule_show'])->name('student-schedule.show');
-});
-
-Route::post('/get_grades', [\App\Http\Controllers\StudentController::class, 'get_grades'])->name('student.get_grades');
+Route::get('/student/home', [PageController::class, 'student_page'])
+        ->middleware('student')
+        ->name('student.home');
 
 
 Route::prefix('admin')->middleware('admin.guard')->group(function () {
@@ -94,7 +90,7 @@ Route::prefix('admin')->middleware('admin.guard')->group(function () {
         Route::post('store', [GradeController::class, 'store'])->name('grade.store');
     });
 
-        Route::prefix('schedule')->group(function() {
+    Route::prefix('schedule')->group(function() {
         Route::post('store', [ScheduleController::class, 'store'])->name('schedule.store');
     });
 
