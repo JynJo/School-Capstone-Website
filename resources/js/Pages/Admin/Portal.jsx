@@ -1,61 +1,59 @@
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { Link, useForm, Head } from "@inertiajs/react";
+import { Modal, Button, Form } from "react-bootstrap";
+import { useForm } from "@inertiajs/react";
 
-function Portal({ error }) {
-    const { post, data, setData, errors } = useForm({
+export default function AdminPortalModal({ show, onHide }) {
+    const { post, data, setData, errors, processing} = useForm({
         pin: "",
     });
 
     const submitHandler = (e) => {
         e.preventDefault();
-        post(route("admin.login"));
+        post(route("admin.login"), {
+            onSuccess: () => onHide()
+        });
     };
 
     return (
-        <>
-            <Head title="Admin Portal" />
-            <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                    <img
-                        alt="Your Company"
-                        src="/images/lc-seal.png"
-                        className="mx-auto h-20 w-auto"
+        <Modal show={show} onHide={onHide} centered>
+            <Modal.Header closeButton className="border-0">
+                <Modal.Title className="text-center w-100">
+                    <img 
+                        src="/images/lc-seal.png" 
+                        alt="Lourdes College Seal" 
+                        className="mx-auto d-block mb-2"
+                        style={{ height: '60px' }}
                     />
-                    <h2
-                        className="text-center text-2xl/9 font-bold tracking-wider text-pink-900 mt-2"
-                        style={{ fontFamily: ' "Faculty Glyphic"' }}
+                    <h5 style={{ fontFamily: 'Faculty Glyphic', fontWeight: 'bold' }}>
+                        Administrator Portal
+                    </h5>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <Form onSubmit={submitHandler}>
+                    <Form.Group className="mb-3">
+                        <Form.Control
+                            type="password"
+                            placeholder="Enter PIN"
+                            value={data.pin}
+                            onChange={(e) => setData('pin', e.target.value)}
+                            className="py-2"
+                            isInvalid={!!errors.pin}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.pin}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
+                    <Button 
+                        type="submit" 
+                        variant="danger"
+                        className="w-100 py-2 btn-sm"
+                        disabled={processing}
                     >
-                        LC: Administrator Portal
-                    </h2>
-                </div>
-
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form onSubmit={submitHandler}>
-                        <div className="my-2">
-                            <input
-                                id="id_number"
-                                name="id_number"
-                                type="password"
-                                placeholder="Enter PIN"
-                                value={data.pin}
-                                onChange={(e) => 
-                                    setData('pin', e.target.value)
-                                }
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6"
-                                />
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full bg-pink-600 p-1.5 text-white rounded-sm shadow"
-                        >
-                            Login
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </>
+                        {processing ? 'Logging in...' : 'Login'}
+                    </Button>
+                </Form>
+            </Modal.Body>
+        </Modal>
     );
 }
-
-export default Portal;

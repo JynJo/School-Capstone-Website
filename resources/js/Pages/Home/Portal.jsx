@@ -1,81 +1,82 @@
-import { useState, useEffect } from 'react'
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { Link, useForm, Head } from "@inertiajs/react";
-import axios from 'axios'
-import AOS from "aos";
-import "aos/dist/aos.css";
+import { useForm } from "@inertiajs/react";
+import { Form, Button, Container, Alert } from "react-bootstrap";
+import { Head } from "@inertiajs/react";
 
 function Portal({ error }) {
-    const { post, data, setData, errors } = useForm({
+    const { post, data, setData, errors, processing } = useForm({
         id_number: "",
         password: ""
     });
 
-    const submitHandler = async(e) => {
-        e.preventDefault()
-
-        post(route('login'))
-
-    }
+    const submitHandler = (e) => {
+        e.preventDefault();
+        post(route('login'));
+    };
 
     return (
         <>
             <Head title="Student Portal" />
-            <div className="flex flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <Container className="d-flex flex-column justify-content-center align-items-center py-5">
+                <div className="text-center mb-4">
                     <img
-                        alt="Your Company"
                         src="/images/lc-seal.png"
-                        className="mx-auto h-20 w-auto"
+                        alt="Lourdes College Seal"
+                        className="mx-auto mb-3"
+                        style={{ height: '80px' }}
                     />
-                    <h2
-                        className="text-center text-2xl/9 font-bold tracking-wider text-pink-900 mt-2"
-                        style={{ fontFamily: ' "Faculty Glyphic"' }}
+                    <h2 
+                        className="font-bold mb-4" 
+                        style={{ fontFamily: 'Faculty Glyphic', fontSize: '1.8rem' }}
                     >
                         LC: Student Grade Portal
                     </h2>
                 </div>
 
-                <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                    <form onSubmit={submitHandler}>
-                        <div className="my-2">
-                            <input
+                <div className="    " >
+                    {/*{errors && <Alert variant="danger">{JSON.stringify(errors)}</Alert>}*/}
+                    
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group className="mb-2">
+                            <Form.Control
                                 id="id_number"
-                                name="id_number"
                                 type="text"
                                 placeholder="Student ID Number"
                                 value={data.id_number}
-                                onChange={(e) => 
-                                    setData('id_number', e.target.value)
-                                }
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6"
-                                />
-                        </div>
+                                onChange={(e) => setData('id_number', e.target.value)}
+                                isInvalid={!!errors.id_number}
+                                className="py-3"
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.id_number}
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
-                        <div className="my-2">
-                            <input
-                                id="id_number"
-                                name="id_number"
+                        <Form.Group className="mb-4">
+                            <Form.Control
+                                id="password"
                                 type="password"
                                 placeholder="Password"
                                 value={data.password}
-                                onChange={(e) => 
-                                    setData("password", e.target.value)
-                                }
-                                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-pink-600 sm:text-sm/6"
-                                />
-                        </div>
+                                onChange={(e) => setData('password', e.target.value)}
+                                isInvalid={!!errors.password}
+                                className="py-3"
+                            />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.password}
+                            </Form.Control.Feedback>
+                        </Form.Group>
 
-
-                        <button
-                            type="submit"
-                            className="w-full bg-pink-600 p-1.5 text-white rounded-sm shadow"
+                        <Button 
+                            type="submit" 
+                            variant="dark" 
+                            className="w-100 py-2"
+                            disabled={processing}
                         >
-                            Login
-                        </button>
-                    </form>
+                            {processing ? 'Logging in...' : 'Login'}
+                        </Button>
+                    </Form>
                 </div>
-            </div>
+            </Container>
         </>
     );
 }

@@ -30,7 +30,7 @@ const AcademicsOffered = () => {
     ];
 
     return (
-        <div className="p-4">
+        <section id="programs-offered" className="p-4">
             <h2
                 className=" text-center h3 my-4 font-semibold"
                 style={{ fontFamily: "Poppins" }}
@@ -73,7 +73,7 @@ const AcademicsOffered = () => {
                     ))}
                 </Row>
             </Container>
-        </div>
+        </section>
     );
 };
 

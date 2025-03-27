@@ -1,22 +1,31 @@
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
+import AdminPortalModal from '../../Admin/Portal.jsx'
 
 export default function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isAcademicsDropdownOpen, setIsAcademicsDropdownOpen] = useState(false);
+  const [isPortalDropdownOpen, setIsPortalDropdownOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     // Close dropdown when mobile menu is toggled
-    setIsDropdownOpen(false);
+    isAcademicsDropdownOpen(false);
   };
 
-  const toggleDropdown = (e) => {
+  const toggleAcademicsDropdown = (e) => {
     e.preventDefault();
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsAcademicsDropdownOpen(!isAcademicsDropdownOpen);
   };
 
-  return (
+  const togglePortalDropdown = (e) => {
+    e.preventDefault();
+    setIsPortalDropdownOpen(!isPortalDropdownOpen);
+  };
+
+
+  return (<>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm p-4">
       <div className="container">
         <Link className="navbar-brand fw-bold" href="/" style={{ fontFamily: 'Faculty Glypic', fontSize: '2em'}}>
@@ -53,34 +62,34 @@ export default function Nav() {
                   href="#"
                   id="navbarDropdown"
                   role="button"
-                  onClick={toggleDropdown}
-                  aria-expanded={isDropdownOpen}
+                  onClick={toggleAcademicsDropdown}
+                  aria-expanded={isAcademicsDropdownOpen}
                 >
                   Academics
                 </Link>
                 <ul 
                   id="navbarDropdownMenu" 
-                  className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}
+                  className={`dropdown-menu ${isAcademicsDropdownOpen ? 'show' : ''}`}
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link 
+                    <a 
                       className="dropdown-item" 
-                      href="/programs"
+                      href="#programs-offered"
                       onClick={() => {
-                        setIsDropdownOpen(false);
+                        setIsAcademicsDropdownOpen(false);
                         setIsMobileMenuOpen(false);
                       }}
                     >
                       Programs
-                    </Link>
+                    </a>
                   </li>
                   <li>
                     <Link 
                       className="dropdown-item" 
-                      href="/admissions"
+                      href="/admission"
                       onClick={() => {
-                        setIsDropdownOpen(false);
+                        setIsAcademicsDropdownOpen(false);
                         setIsMobileMenuOpen(false);
                       }}
                     >
@@ -100,38 +109,39 @@ export default function Nav() {
                   href="#"
                   id="navbarDropdown"
                   role="button"
-                  onClick={toggleDropdown}
-                  aria-expanded={isDropdownOpen}
+                  onClick={togglePortalDropdown}
+                  aria-expanded={isPortalDropdownOpen}
                 >
-                  Academics
+                  Portal
                 </Link>
                 <ul 
                   id="navbarDropdownMenu" 
-                  className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}
+                  className={`dropdown-menu ${isPortalDropdownOpen ? 'show' : ''}`}
                   aria-labelledby="navbarDropdown"
                 >
                   <li>
-                    <Link 
-                      className="dropdown-item" 
-                      href="/programs"
+                    <span 
+                      className="dropdown-item"
+                      style={{cursor:'pointer'}} 
                       onClick={() => {
-                        setIsDropdownOpen(false);
+                        setShowModal(true)
+                        setIsPortalDropdownOpen(false);
                         setIsMobileMenuOpen(false);
                       }}
                     >
-                      Programs
-                    </Link>
+                      Admin
+                    </span>
                   </li>
                   <li>
                     <Link 
                       className="dropdown-item" 
-                      href="/admissions"
+                      href="/grade-portal"
                       onClick={() => {
-                        setIsDropdownOpen(false);
+                        setIsPortalDropdownOpen(false);
                         setIsMobileMenuOpen(false);
                       }}
                     >
-                      Admissions
+                      Student
                     </Link>
                   </li>
                 </ul>
@@ -146,5 +156,12 @@ export default function Nav() {
         </div>
       </div>
     </nav>
+
+    <AdminPortalModal 
+                show={showModal} 
+                onHide={() => setShowModal(false)} 
+            />
+
+    </>
   );
 }

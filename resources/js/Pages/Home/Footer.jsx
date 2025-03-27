@@ -44,7 +44,7 @@ export default function Footer() {
                     </Col>
 
                     {/* Quick Links */}
-                    <Col lg={4} className="text-center text-lg-start">
+                    {/*<Col lg={4} className="text-center text-lg-start">
                         <h5 className="mb-3 text-danger">Quick Links</h5>
                         <ul className="list-unstyled">
                             <li className="mb-2">
@@ -73,7 +73,7 @@ export default function Footer() {
                                 </Link>
                             </li>
                         </ul>
-                    </Col>
+                    </Col>*/}
                 </Row>
 
                 <hr className="my-4 border-secondary" />
