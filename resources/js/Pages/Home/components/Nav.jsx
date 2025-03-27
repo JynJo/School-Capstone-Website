@@ -46,7 +46,7 @@ export default function Nav() {
           <div className="d-flex justify-content-between w-100">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <Link className="nav-link active" href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link className="nav-link" href="/" onClick={() => setIsMobileMenuOpen(false)}>
                   Home
                 </Link>
               </li>

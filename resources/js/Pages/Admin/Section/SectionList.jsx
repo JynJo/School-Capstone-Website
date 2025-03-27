@@ -1,163 +1,206 @@
-import DashboardLayout from '../DashboardLayout.jsx'
-import { Link, useForm, router } from '@inertiajs/react'
-import SubjectList from '../Subject/SubjectList.jsx'
-import AssignSubject from '../SectionSubject/Create.jsx'
+import DashboardLayout from '../DashboardLayout.jsx';
+import { Link, useForm, router } from '@inertiajs/react';
+import SubjectList from '../Subject/SubjectList.jsx';
+import AssignSubject from '../SectionSubject/Create.jsx';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 export default function SectionList({ sections, subjects, allSections, allSubjects }) {
+    const { data, setData, post, errors, processing } = useForm({
+        subject_name: '',
+        section_name: ''
+    });
 
-	const { data, setData, post, errors, processing } = useForm({
-		subject_name: '',
-		section_name: ''
-	});
+    const deleteHandler = (id) => {
+        if (confirm('Are you sure you want to delete this section?')) {
+            router.delete(route('section.destroy', { id: id }));
+        }
+    };
 
+    const storeSubject = (e) => {    
+        e.preventDefault();
+        post(route('subject.store'));
+    };
 
-	const deleteHandler = (id) => {
-		router.delete( route('section.destroy', { id: id }) );
-	}
+    const storeSection = (e) => {    
+        e.preventDefault();
+        post(route('section.store'));
+    };
 
-	const storeSubject = (e) => {	
-		e.preventDefault();
-		post( route('subject.store') );
-	}
+    return (
+        <DashboardLayout>
+            <div className="container-fluid p-4 bg-white rounded shadow-sm">
+                {/* Section Management */}
+                <div className="mb-5">
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                        <h2 className="h4 font-weight-bold mb-0">Section Management</h2>
+                    </div>
 
-	const storeSection = (e) => {	
-		e.preventDefault();
-		post(route('section.store') );
-	}
+                    <form onSubmit={storeSection} className="mb-4">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <input
+                                        value={data.section_name}
+                                        onChange={(e) => setData('section_name', e.target.value)}
+                                        className="form-control form-control-sm"
+                                        placeholder="Section name"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-md-2">
+                                <button
+                                    type='submit'
+                                    className="btn btn-primary btn-sm"
+                                    disabled={processing}
+                                >
+                        <i className="fas fa-plus mr-2"></i>                                    
+                                    {processing ? 'Adding...' : 'Add New Section'}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
-	return (<>
-		<div className="p-4 shadow-sm">
-			<div className="my-4 flex flex-col  gap-4">
-                    <h1 class="font-semibold">
-                        Section Management
-                    </h1>
+                    <div className="table-responsive">
+                        <table className="table table-bordered table-hover">
+                            <thead className="thead-light">
+                                <tr>
+                                    <th>Section Name</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {sections?.data.length > 0 ? (
+                                    sections.data.map((section) => (
+                                        <tr key={section.id}>
+                                            <td>{section.name}</td>
+                                            <td>
+                                                <div className="d-flex gap-2">
+                                                    <PhotoProvider>
+                                                        <PhotoView src={`/storage/${section.schedule?.image || ''}`}>
+                                                            <button className="btn btn-sm btn-warning">
+                                                    <i className="fas fa-clock mr-1"></i> 
+                                                                 View Schedule
+                                                            </button>
+                                                        </PhotoView>
+                                                    </PhotoProvider>
 
-                <div>
-                <form onSubmit={storeSection}>
-                	<input value={data.section_name} onChange={(e) => setData('section_name', e.target.value)} className="form-control" placeholder="Subject name"/>
-                    <button
-                    	type='submit'
-                        className="btn btn-primary btn-sm mt-2"
-                    >
-                        Insert new
-                    </button>
-                	
-                </form>
-                </div>
+                                                    <Link 
+                                                        href={`/admin/subject/show/${section.id}`} 
+                                                        className="btn btn-sm btn-info"
+                                                    >
+                                                    <i className="fas fa-book mr-1"></i>
+                                                        View Subjects
+                                                    </Link>
 
-                </div>
+                                                    <Link 
+                                                        href={route('section.edit', { id: section.id })} 
+                                                        className="btn btn-sm btn-primary"
+                                                    >
+                                                    <i className="fas fa-pen mr-1"></i>
 
-			<table className="table table-bordered table-hover table-responsive ">
-	        <thead>
-	        <tr>
-	            <th>
-	                Section Name
-	            </th>
-	            <th >
-	                Action
-	            </th>
-	        </tr>
-	        </thead>
-	        <tbody className="">
-	        { console.log(sections)}
-	       { sections?.data.length > 0 ? sections.data.map((section, index) => <>
-						<tr key={section.id}>
-			             <td className="px-3">
-			            	<p>
-								{section.name}
-			            	</p>
-			            </td>
-			            <td class="flex flex-row gap-2">
+                                                        Edit
+                                                    </Link>
 
-			             <PhotoProvider>
-					      <div className="foo">
-					          <PhotoView src={`/storage/${section.schedule?.image ? section.schedule.image : '' }`}>
-						           <button class="btn btn-sm btn-warning">
-	                                	View Class Schedule
-	                            	</button>
-					          </PhotoView>
-					      </div>
-					    </PhotoProvider>
+                                                    <button
+                                                        onClick={() => deleteHandler(section.id)}
+                                                        className="btn btn-sm btn-danger"
+                                                    >
+                                                    <i className="fas fa-trash mr-1"></i>
 
-			            
-                            <Link href={`/admin/subject/show/${section.id}`} class="btn btn-sm btn-warning">
-                                View Assigned Subjects
-                            </Link>
-                                            <button
-                                                onClick={e => deleteHandler(section.id)}
-                                                className="btn btn-danger btn-sm"
-                                            >
-                                                Delete
-                                            </button>
-                                           <Link href={ route('section.edit', { id: section.id }) } class="btn btn-sm btn-primary">
-                                Update
-                            </Link>
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="2" className="text-center py-4">
+                                            <div className="alert alert-info mb-0">
+                                                No sections available
+                                            </div>
                                         </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
 
-                            
-                           
-                           
-						</tr>
-						</>) : <p className="text-muted p-4 text-sm bg-slate-200">No records available.</p> }
-	        </tbody>
-	    </table>
-	    <div className="flex justify-between mt-4">
-	        <div className="">
-	        Showing <b>{sections.current_page}</b> of { sections.total }
-	        </div>
-	        <div>
-	        { sections.links.map((link) => (
-	        	link.url ? (
-	        		<Link
-	        			href={link.url}
-						className={`${link.active ? 'bg-slate-800' : 'bg-white'} px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-white border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200 ease`}
-	        			// className={`
-	        			dangerouslySetInnerHTML={{ __html: link.label == 'Next &raquo;' ? 'Next' : link.label == '&laquo; Previous' ? 'Prev' : link.label }}
-	        		/>
-	        	) : (
-	        	<span
-					key={link.url}
-					// dangerouslySetInnerHTML={{ __html: link.label }}
-					className="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease"
-				>{link.label == 'Next &raquo;' ? 'Next' : 'Prev'}</span>
-	        	)
-	        ))}
-	        </div>
-	    </div>
-
-	    {/* Subject */}
-		<div className="my-4 flex flex-col  gap-4">
-                    <h1 class="font-semibold">
-                        Subject Management
-                    </h1>
-
-                <div>
-                <form onSubmit={storeSubject}>
-                	<input value={data.subject_name} onChange={(e) => setData('subject_name', e.target.value)} className="form-control" placeholder="Subject name"/>
-                    <button
-                    	type='submit'
-                        className="btn btn-primary btn-sm mt-2"
-                    >
-                        Insert new
-                    </button>
-                	
-                </form>
+                    {/* Pagination */}
+                    {sections?.data.length > 0 && (
+                        <div className="d-flex justify-content-between align-items-center mt-3">
+                            <div className="text-muted">
+                                Showing <b>{sections.from}</b> to <b>{sections.to}</b> of <b>{sections.total}</b> entries
+                            </div>
+                            <nav>
+                                <ul className="pagination pagination-sm mb-0">
+                                    {sections.links.map((link, index) => (
+                                        <li key={index} className={`page-item ${link.active ? 'active' : ''} ${!link.url ? 'disabled' : ''}`}>
+                                            {link.url ? (
+                                                <Link 
+                                                    href={link.url} 
+                                                    className="page-link"
+                                                    preserveScroll
+                                                >
+                                                    {link.label.includes('Previous') ? '«' : 
+                                                     link.label.includes('Next') ? '»' : link.label}
+                                                </Link>
+                                            ) : (
+                                                <span className="page-link">
+                                                    {link.label.includes('Previous') ? '«' : 
+                                                     link.label.includes('Next') ? '»' : link.label}
+                                                </span>
+                                            )}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </nav>
+                        </div>
+                    )}
                 </div>
 
+                {/* Subject Management */}
+                <div className="mb-5">
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                        <h2 className="h4 font-weight-bold mb-0">Subject Management</h2>
+                    </div>
+
+                    <form onSubmit={storeSubject} className="mb-4">
+                        <div className="row">
+                            <div className="col-md-6">
+                                <div className="form-group">
+                                    <input
+                                        value={data.subject_name}
+                                        onChange={(e) => setData('subject_name', e.target.value)}
+                                        className="form-control form-control-sm"
+                                        placeholder="Subject name"
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className="col-md-2">
+                                <button
+                                    type='submit'
+                                    className="btn btn-primary btn-sm"
+                                    disabled={processing}
+                                >
+                        <i className="fas fa-plus mr-2"></i>                                    
+
+                                    {processing ? 'Adding...' : 'Add New Subject'}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <SubjectList subjects={subjects} />
                 </div>
 
-		<SubjectList subjects={subjects}/>
-		{/*Assign Subject to Section*/}
-		<AssignSubject subjects={allSubjects} sections={allSections} />
-
-
-
-		</div>
-
-
-
-	</>)
+                {/* Assign Subject to Section */}
+                <AssignSubject subjects={allSubjects} sections={allSections} />
+            </div>
+        </DashboardLayout>
+    );
 }
 
-SectionList.layout = page => <DashboardLayout children={page}/>
+// SectionList.layout = page => <DashboardLayout children={page} />;

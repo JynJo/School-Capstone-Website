@@ -5,8 +5,8 @@ import { Link } from '@inertiajs/react'
 const DashboardLayout = ({ children }) => {
     return (<>
         <Header/>
-        <div class="p-6">
-                { children }
+        <div className="p-5">
+            { children }
         </div>
     </>)
 }
