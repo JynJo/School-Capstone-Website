@@ -42,7 +42,7 @@ class SubjectController extends Controller
        $subject = Subject::findOrFail($id);
        $subject->update($validated);
 
-       return redirect()->route('subject.index')->with('success', 'Subject updated successfuly.');
+       return redirect()->route('section.index')->with('success', 'Subject updated successfuly.');
     }
 
     public function destroy(int $id) {

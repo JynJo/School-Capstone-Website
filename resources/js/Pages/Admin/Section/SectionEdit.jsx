@@ -1,62 +1,77 @@
-import DashboardLayout from '../DashboardLayout.jsx'
-import { Link, useForm } from '@inertiajs/react'
+import DashboardLayout from "../DashboardLayout.jsx";
+import { Link, useForm } from "@inertiajs/react";
 
 export default function SectionEdit({ section }) {
-	const { data, setData, put, errors, processing } = useForm({
-		name: section.name,
-	});
+    const { data, setData, put, errors, processing } = useForm({
+        name: section.name,
+    });
 
-	const submitHandler = (e) => {
-		e.preventDefault()
+    const submitHandler = (e) => {
+        e.preventDefault();
+        put(route("section.update", { id: section.id }));
+    };
 
-		put( route('section.update', { id: section.id }) )
-	}
-
-
-	return (<>
-		 <div className="">
-    <div className="mx-auto">
-      <div className="bg-white p-6">
-      { errors.name && (
-		      	<div role="alert" className="rounded border-s-4 border-red-400 bg-red-100 p-4 mb-4">
-		            <strong className="block font-bold text-red-800"> Validation Error! </strong>
-		            <p className="mt-2 text-sm text-red-700 font-medium">
-		             { errors.name }
-		            </p>
-		         </div>
-	          )}
-        <h1 className="text-lg font-semibold text-gray-700 mb-3">
-          Section information
-        </h1>
-        <p className="text-gray-500  mb-6 text-sm">
-          partial information only.
-        </p>
-        <form onSubmit={submitHandler}>
-          <div>
-            <input
-              type="text"
-              value={data.name}
-		      onChange={e => setData('name', e.target.value)}
-              placeholder="Name"
-              className="border p-2 rounded w-full"
-            />
-		      
-          </div>
-          <button
-            type="submit"
-            id="theme-toggle"
-            disabled={processing}
-            className="mt-4 py-2 px-4 text-md rounded bg-slate-800 text-white hover:bg-slate-900 focus:outline-none"
-          >
-            { processing ? 'Saving...' : 'Save'}
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-  </>
-)
-
+    return (
+        <>
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-md-8 bg-white p-4 rounded shadow-sm mt-4">
+                        {errors.name && (
+                            <div className="alert alert-danger mb-4">
+                                <strong className="font-weight-bold">
+                                    Validation Error!
+                                </strong>
+                                <p className="mb-0 mt-1">{errors.name}</p>
+                            </div>
+                        )}
+                        <h1 className="h5 font-weight-bold text-secondary mb-3">
+                            Updating section: {data.name}
+                        </h1>
+                        <form onSubmit={submitHandler}>
+                            <div className="form-group">
+                                <input
+                                    type="text"
+                                    value={data.name}
+                                    onChange={(e) =>
+                                        setData("name", e.target.value)
+                                    }
+                                    placeholder="Name"
+                                    className={`form-control ${
+                                        errors.name ? "is-invalid" : ""
+                                    }`}
+                                />
+                                {errors.name && (
+                                    <div className="invalid-feedback">
+                                        {errors.name}
+                                    </div>
+                                )}
+                            </div>
+                            <button
+                                type="submit"
+                                disabled={processing}
+                                className="btn btn-dark mt-3"
+                            >
+                                {processing ? (
+                                    <>
+                                        <span
+                                            className="spinner-border spinner-border-sm mr-2"
+                                            role="status"
+                                            aria-hidden="true"
+                                        ></span>
+                                        Updating...
+                                    </>
+                                ) : (
+                                    "Save Changes"
+                                )}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 }
 
-SectionEdit.layout = page => <DashboardLayout children={page} title="Edit student"/>
+SectionEdit.layout = (page) => (
+    <DashboardLayout children={page} title="Edit student" />
+);
