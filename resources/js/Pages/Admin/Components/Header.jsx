@@ -33,11 +33,6 @@ export default function Header() {
         <div className={`collapse navbar-collapse ${isMobileMenuOpen ? 'show' : ''}`}>
           <div className="d-flex justify-content-between w-100">
             <ul className="navbar-nav">
-            <li className="nav-item">
-                <Link className="nav-link" href={route('admin.dashboard')} onClick={() => setIsMobileMenuOpen(false)}>
-                  Dashboard
-                </Link>
-              </li>
               <li className="nav-item">
                 <Link className="nav-link" href={route('student.index')} onClick={() => setIsMobileMenuOpen(false)}>
                   Students

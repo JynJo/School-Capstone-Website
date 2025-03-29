@@ -18,7 +18,7 @@ class AdminController extends Controller
             $admin = Admin::where('email', 'admin@admin.com')->first();
             Auth::guard('admin')->login($admin);
 
-            return redirect()->route("admin.dashboard");
+            return redirect()->route("student.index");
         }
         
         return redirect()->route('home');
