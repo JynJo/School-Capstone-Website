@@ -16,7 +16,8 @@ use App\Http\Controllers\NewsController;
 use Inertia\Inertia;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/', [PageController::class, 'index'])->name('home');
+    Route::get('/home', [PageController::class, 'index'])->name('home');
+    Route::redirect('/', '/home');
     Route::get('/admission', [PageController::class, 'admission_page'])->name('admission.index');
     Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events');
     Route::get('/about', [PageController::class, 'about'])->name('about');

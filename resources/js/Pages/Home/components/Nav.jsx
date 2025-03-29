@@ -1,23 +1,20 @@
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
 import AdminPortalModal from "../../Admin/Portal.jsx";
+import { usePage } from '@inertiajs/react';
 
 export default function Nav() {
+    const { url } = usePage();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isAcademicsDropdownOpen, setIsAcademicsDropdownOpen] =
-        useState(false);
     const [isPortalDropdownOpen, setIsPortalDropdownOpen] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-        // Close dropdown when mobile menu is toggled
-        isAcademicsDropdownOpen(false);
+    const isActive = (routeName) => {
+        return url.startsWith(routeName);
     };
 
-    const toggleAcademicsDropdown = (e) => {
-        e.preventDefault();
-        setIsAcademicsDropdownOpen(!isAcademicsDropdownOpen);
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     const togglePortalDropdown = (e) => {
@@ -32,10 +29,7 @@ export default function Nav() {
                     <Link
                         className="navbar-brand fw-bold"
                         href="/"
-                        style={{
-                            fontFamily: "Faculty Glypic",
-                            fontSize: "2em",
-                        }}
+                        style={{ fontFamily: "Faculty Glypic", fontSize: "2em" }}
                     >
                         Lourdes College
                     </Link>
@@ -50,53 +44,48 @@ export default function Nav() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
-                    <div
-                        className={`collapse navbar-collapse ${
-                            isMobileMenuOpen ? "show" : ""
-                        }`}
-                    >
+                    <div className={`collapse navbar-collapse ${isMobileMenuOpen ? "show" : ""}`}>
                         <div className="d-flex justify-content-between w-100">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link"
+                                        className={`nav-link ${isActive('/home') ? 'active' : ''}`}
                                         href="/"
-                                        onClick={() =>
-                                            setIsMobileMenuOpen(false)
-                                        }
+                                        onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         Home
                                     </Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link
-                                        className="nav-link"
+                                        className={`nav-link ${isActive('/about') ? 'active' : ''}`}
                                         href="/about"
-                                        onClick={() =>
-                                            setIsMobileMenuOpen(false)
-                                        }
+                                        onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         About
                                     </Link>
                                 </li>
-
-                                <li className='nav-item'>
+                                <li className="nav-item">
                                     <Link
-                                        className="nav-link"
+                                        className={`nav-link ${isActive('/events') ? 'active' : ''}`}
+                                        href="/events"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        Events
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link
+                                        className={`nav-link ${isActive('/admission') ? 'active' : ''}`}
                                         href="/admission"
-                                        onClick={() => {
-                                            setIsAcademicsDropdownOpen(false);
-                                            setIsMobileMenuOpen(false);
-                                        }}
+                                        onClick={() => setIsMobileMenuOpen(false)}
                                     >
                                         Admissions
                                     </Link>
                                 </li>
-
-                                {/*Portal*/}
-                                <li className="nav-item dropdown">
+                                <li className={`nav-item dropdown ${isActive('/grade-portal') ? 'active' : ''}`}>
                                     <Link
-                                        className="nav-link dropdown-toggle"
+                                        className={`nav-link dropdown-toggle ${isPortalDropdownOpen ? 'active' : ''}`}
                                         href="#"
                                         id="navbarDropdown"
                                         role="button"
@@ -106,10 +95,7 @@ export default function Nav() {
                                         Portal
                                     </Link>
                                     <ul
-                                        id="navbarDropdownMenu"
-                                        className={`dropdown-menu ${
-                                            isPortalDropdownOpen ? "show" : ""
-                                        }`}
+                                        className={`dropdown-menu ${isPortalDropdownOpen ? "show" : ""}`}
                                         aria-labelledby="navbarDropdown"
                                     >
                                         <li>
@@ -118,9 +104,7 @@ export default function Nav() {
                                                 style={{ cursor: "pointer" }}
                                                 onClick={() => {
                                                     setShowModal(true);
-                                                    setIsPortalDropdownOpen(
-                                                        false
-                                                    );
+                                                    setIsPortalDropdownOpen(false);
                                                     setIsMobileMenuOpen(false);
                                                 }}
                                             >
@@ -129,12 +113,10 @@ export default function Nav() {
                                         </li>
                                         <li>
                                             <Link
-                                                className="dropdown-item"
+                                                className={`dropdown-item ${isActive('/grade-portal') ? 'active' : ''}`}
                                                 href="/grade-portal"
                                                 onClick={() => {
-                                                    setIsPortalDropdownOpen(
-                                                        false
-                                                    );
+                                                    setIsPortalDropdownOpen(false);
                                                     setIsMobileMenuOpen(false);
                                                 }}
                                             >

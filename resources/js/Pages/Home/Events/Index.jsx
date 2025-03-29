@@ -1,30 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import Layout from "../Layouts/Layout.jsx";
-import { Pagination } from "react-bootstrap";
+import { Link } from '@inertiajs/react';
 
 const Events = ({ events }) => {
-    const [currentPage, setCurrentPage] = useState(1);
-    const eventsPerPage = 6;
-
-    // Get current events
-    const indexOfLastEvent = currentPage * eventsPerPage;
-    const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-    const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
-
-    // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
     return (
         <div className="container py-4">
             <div className="row mb-4">
                 <div className="col-12">
                     <h1 className="text-primary fw-bold">Events</h1>
-                    <p className="text-muted">{events.length} upcoming events</p>
+                    <p className="text-muted">
+                        Showing {events.from} to {events.to} of {events.total} events
+                    </p>
                 </div>
             </div>
 
             <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
-                {currentEvents.map((event) => (
+                {events.data.map((event) => (
                     <div className="col" key={event.id}>
                         <div className="card h-100 shadow-sm">
                             <div className="position-relative">
@@ -67,17 +58,24 @@ const Events = ({ events }) => {
             </div>
 
             <div className="d-flex justify-content-center">
-                <Pagination>
-                    {Array.from({ length: Math.ceil(events.length / eventsPerPage) }).map((_, index) => (
-                        <Pagination.Item
-                            key={index + 1}
-                            active={index + 1 === currentPage}
-                            onClick={() => paginate(index + 1)}
-                        >
-                            {index + 1}
-                        </Pagination.Item>
-                    ))}
-                </Pagination>
+                <nav>
+                    <ul className="pagination">
+                        {events.links.map((link, index) => (
+                            <li 
+                                key={index} 
+                                className={`page-item ${link.active ? 'active' : ''} ${link.url === null ? 'disabled' : ''}`}
+                            >
+                                <Link 
+                                    href={link.url || '#'} 
+                                    className="page-link" 
+                                    preserveScroll
+                                >
+                                    {link.label.replace('&laquo;', '«').replace('&raquo;', '»')}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
             </div>
         </div>
     );
