@@ -56,7 +56,7 @@ export default function EventCreate() {
                                 value={data.category} 
                                 onChange={e => setData('category', e.target.value)} 
                                 id="category" 
-                                className={`form-select ${errors.category ? 'is-invalid' : ''}`}
+                                className={`form-control ${errors.category ? 'is-invalid' : ''}`}
                             >
                                 <option value="">Please select</option>
                                 <option value="Academic Calendar">Academic Calendar</option>

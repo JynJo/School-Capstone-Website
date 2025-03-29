@@ -17,10 +17,17 @@ use App\Rules\PhoneNumber;
 class StudentController extends Controller
 {
     public function index(Request $request) {
-        $query = Student::with('section');
-        $students = $query->paginate(10);
+        $students = Student::with('section')->paginate(10);
+        $sections = Section::all();
 
-        return Inertia::render('Admin/Student/StudentList', compact('students'));
+        if ($request->get('section')) {
+            $section = Section::find($request->get('section'));
+            $students = $section->students()->with('section')->paginate(10);
+            return Inertia::render('Admin/Student/StudentList', compact('students', 'sections'));
+
+        }
+
+        return Inertia::render('Admin/Student/StudentList', compact('students', 'sections'));
     }
 
     public function create() {

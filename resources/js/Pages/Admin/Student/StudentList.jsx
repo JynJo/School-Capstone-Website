@@ -1,7 +1,17 @@
 import DashboardLayout from "../DashboardLayout.jsx";
 import { Link, useForm, router } from "@inertiajs/react";
+import { useState } from "react";
 
-export default function StudentList({ auth, students }) {
+export default function StudentList({ students, sections }) {
+    const [filter, setFilter] = useState();
+    const { get, processing } = useForm();
+
+    const filterHandler = (e) => {
+        e.preventDefault()
+
+        get(route('student.index', {section: filter }))
+
+    }
     const deleteHandler = (id) => {
         if (confirm("Are you sure you want to delete this student?")) {
             router.delete(route("student.destroy", { id: id }));
@@ -24,16 +34,32 @@ export default function StudentList({ auth, students }) {
                 </div>
 
                 <div className="mb-4 d-flex align-items-end gap-2">
-                    <div className="flex-grow-1 mr-2">
-                        <label htmlFor="filter-section" className="form-label mb-1">Filter by section</label>
-                        <select id="filter-section" className="form-control">
-                            <option value="">All sections</option>
-                            {/* Add section options here */}
-                        </select>
-                    </div>
-                    <button className="btn btn-primary">
-                        Filter
-                    </button>
+                        <div className="flex-grow-1 mr-2">
+                            <label
+                                htmlFor="filter-section"
+                                className="form-label mb-1"
+                            >
+                                Filter by section
+                            </label>
+                            <select
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                                id="filter-section"
+                                className="form-control"
+                            >
+                                <option value="">All sections</option>
+                                {sections &&
+                                    sections.map((section, index) => (
+                                        <option
+                                            key={index}
+                                            value={section.id}
+                                        >
+                                            {section.name}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
+                        <button onClick={filterHandler} className="btn btn-primary">Filter</button>
                 </div>
 
                 <div className="table-responsive">
@@ -55,7 +81,7 @@ export default function StudentList({ auth, students }) {
                                         <td>{student.name}</td>
                                         <td>{student.email}</td>
                                         <td>
-                                            {student.section?.name || "N/A"}
+                                            { student.section.name }
                                         </td>
                                         <td>
                                             <div className="d-flex gap-2">
