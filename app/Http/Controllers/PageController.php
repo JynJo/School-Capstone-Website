@@ -29,8 +29,8 @@ class PageController extends Controller
         return Inertia::render('Home/AdmissionPage/Index');
     }
 
-    public function about() {
+    public function news() {
         $news = Announcement::latest()->where('notice_for', 'public')->get();
-        return Inertia::render('Home/About', compact('news'));
+        return Inertia::render('Home/NewsPage', compact('news'));
     }
 }

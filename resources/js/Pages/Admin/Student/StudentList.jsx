@@ -25,6 +25,7 @@ export default function StudentList({ students, sections }) {
                     <h2 className="h4 font-weight-bold mb-0">
                         Student Management
                     </h2>
+
                     <Link
                         href={route("student.create")}
                         className="btn btn-primary btn-sm"

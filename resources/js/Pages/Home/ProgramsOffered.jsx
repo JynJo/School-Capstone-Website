@@ -2,7 +2,7 @@ import React from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css"; // Import Splide's default styles
 
-const AcademicsOffered = () => {
+const ProgramsOffered = () => {
     const programs = [
         {
             id: 1,
@@ -119,4 +119,4 @@ const AcademicsOffered = () => {
     );
 };
 
-export default AcademicsOffered;
+export default ProgramsOffered;

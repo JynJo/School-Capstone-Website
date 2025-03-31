@@ -20,7 +20,7 @@ Route::middleware('guest')->group(function () {
     Route::redirect('/', '/home');
     Route::get('/admission', [PageController::class, 'admission_page'])->name('admission.index');
     Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events');
-    Route::get('/about', [PageController::class, 'about'])->name('about');
+    Route::get('/news', [PageController::class, 'news'])->name('news');
 
     Route::get('/news/{title}', [NewsController::class, 'show'])->name('news.show');
 });

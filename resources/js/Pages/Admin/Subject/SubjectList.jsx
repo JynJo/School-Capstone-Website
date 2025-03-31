@@ -33,7 +33,7 @@ export default function SubjectList({ subjects }) {
                                                 </Link>
                                                 <button 
                                                     onClick={() => deleteHandler(subject.id)} 
-                                                    className="btn btn-danger btn-sm ml-2"
+                                                    className="btn btn-danger btn-sm"
                                                 >
                                                     <i className="fas fa-trash-alt"></i>
                                                 </button>

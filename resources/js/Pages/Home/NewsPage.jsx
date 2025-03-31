@@ -3,9 +3,7 @@ import { Container, Nav, Card, Row, Col } from "react-bootstrap";
 import Layout from "./Layouts/Layout.jsx";
 import { Link } from "@inertiajs/react";
 
-const About = ({ news }) => {
-    const [activeTab, setActiveTab] = useState("history");
-
+const NewsPage = ({ news }) => {
     return (
         <div data-aos="fade-up">
             <div
@@ -107,5 +105,5 @@ const About = ({ news }) => {
     );
 };
 
-About.layout = (page) => <Layout children={page} />;
-export default About;
+NewsPage.layout = (page) => <Layout children={page} />;
+export default NewsPage;

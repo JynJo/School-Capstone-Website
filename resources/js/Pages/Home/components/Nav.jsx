@@ -57,7 +57,7 @@ export default function NavigationBar() {
                             </Nav.Link>
                             <Nav.Link
                                 as={Link}
-                                href="/about"
+                                href="/news"
                                 className={isActive("/about") ? "active nav-item" : "nav-item"}
                                 style={
                                     isActive("/about")
