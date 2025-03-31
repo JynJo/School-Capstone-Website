@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use App\Models\Grade;
-use App\Models\Schedule;
-use App\Models\Student;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class StudentController extends Controller
 {
     
     public function login() {
-        return Inertia::render('Home/Portal');
+        return Inertia::render('Home/StudentPortal');
     }
 
     public function authenticate(Request $request) {

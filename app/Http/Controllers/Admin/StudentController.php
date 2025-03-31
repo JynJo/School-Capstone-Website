@@ -3,12 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Crypt;
-/*use Illuminate\Support\Facades\Gate;*/
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
-use App\Models\User;
 use App\Models\Student;
 use App\Models\Section;
 use App\Rules\PhoneNumber;

@@ -1,6 +1,5 @@
 import React from "react";
-import Layout from "../Layouts/Layout.jsx";
-import { Link } from '@inertiajs/react';
+import Layout from "./Layouts/Layout.jsx";
 
 const Events = ({ events }) => {
     return (<div data-aos="fade-up">

@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Inertia\Inertia;
-use App\Models\User;
-use App\Models\SectionTeacher;
-use App\Models\Teacher;
-use App\Models\Section;
 use App\Models\Announcement;
 class PageController extends Controller
 {
@@ -17,7 +12,7 @@ class PageController extends Controller
     }
 
     public function login_page() {
-        return Inertia::render('Home/Portal');
+        return Inertia::render('Home/StudentPortal');
     }
 
     public function student_page() {
@@ -26,7 +21,7 @@ class PageController extends Controller
    
     public function admission_page() {
 
-        return Inertia::render('Home/AdmissionPage/Index');
+        return Inertia::render('Home/AdmissionProcess');
     }
 
     public function news() {

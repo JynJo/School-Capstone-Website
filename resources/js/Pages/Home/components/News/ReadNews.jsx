@@ -1,4 +1,4 @@
-import Layout from "../Layouts/Layout.jsx";
+import Layout from "../../Layouts/Layout.jsx";
 
 export default function ReadNews({ news }) {
     return (

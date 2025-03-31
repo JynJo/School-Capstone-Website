@@ -1,7 +1,5 @@
-import { Link } from "@inertiajs/react";
-import Hero from "../Hero.jsx";
 import { Head } from "@inertiajs/react";
-import Layout from "../Layouts/Layout.jsx";
+import Layout from "./Layouts/Layout.jsx";
 import { Container, Row, Col, Card } from "react-bootstrap";
 
 const Index = ({ auth }) => {

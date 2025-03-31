@@ -15,7 +15,7 @@ class EventController extends Controller
     {
         $events = Event::orderBy('date', 'asc')
             ->paginate(6);
-        return Inertia::render('Home/Events/Index', compact('events'));
+        return Inertia::render('Home/Events', compact('events'));
     }
 
     /**

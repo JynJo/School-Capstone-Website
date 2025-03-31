@@ -44,9 +44,6 @@ Route::get('/student/home', [PageController::class, 'student_page'])
 
 
 Route::prefix('admin')->middleware('admin.guard')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->name('admin.dashboard');
     // admin/student-specific routes go here
     Route::prefix('student')->group(function () {
         Route::get('list', [StudentController::class, 'index'])->name('student.index');
