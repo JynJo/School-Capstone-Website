@@ -87,16 +87,14 @@ export default function StudentList({ students, sections }) {
                                             <div className="d-flex gap-2">
                                                 <Link
                                                     href={`/admin/grade/show/${student.id}`}
-                                                    className="btn btn-sm btn-info"
+                                                    className="btn btn-sm btn-success"
                                                 >
-                                                    <i className="fas fa-eye mr-1"></i>{" "}
                                                     View Grades
                                                 </Link>
                                                 <Link
                                                     href={`/admin/grade/create/${student.id}`}
                                                     className="btn btn-sm btn-success"
                                                 >
-                                                    <i className="fas fa-edit mr-1"></i>{" "}
                                                     Grade
                                                 </Link>
                                                 <Link
@@ -106,8 +104,7 @@ export default function StudentList({ students, sections }) {
                                                     )}
                                                     className="btn btn-sm btn-primary"
                                                 >
-                                                    <i className="fas fa-pencil-alt mr-1"></i>{" "}
-                                                    Edit
+                                                    <i className="fas fa-edit mr-1"></i>{" "}
                                                 </Link>
                                                 <button
                                                     onClick={() =>
@@ -118,7 +115,6 @@ export default function StudentList({ students, sections }) {
                                                     className="btn btn-sm btn-danger"
                                                 >
                                                     <i className="fas fa-trash-alt mr-1"></i>{" "}
-                                                    Delete
                                                 </button>
                                             </div>
                                         </td>

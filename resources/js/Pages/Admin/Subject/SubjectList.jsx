@@ -29,13 +29,13 @@ export default function SubjectList({ subjects }) {
                                                     href={route('subject.edit', { id: subject.id })} 
                                                     className="btn btn-primary btn-sm"
                                                 >
-                                                    <i className="fas fa-edit mr-1"></i> Edit
+                                                    <i className="fas fa-edit"></i>
                                                 </Link>
                                                 <button 
                                                     onClick={() => deleteHandler(subject.id)} 
-                                                    className="btn btn-danger btn-sm"
+                                                    className="btn btn-danger btn-sm ml-2"
                                                 >
-                                                    <i className="fas fa-trash-alt mr-1"></i> Delete
+                                                    <i className="fas fa-trash-alt"></i>
                                                 </button>
                                         </td>
                                     </tr>

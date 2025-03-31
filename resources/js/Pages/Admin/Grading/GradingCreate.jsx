@@ -26,11 +26,11 @@ export default function GradeCreate({ student, subjects }) {
                         <div className="card-header bg-primary text-white py-3">
                             <div className="d-flex justify-content-between align-items-center">
                                 <h2 className="h4 mb-0 font-weight-bold">
-                                    <i className="fas fa-user-graduate mr-2"></i>
+                                    <i className="fas fa-user-graduate mr-2"></i>{" "}
                                     Grading Student: {student.name}
                                 </h2>
                                 <span className="badge badge-light">
-                                    <i className="fas fa-chalkboard-teacher mr-1"></i>
+                                    <i className="fas fa-chalkboard-teacher mr-1"></i>{" "}
                                     Section: {student.section.name}
                                 </span>
                             </div>
@@ -66,7 +66,6 @@ export default function GradeCreate({ student, subjects }) {
                                                         }
                                                     >
                                                         <td className="font-weight-bold">
-                                                            <i className="fas fa-book mr-2 text-primary"></i>
                                                             {
                                                                 subjects[index]
                                                                     .name
@@ -78,6 +77,7 @@ export default function GradeCreate({ student, subjects }) {
                                                                     value={
                                                                         subject.average
                                                                     }
+                                                                    required
                                                                     onChange={(
                                                                         e
                                                                     ) => {
@@ -129,6 +129,7 @@ export default function GradeCreate({ student, subjects }) {
                                                                 value={
                                                                     subject.term
                                                                 }
+                                                                required
                                                                 onChange={(
                                                                     e
                                                                 ) => {
@@ -186,6 +187,7 @@ export default function GradeCreate({ student, subjects }) {
                                                                 value={
                                                                     subject.semester
                                                                 }
+                                                                required
                                                                 onChange={(
                                                                     e
                                                                 ) => {
@@ -247,12 +249,12 @@ export default function GradeCreate({ student, subjects }) {
 
                                 <div className="card-footer bg-white border-0 d-flex justify-content-between align-items-center py-3">
                                     <div className="text-muted small">
-                                        <i className="fas fa-info-circle mr-1"></i>
+                                        <i className="fas fa-info-circle mr-1"></i>{" "}
                                         Please fill all required fields
                                     </div>
                                     <button
                                         type="submit"
-                                        className="btn btn-success px-4 py-2"
+                                        className="btn btn-sm btn-success px-4 py-2"
                                         disabled={processing}
                                     >
                                         {processing ? (
@@ -266,8 +268,7 @@ export default function GradeCreate({ student, subjects }) {
                                             </>
                                         ) : (
                                             <>
-                                                <i className="fas fa-save mr-2"></i>
-                                                Save Grades
+                                                <i className="fas fa-save mr-2"></i>{" "} Save Grades
                                             </>
                                         )}
                                     </button>

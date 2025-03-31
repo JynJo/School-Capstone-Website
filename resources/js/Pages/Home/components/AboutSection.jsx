@@ -7,7 +7,7 @@ const AboutUs = () => {
         <div className="container py-5" style={{ maxWidth: "800px" }}>
             <h1
                 className="text-center h3 my-4 font-semibold"
-                style={{ fontFamily: "Poppins", color: "#E41B70" }}
+                style={{ color: "#E41B70" }}
                 data-aos="fade-up"
             >
                 ABOUT US

@@ -78,8 +78,7 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
                                                 <div className="d-flex gap-2">
                                                     <PhotoProvider>
                                                         <PhotoView src={`/storage/${section.schedule?.image || ''}`}>
-                                                            <button className="btn btn-sm btn-warning">
-                                                    <i className="fas fa-clock mr-1"></i> 
+                                                            <button className="btn btn-sm btn-success">
                                                                  View Schedule
                                                             </button>
                                                         </PhotoView>
@@ -87,9 +86,8 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
 
                                                     <Link 
                                                         href={`/admin/subject/show/${section.id}`} 
-                                                        className="btn btn-sm btn-info"
+                                                        className="btn btn-sm btn-success"
                                                     >
-                                                    <i className="fas fa-book mr-1"></i>
                                                         View Subjects
                                                     </Link>
 
@@ -97,9 +95,7 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
                                                         href={route('section.edit', { id: section.id })} 
                                                         className="btn btn-sm btn-primary"
                                                     >
-                                                    <i className="fas fa-pen mr-1"></i>
-
-                                                        Edit
+                                                    <i className="fas fa-edit mr-1"></i>
                                                     </Link>
 
                                                     <button
@@ -107,8 +103,6 @@ export default function SectionList({ sections, subjects, allSections, allSubjec
                                                         className="btn btn-sm btn-danger"
                                                     >
                                                     <i className="fas fa-trash mr-1"></i>
-
-                                                        Delete
                                                     </button>
                                                 </div>
                                             </td>

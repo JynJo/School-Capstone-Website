@@ -30,7 +30,7 @@ function Index({ news }) {
 
             <h1
                 className="text-center h3 my-4 font-semibold"
-                style={{ fontFamily: "Poppins", color: "#E41B70" }}
+                style={{  color: "#E41B70" }}
                 data-aos="fade-up"
             >
                 CONTACT US

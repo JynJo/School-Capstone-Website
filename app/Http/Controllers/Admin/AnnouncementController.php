@@ -61,9 +61,9 @@ class AnnouncementController extends Controller
      */
     public function show(string $id)
     {
-        $announcement = Announcement::findOrFail($id);
+        $news = Announcement::findOrFail($id);
 
-        return Inertia::render('Admin/Announcement/Show', compact('announcement'));
+        return Inertia::render('Admin/Announcement/Show', compact('news'));
     }
 
     /**

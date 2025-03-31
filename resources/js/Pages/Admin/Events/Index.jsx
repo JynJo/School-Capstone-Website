@@ -65,8 +65,6 @@ export default function EventsIndex({ events }) {
                                                     onClick={() => deleteHandler(event.id)}
                                                 >
                        								 <i className="fas fa-trash-alt mr-2"></i>
-                        							
-                                                    Delete
                                                 </button>
                                             </td>
                                         </tr>

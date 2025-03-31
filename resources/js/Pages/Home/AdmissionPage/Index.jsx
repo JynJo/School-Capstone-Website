@@ -38,9 +38,9 @@ const Index = ({ auth }) => {
                 </h1>
             </div>
             <Container className="py-5" data-aos="fade-up">
-                <p
-                    className="h4 font-weight-bold text-primary mb-4"
-                    style={{ fontFamily: "Open Sans" }}
+                <h4
+                    className="font-weight-bold text-primary mb-4"
+                    style={{  fontWeight: "bold" }}
                 >
                     We are delighted that you are considering Lourdes College
                     for your child's educational journey. As a Catholic
@@ -51,8 +51,8 @@ const Index = ({ auth }) => {
                     on academic achievement but also on nurturing strong
                     character, spiritual growth, and a lifelong love of
                     learning.
-                </p>
-                <p className="lead" style={{ fontFamily: "Open Sans" }}>
+                </h4>
+                <p className="lead" >
                     We take pride in our students' accomplishments, including
                     those who go on to excel in prestigious universities and
                     meaningful careers. However, we believe that true success

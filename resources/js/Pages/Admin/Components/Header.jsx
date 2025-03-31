@@ -1,12 +1,18 @@
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
+import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 
 export default function Header() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const { url } = usePage();
     const { post } = useForm();
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
+
+    const isActive = (routeName) => {
+        return url.startsWith(routeName);
     };
 
     const logoutHandler = () => {
@@ -15,85 +21,82 @@ export default function Header() {
 
     return (
         <>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm p-4">
-                <div className="container">
-                    <Link
-                        className="navbar-brand fw-bold"
+            <Navbar
+                expand="lg"
+                bg="white"
+                variant="light"
+                className="shadow-sm p-3"
+            >
+                <Container>
+                    {/* Brand */}
+                    <Navbar.Brand
+                        as={Link}
                         href="/"
+                        className="fw-bold"
                         style={{
-                            fontFamily: "Faculty Glypic",
+                            fontFamily: "Parisienne",
                             fontSize: "2em",
+                            color: "#E41B70",
                         }}
                     >
-                        Administrator
-                    </Link>
+                        <img src="/images/lc-seal.png" width="80"/> {""}
+                        Lourdes College, Inc
+                    </Navbar.Brand>
 
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        onClick={toggleMobileMenu}
-                        aria-expanded={isMobileMenuOpen}
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
+                    {/* Toggle Button */}
+                    <Navbar.Toggle aria-controls="navbar-nav" />
 
-                    <div
-                        className={`collapse navbar-collapse ${
-                            isMobileMenuOpen ? "show" : ""
-                        }`}
-                    >
-                        <div className="d-flex justify-content-between w-100">
-                            <ul className="navbar-nav">
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link"
-                                        href={route("student.index")}
-                                        onClick={() =>
-                                            setIsMobileMenuOpen(false)
-                                        }
-                                    >
-                                        <i className='fas fa-users'></i> Students
-                                    </Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link"
-                                        href={route("section.index")}
-                                        onClick={() =>
-                                            setIsMobileMenuOpen(false)
-                                        }
-                                    >
-                                        <i className="fas fa-book"></i> Academics
-                                    </Link>
-                                </li>
-
-                                <li className="nav-item">
-                                    <Link
-                                        className="nav-link"
-                                        href={route("announcement.index")}
-                                        onClick={() =>
-                                            setIsMobileMenuOpen(false)
-                                        }
-                                    >
-                                        <i className="fas fa-bullhorn"></i> Announcements
-                                    </Link>
-                                </li>
-
-                                <li className="nav-item">
-                                    <span
-                                        className="nav-link"
-                                        onClick={logoutHandler}
-                                    >
-                                        <i className="fas fa-sign-out-alt mr-2"></i>
-                                        Logout
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+                    {/* Navbar Links */}
+                    <Navbar.Collapse id="navbar-nav">
+                        <Nav className="ms-auto">
+                            <Nav.Link
+                                as={Link}
+                                href="/admin/student/list"
+                                className={isActive("/admin/student/list") ? "active nav-item" : "nav-item"}
+                                style={
+                                    isActive("/home")
+                                        ? { color: "#E41B70" }
+                                        : {}
+                                }
+                            >
+                                Students
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                href={route("section.index")}
+                                className={isActive("/admin/section/list") ? "active nav-item" : "nav-item"}
+                                style={
+                                    isActive("/about")
+                                        ? { color: "#E41B70" }
+                                        : {}
+                                }
+                            >
+                              Academics
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                href={route("announcement.index")}
+                                className={isActive("/admin/announcement/index") ? "active nav-item" : "nav-item"}
+                                style={
+                                    isActive("/events")
+                                        ? { color: "#E41B70" }
+                                        : {}
+                                }
+                            >
+                                Announcements
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
+                                href="/admission"
+                                onClick={logoutHandler}
+                            >
+                                <i className="fas fa-sign-out-alt mr-2"></i>
+                                LOGOUT
+                            </Nav.Link>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         </>
     );
 }

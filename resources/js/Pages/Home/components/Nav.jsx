@@ -33,6 +33,7 @@ export default function NavigationBar() {
                             color: "#E41B70",
                         }}
                     >
+                        <img src="/images/lc-seal.png" width="80"/> {""}
                         Lourdes College, Inc
                     </Navbar.Brand>
 

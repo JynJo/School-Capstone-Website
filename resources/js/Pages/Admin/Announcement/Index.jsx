@@ -62,21 +62,21 @@ const Index = ({ announcements, events }) => {
                                             <div className="d-flex justify-content-center gap-2">
                                                 <Link 
                                                     href={route('announcement.show', { id: announcement.id })} 
-                                                    className="btn btn-info btn-sm"
+                                                    className="btn btn-sm btn-success"
                                                 >
-                                                    <i className="fas fa-eye mr-1"></i> View
+                                                    View
                                                 </Link>
                                                 <Link 
                                                     href={route('announcement.edit', { id: announcement.id })} 
                                                     className="btn btn-primary btn-sm"
                                                 >
-                                                    <i className="fas fa-edit mr-1"></i> Edit
+                                                    <i className="fas fa-edit mr-1"></i>
                                                 </Link>
                                                 <button 
                                                     className="btn btn-danger btn-sm"
                                                     onClick={() => deleteHandler(announcement.id)}
                                                 >
-                                                    <i className="fas fa-trash-alt mr-1"></i> Delete
+                                                    <i className="fas fa-trash-alt mr-1"></i>
                                                 </button>
                                             </div>
                                         </td>

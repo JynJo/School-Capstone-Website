@@ -71,7 +71,7 @@ export default function CreateSchedule({ sections }) {
                 <div className="text-end">
                     <button 
                         type="submit" 
-                        className="btn btn-primary"
+                        className="btn btn-primary btn-sm"
                         disabled={processing}
                     >
                         {processing ? (
@@ -81,8 +81,7 @@ export default function CreateSchedule({ sections }) {
                             </>
                         ) : (
                             <>
-                                <i className="fas fa-upload me-2"></i>
-                                Upload Schedule
+                                <i className="fas fa-upload me-2"></i>{" "}Upload Schedule
                             </>
                         )}
                     </button>
