@@ -1,34 +1,89 @@
 import Layout from "../Layouts/Layout.jsx";
 
 export default function ReadNews({ news }) {
-    console.log(news);
     return (
-        <>
-            <div data-aos="fade-down" className="flex flex-row justify-center">
-                <div className="p-5 flex flex-col gap-4 w-[70vw]">
-                    <h2 className="font-bold italic text-lg text-gray-500">
-                        {new Intl.DateTimeFormat("en-US", {
-                            month: "long",
-                            day: "numeric",
-                            year: "numeric",
-                        }).format(
-                            new Date(
-                                new Date(news.created_at).toLocaleDateString()
-                            )
-                        )}
-                    </h2>
-                    <img
-                        className="max-h-[600px] object-scale-down"
-                        src={`/storage/${news.image}`}
-                    />
-                    <h2 className="text-2xl font-semibold">{news.title}</h2>
-                    <article
-                        className="text-gray-600 text-lg font-light"
-                        dangerouslySetInnerHTML={{ __html: news.content }}
-                    ></article>
-                </div>
+        <div data-aos="fade-up">
+            {/* Title */}
+            <div
+                style={{
+                    backgroundImage: `linear-gradient(rgba(228, 27, 112, 0.7), rgba(228, 27, 112, 0.9)), url('/storage/${news.image}')`,
+                    backgroundSize: "cover",
+                    padding: "50px 0",
+                    backgroundPosition: "center",
+                }}
+            >
+                <h1
+                    style={{
+                        textAlign: "center",
+                        fontSize: "28px",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                        color: "white",
+                        textTransform: "uppercase",
+                    }}
+                >
+                    {news.title}
+                </h1>
             </div>
-        </>
+
+            <div
+                style={{
+                    fontFamily: "Arial, sans-serif",
+                    maxWidth: "800px",
+                    margin: "0 auto",
+                    backgroundColor: "#fff",
+                }}
+            >
+                {/* <h2
+                    style={{
+                        textAlign: "center",
+                        fontSize: "22px",
+                        fontWeight: "bold",
+                        marginBottom: "30px",
+                        fontStyle: "italic",
+                        color: "#444",
+                    }}
+                >
+                    "Bagong Pilipinas: Pagpupuo Mapanilkhang Propesyona!"
+                </h2> */}
+
+                {/* Event Details */}
+
+                {/* Content */}
+
+                <img
+                    src={`/storage/${news.image}`}
+                    alt={news.title}
+                    style={{
+                        width: "100%",
+                        height: "auto",
+                        marginBottom: "20px",
+                    }}
+                />
+
+                <hr
+                    style={{
+                        border: "none",
+                        height: "1px",
+                        backgroundColor: "#ddd",
+                        margin: "30px 0",
+                    }}
+                />
+                <div style={{padding: "20px"}}>
+                <p
+                    style={{
+                        fontSize: "16px",
+                        lineHeight: "1.6",
+                        color: "#333",
+                        textAlign: "justify",
+                    }}
+                >
+                    {news.content}
+                </p>
+                </div>
+              
+            </div>
+        </div>
     );
 }
 

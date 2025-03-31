@@ -136,6 +136,10 @@ const AnnouncementCreate = () => {
                             <textarea
                                 className="form-control"
                                 name=""
+                                value={data.content}
+                                onChange={(e) =>
+                                    setData("content", e.target.value)
+                                }
                             ></textarea>
                             {errors.content && (
                                 <div className="text-danger small mt-2">

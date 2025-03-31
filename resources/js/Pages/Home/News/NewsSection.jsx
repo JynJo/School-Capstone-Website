@@ -1,62 +1,89 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css"; // Import Splide's default styles
 
 const LatestNews = ({ news }) => {
-    return ( <div 
-    data-aos="fade-down"
-    className="container py-5 my-5"
->
-    <div className="text-center mb-5">
-        <h2
-                className=" text-center h3 my-4 font-semibold"
-                style={{ fontFamily: "Poppins" }}
-                data-aos="fade-up"
-            >
-                Latest News
-            </h2>
-    </div>
-    
-    <div className="row g-4">
-        {news && news.map((news, index) => (
-            <div className="col-md-6 col-lg-4 ">
-                <div className="mb-4 group card h-100 border-0 shadow-sm hover-shadow transition p-4">
-                    <div className="ratio ratio-16x9 mb-4">
-                        <img
-                            className="card-img-top object-fit-cover rounded"
-                            src={`/storage/${news.image}`}
-                            alt="Blog Image"
-                            style={{ maxHeight: "200px" }}
-                        />
-                    </div>
-                    <div className="card-body p-0">
-                        <h3 className="card-title h5">
-                            {news.title}
-                        </h3>
-                        <Link
-                            href={route("news.show", { title: news.title })}
-                            className="d-inline-flex align-items-center text-decoration-none mt-3 text-[#ea9999] fw-semibold"
-                        >
-                            Read More
-                            <svg
-                                className="ms-1 transition-all ease-in-out group-hover:translate-x-1"
-                                width="16"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                            >
-                                <path d="m9 18 6-6-6-6" />
-                            </svg>
-                        </Link>
-                    </div>
-                </div>
+    return (
+        <div data-aos="fade-down" className="container py-5 my-5">
+            <div className="mb-5">
+                <h2
+                    className="text-start h3 my-4 font-semibold"
+                    style={{ fontFamily: "Poppins", color: "#E41B70" }}
+                    data-aos="fade-up"
+                >
+                    LATEST NEWS
+                </h2>
             </div>
-        ))}
-    </div>
-</div>
+
+            <Splide
+                options={{
+                    perPage: 4,
+                    perMove: 1,
+                    gap: "4rem",
+                    pagination: true,
+                    arrows:false,
+                    breakpoints: {
+                        1024: { perPage: 3 },
+                        768: { perPage: 1 },
+                    },
+                }}
+                aria-label="Latest News"
+            >
+                {news &&
+                    news.map((newsItem, index) => (
+                        <SplideSlide key={index}>
+                            <div className="card mb-4" style={{ width: "18rem" }}>
+                                <img
+                                    className="object-fit-cover"
+                                    src={`/storage/${newsItem.image}`}
+                                    alt={newsItem.title}
+                                    style={{ height: "300px", objectFit: "cover" }}
+                                />
+                                <div className="card-body p-3">
+                                    <h3
+                                        className="card-title mb-2"
+                                        style={{
+                                            color: "#E41B70",
+                                            fontWeight: "bold",
+                                            fontSize: "1.2em",
+                                        }}
+                                    >
+                                        {newsItem.title}
+                                    </h3>
+                                    <p className="card-text" style={{ fontSize: "0.9em" }}>
+                                        {newsItem.content.length > 200
+                                            ? `${newsItem.content.substring(0, 200)}...`
+                                            : newsItem.content}
+                                    </p>
+                                    <Link
+                                        href={route("news.show", {
+                                            title: newsItem.title,
+                                        })}
+                                        className="btn btn-outline-primary d-flex align-items-center justify-content-center mt-2 group"
+                                        style={{ fontSize: "0.85em" }}
+                                    >
+                                        Read More
+                                        <svg
+                                            className="ms-1 transition-all ease-in-out group-hover:translate-x-1"
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth={2}
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                        >
+                                            <path d="m9 18 6-6-6-6" />
+                                        </svg>
+                                    </Link>
+                                </div>
+                            </div>
+                        </SplideSlide>
+                    ))}
+            </Splide>
+        </div>
     );
 };
 

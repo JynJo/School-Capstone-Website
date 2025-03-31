@@ -39,8 +39,8 @@ class AnnouncementController extends Controller
         $request->validate([
             'title' => ['required', 'min:3'],
             'content' => ['required', 'min:10'],
-            'noticeFor' => ['required', 'in:teachers,students,parents,public'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:7168'],
+            'noticeFor' => ['required', 'in:students,public'],
+            // 'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg'],
 
         ]);
 

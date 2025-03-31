@@ -7,7 +7,6 @@
         <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
         <!-- Theme style -->
-        <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
         {{-- Font --}}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -2,30 +2,27 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { useForm } from "@inertiajs/react";
 
 export default function AdminPortalModal({ show, onHide }) {
-    const { post, data, setData, errors, processing} = useForm({
+    const { post, data, setData, errors, processing } = useForm({
         pin: "",
     });
 
     const submitHandler = (e) => {
         e.preventDefault();
         post(route("admin.login"), {
-            onSuccess: () => onHide()
+            onSuccess: () => onHide(),
         });
     };
 
     return (
         <Modal show={show} onHide={onHide} centered>
             <Modal.Header closeButton className="border-0">
-                <Modal.Title className="text-center w-100">
-                    <img 
-                        src="/images/lc-seal.png" 
-                        alt="Lourdes College Seal" 
-                        className="mx-auto d-block mb-2"
-                        style={{ height: '60px' }}
+                <Modal.Title style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "100%" }}>
+                    <img
+                        src="/images/lc-seal.png"
+                        alt="Lourdes College Seal"
+                        style={{ height: "60px" }}
                     />
-                    <h5 style={{ fontFamily: 'Faculty Glyphic', fontWeight: 'bold' }}>
-                        Administrator Portal
-                    </h5>
+                    <h5 style={{marginLeft: '8px'}}>ADMINISTRATOR PORTAL</h5>
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
@@ -35,7 +32,7 @@ export default function AdminPortalModal({ show, onHide }) {
                             type="password"
                             placeholder="Enter PIN"
                             value={data.pin}
-                            onChange={(e) => setData('pin', e.target.value)}
+                            onChange={(e) => setData("pin", e.target.value)}
                             className="py-2"
                             isInvalid={!!errors.pin}
                         />
@@ -44,13 +41,13 @@ export default function AdminPortalModal({ show, onHide }) {
                         </Form.Control.Feedback>
                     </Form.Group>
 
-                    <Button 
-                        type="submit" 
-                        variant="danger"
+                    <Button
+                        type="submit"
+                        variant="primary"
                         className="w-100 py-2 btn-sm"
                         disabled={processing}
                     >
-                        {processing ? 'Logging in...' : 'Login'}
+                        {processing ? "Logging in..." : "LOGIN"}
                     </Button>
                 </Form>
             </Modal.Body>

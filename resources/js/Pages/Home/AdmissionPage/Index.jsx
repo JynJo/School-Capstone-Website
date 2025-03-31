@@ -14,55 +14,57 @@ const Index = ({ auth }) => {
     ];
 
     return (
-        <>
+        <div data-aos="fade-up">
             <Head title="Admissions" />
-            <Hero title="Admission Process" />
-
+            <div
+                style={{
+                    backgroundImage: `linear-gradient(rgba(228, 27, 112, 0.7), rgba(228, 27, 112, 0.9)), url('/images/cbg-2.jpg')`,
+                    backgroundSize: "cover",
+                    padding: "50px",
+                    backgroundPosition: "center",
+                }}
+            >
+                <h1
+                    style={{
+                        textAlign: "start",
+                        fontSize: "28px",
+                        fontWeight: "bold",
+                        marginBottom: "20px",
+                        color: "white",
+                        textTransform: "uppercase",
+                    }}
+                >
+                    ADMISSION PROCESS
+                </h1>
+            </div>
             <Container className="py-5" data-aos="fade-up">
-                <Row className="justify-content-center">
-                    <Col md={8}>
-                        <Card className="mb-5" >
-                            <Card.Body>
-                                <p
-                                    className="h4 font-weight-bold text-primary mb-4"
-                                    style={{ fontFamily: "Open Sans" }}
-                                >
-                                    We are delighted that you are considering
-                                    Lourdes College for your child's educational
-                                    journey. As a Catholic institution rooted in
-                                    faith, excellence, and service, Lourdes
-                                    College is more than just a school — it is a
-                                    vibrant community of learners. From our
-                                    youngest students in Kindergarten to our
-                                    High School graduates, we focus not only on
-                                    academic achievement but also on nurturing
-                                    strong character, spiritual growth, and a
-                                    lifelong love of learning.
-                                </p>
-                                <p
-                                    className="lead"
-                                    style={{ fontFamily: "Open Sans" }}
-                                >
-                                    We take pride in our students'
-                                    accomplishments, including those who go on
-                                    to excel in prestigious universities and
-                                    meaningful careers. However, we believe that
-                                    true success starts with a solid foundation
-                                    — one built on faith, values, and the
-                                    pursuit of knowledge. At Lourdes College,
-                                    every child is valued, supported, and
-                                    encouraged to grow as a whole person, ready
-                                    to face the world with compassion,
-                                    confidence, and a strong moral compass.
-                                    Thank you for considering joining the
-                                    Lourdes College family. We are excited to
-                                    partner with you in shaping the future of
-                                    your child.
-                                </p>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
+                <p
+                    className="h4 font-weight-bold text-primary mb-4"
+                    style={{ fontFamily: "Open Sans" }}
+                >
+                    We are delighted that you are considering Lourdes College
+                    for your child's educational journey. As a Catholic
+                    institution rooted in faith, excellence, and service,
+                    Lourdes College is more than just a school — it is a vibrant
+                    community of learners. From our youngest students in
+                    Kindergarten to our High School graduates, we focus not only
+                    on academic achievement but also on nurturing strong
+                    character, spiritual growth, and a lifelong love of
+                    learning.
+                </p>
+                <p className="lead" style={{ fontFamily: "Open Sans" }}>
+                    We take pride in our students' accomplishments, including
+                    those who go on to excel in prestigious universities and
+                    meaningful careers. However, we believe that true success
+                    starts with a solid foundation — one built on faith, values,
+                    and the pursuit of knowledge. At Lourdes College, every
+                    child is valued, supported, and encouraged to grow as a
+                    whole person, ready to face the world with compassion,
+                    confidence, and a strong moral compass. Thank you for
+                    considering joining the Lourdes College family. We are
+                    excited to partner with you in shaping the future of your
+                    child.
+                </p>
             </Container>
 
             <Container className="py-4">
@@ -90,7 +92,7 @@ const Index = ({ auth }) => {
                     ))}
                 </Row>
             </Container>
-        </>
+        </div>
     );
 };
 

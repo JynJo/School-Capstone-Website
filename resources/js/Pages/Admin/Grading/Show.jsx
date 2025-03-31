@@ -1,13 +1,13 @@
-import DashboardLayout from '../DashboardLayout.jsx'
+import DashboardLayout from "../DashboardLayout.jsx";
 
 export default function Show({ student }) {
-	function getAverageBadgeClass(average) {
-		if (average >= 90) return 'badge-success';
-		if (average >= 75) return 'badge-primary';
-		if (average <= 75) return 'badge-warning';
-		return 'badge-danger';
-	}
-	
+    
+    function getAverageBadgeClass(average) {
+        if (average >= 90) return "badge-success";
+        if (average >= 75) return "badge-primary";
+        if (average <= 75) return "badge-warning";
+        return "badge-danger";
+    }
 
     return (
         <>
@@ -23,11 +23,13 @@ export default function Show({ student }) {
                                             {student.name}
                                         </h2>
                                         <span className="text-white-50">
-                                            Section: <b>{student.section.name}</b>
+                                            Section:{" "}
+                                            <b>{student.section.name}</b>
                                         </span>
                                     </div>
                                     <span className="badge badge-light">
-                                        <i className="fas fa-id-card mr-1"></i> Student Record
+                                        <i className="fas fa-id-card mr-1"></i>{" "}
+                                        Student Record
                                     </span>
                                 </div>
                             </div>
@@ -36,32 +38,59 @@ export default function Show({ student }) {
                                     <table className="table table-striped table-hover">
                                         <thead className="thead-dark">
                                             <tr>
-                                                <th><i className="fas fa-book mr-1"></i> Subject</th>
-                                                <th><i className="fas fa-percentage mr-1"></i> Average</th>
-                                                <th><i className="fas fa-calendar-alt mr-1"></i> Term</th>
-                                                <th><i className="fas fa-calendar-week mr-1"></i> Semester</th>
+                                                <th>
+                                                    <i className="fas fa-book mr-1"></i>{" "}
+                                                    Subject
+                                                </th>
+                                                <th>
+                                                    <i className="fas fa-percentage mr-1"></i>{" "}
+                                                    Average
+                                                </th>
+                                                <th>
+                                                    <i className="fas fa-calendar-alt mr-1"></i>{" "}
+                                                    Term
+                                                </th>
+                                                <th>
+                                                    <i className="fas fa-calendar-week mr-1"></i>{" "}
+                                                    Semester
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {student.grades.map((grades, index) => (
-                                                <tr key={index}>
-                                                    <td className="font-weight-bold">{grades.subject.name}</td>
-                                                    <td>
-                                                        <span className={`badge ${getAverageBadgeClass(grades.average)}`}>
-                                                            {grades.average}%
-                                                        </span>
-                                                    </td>
-                                                    <td>{grades.term}</td>
-                                                    <td>{grades.semester}</td>
-                                                </tr>
-                                            ))}
+                                            {student.grades.map(
+                                                (grades, index) => (
+                                                    <tr key={index}>
+                                                        <td className="font-weight-bold">
+                                                            {
+                                                                grades.subject
+                                                                    .name
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            <span
+                                                                className={`badge ${getAverageBadgeClass(
+                                                                    grades.average
+                                                                )}`}
+                                                            >
+                                                                {grades.average}
+                                                                %
+                                                            </span>
+                                                        </td>
+                                                        <td>{grades.term}</td>
+                                                        <td>
+                                                            {grades.semester}
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div className="card-footer bg-light">
                                 <small className="text-muted">
-                                    Last updated: {new Date().toLocaleDateString()}
+                                    Last updated:{" "}
+                                    {new Date().toLocaleDateString()}
                                 </small>
                             </div>
                         </div>
@@ -69,8 +98,9 @@ export default function Show({ student }) {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-
-Show.layout = page => <DashboardLayout children={page} title="Student Grades"/>;
+Show.layout = (page) => (
+    <DashboardLayout children={page} title="Student Grades" />
+);
