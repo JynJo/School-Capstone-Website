@@ -14,7 +14,7 @@ export default function Footer() {
                 <Row>
                     {/* Browse Section */}
                     <Col lg={3} md={6} className="mb-4">
-                        <h5 className="text-uppercase mb-3">Browse</h5>
+                        <h6 className="text-uppercase mb-3">Browse</h6>
                         <ul className="list-unstyled">
                             <li className="mb-2">
                                 <a
@@ -61,7 +61,7 @@ export default function Footer() {
 
                     {/* News Section */}
                     <Col lg={3} md={6} className="mb-4">
-                        <h5 className="text-uppercase mb-3">News</h5>
+                        <h6 className="text-uppercase mb-3">News</h6>
                         <ul className="list-unstyled">
                             <li className="mb-2">
                                 <a
@@ -100,7 +100,7 @@ export default function Footer() {
 
                     {/* Contact Section */}
                     <Col lg={3} md={6} className="mb-4">
-                        <h5 className="text-uppercase mb-3">Contact</h5>
+                        <h6 className="text-uppercase mb-3">Contact</h6>
                         <p className="mb-2">
                             <i className="fas fa-map-marker-alt me-2"></i>
                             Gen. Capistrano Sts., Cagayan de Oro, Philippines, 9000

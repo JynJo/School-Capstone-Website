@@ -21,25 +21,29 @@ Route::middleware('guest')->group(function () {
     Route::get('/admission', [PageController::class, 'admission_page'])->name('admission.index');
     Route::get('/events', [App\Http\Controllers\EventController::class, 'index'])->name('events');
     Route::get('/news', [PageController::class, 'news'])->name('news');
-
     Route::get('/news/{title}', [NewsController::class, 'show'])->name('news.show');
+
+    Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('portal', [App\Http\Controllers\StudentController::class, 'login'])->name('student.portal');
 });
 
 // Student Auth
-Route::get('grade-portal', [App\Http\Controllers\StudentController::class, 'login'])->name('student.portal');
-Route::post('logout', [App\Http\Controllers\StudentController::class, 'logout'])->name('student.logout');
-Route::post('/login', [App\Http\Controllers\StudentController::class, 'authenticate'])->name('login');
 // Admin Auth
-Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
-Route::post('admin/login', [AdminController::class, 'authenticate'])->name('admin.login');
-Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+Route::middleware(['throttle:5,1'])->group(function () {
+    Route::post('/login', [App\Http\Controllers\StudentController::class, 'authenticate'])->name('login');
+    Route::post('logout', [App\Http\Controllers\StudentController::class, 'logout'])->name('student.logout');
+    Route::post('admin/login', [AdminController::class, 'authenticate'])->name('admin.login');
+    Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+});
+
 
 // Announcement
 /*Route::get('announcemen'announcement't');*/
 
 // Student
 Route::get('/student/home', [PageController::class, 'student_page'])
-    ->middleware('student')
+    ->middleware('student.guard')
     ->name('student.home');
 
 

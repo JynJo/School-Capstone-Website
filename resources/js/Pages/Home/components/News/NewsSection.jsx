@@ -5,11 +5,15 @@ import "@splidejs/react-splide/css"; // Import Splide's default styles
 
 const LatestNews = ({ news }) => {
     return (
-        <div data-aos="fade-down" className="container py-5 my-5">
+        <div
+            data-aos="fade-down"
+            className="container py-5 my-5 "
+           
+        >
             <div className="mb-5">
                 <h2
                     className="text-start h3 my-4 font-semibold"
-                    style={{  color: "#E41B70" }}
+                    style={{ color: "#E41B70" }}
                     data-aos="fade-up"
                 >
                     LATEST NEWS
@@ -19,10 +23,9 @@ const LatestNews = ({ news }) => {
             <Splide
                 options={{
                     perPage: 4,
-                    perMove: 1,
                     gap: "4rem",
                     pagination: true,
-                    arrows:false,
+                    arrows: false,
                     breakpoints: {
                         1024: { perPage: 3 },
                         768: { perPage: 1 },
@@ -33,12 +36,18 @@ const LatestNews = ({ news }) => {
                 {news &&
                     news.map((newsItem, index) => (
                         <SplideSlide key={index}>
-                            <div className="card mb-4" style={{ width: "18rem" }}>
+                            <div
+                                className="card mb-4"
+                                style={{ width: "18rem" }}
+                            >
                                 <img
                                     className="object-fit-cover"
                                     src={`/storage/${newsItem.image}`}
                                     alt={newsItem.title}
-                                    style={{ height: "300px", objectFit: "cover" }}
+                                    style={{
+                                        height: "300px",
+                                        objectFit: "cover",
+                                    }}
                                 />
                                 <div className="card-body p-3">
                                     <h3
@@ -51,9 +60,15 @@ const LatestNews = ({ news }) => {
                                     >
                                         {newsItem.title}
                                     </h3>
-                                    <p className="card-text" style={{ fontSize: "0.9em" }}>
+                                    <p
+                                        className="card-text"
+                                        style={{ fontSize: "0.9em" }}
+                                    >
                                         {newsItem.content.length > 200
-                                            ? `${newsItem.content.substring(0, 200)}...`
+                                            ? `${newsItem.content.substring(
+                                                  0,
+                                                  200
+                                              )}...`
                                             : newsItem.content}
                                     </p>
                                     <Link

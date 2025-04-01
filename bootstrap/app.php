@@ -17,9 +17,8 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->alias([
             'admin.guard' => \App\Http\Middleware\CheckAdmin::class,
-            'student' => \App\Http\Middleware\CheckStudent::class,
+            'student.guard' => \App\Http\Middleware\CheckStudent::class,
             'guest' => \App\Http\Middleware\Guest::class,
-            'admin-student.guard' => \App\Http\Middleware\AdminOrStudentCheck::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

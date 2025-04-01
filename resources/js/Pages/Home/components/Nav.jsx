@@ -107,9 +107,9 @@ export default function NavigationBar() {
                                 </NavDropdown.Item>
                                 <NavDropdown.Item
                                     as={Link}
-                                    href="/grade-portal"
+                                    href="/portal"
                                     className={
-                                        isActive("/grade-portal")
+                                        isActive("/portal")
                                             ? "active"
                                             : ""
                                     }
