@@ -16,7 +16,7 @@ const Index = ({ auth }) => {
             <Head title="Admissions" />
             <div
                 style={{
-                    backgroundImage: `linear-gradient(rgba(228, 27, 112, 0.7), rgba(228, 27, 112, 0.9)), url('/images/cbg-2.jpg')`,
+                    backgroundColor: "rgba(228, 27, 112, 0.9)",
                     backgroundSize: "cover",
                     padding: "50px",
                     backgroundPosition: "center",
@@ -38,7 +38,7 @@ const Index = ({ auth }) => {
             <Container className="py-5" data-aos="fade-up">
                 <h4
                     className="font-weight-bold text-primary mb-4"
-                    style={{  fontWeight: "bold" }}
+                    style={{ fontWeight: "bold" }}
                 >
                     We are delighted that you are considering Lourdes College
                     for your child's educational journey. As a Catholic
@@ -50,7 +50,7 @@ const Index = ({ auth }) => {
                     character, spiritual growth, and a lifelong love of
                     learning.
                 </h4>
-                <p className="lead" >
+                <p className="lead">
                     We take pride in our students' accomplishments, including
                     those who go on to excel in prestigious universities and
                     meaningful careers. However, we believe that true success
@@ -90,6 +90,27 @@ const Index = ({ auth }) => {
                     ))}
                 </Row>
             </Container>
+
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
+                    marginBottom: "50px",
+                    fontFamily: 'Raleway'
+                }}
+                className='bg-light p-4'
+            >
+                <h5 >How do I get in touch?</h5>
+                <span>
+                    For inquiries regarding admissions, please message us on Facebook:
+                    <br />  
+                </span>
+                <a className='text-primary' href='https://www.facebook.com/lccdotheofficialpage' target='_blank' rel='noopener noreferrer'>
+                    https://www.facebook.com/lccdotheofficialpage
+                </a>
+            </div>
         </div>
     );
 };

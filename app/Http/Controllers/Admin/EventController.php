@@ -34,8 +34,7 @@ class EventController extends Controller
         // dd($request->all());
         $request->validate([
             'title' => 'required',
-            'date' => 'required|date|after_or_equal:' . now()->subMonths(0)->toDateString() .
-              '|before_or_equal:' . now()->addMonths(5)->toDateString(),
+            'date' => 'required|date',
             'description' => 'required',
             'category' => 'required',
             'image' => ['required', 'image', 'mimes:jpg,jpeg,png']

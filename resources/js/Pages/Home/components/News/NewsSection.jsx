@@ -23,7 +23,9 @@ const LatestNews = ({ news }) => {
             <Splide
                 options={{
                     perPage: 4,
-                    gap: "4rem",
+                    gap: "22rem",
+                    // autoWidth: true
+                    width: "100%",
                     pagination: true,
                     arrows: false,
                     breakpoints: {
@@ -37,8 +39,8 @@ const LatestNews = ({ news }) => {
                     news.map((newsItem, index) => (
                         <SplideSlide key={index}>
                             <div
-                                className="card mb-4"
-                                style={{ width: "18rem" }}
+                                className="card rounded-0 border-0 shadow-sm mb-4"
+                                style={{ width: "22rem", backgroundColor: '#FFE4EC' }}
                             >
                                 <img
                                     className="object-fit-cover"
@@ -73,12 +75,12 @@ const LatestNews = ({ news }) => {
                                     </p>
                                     <Link
                                         href={route("news.show", {
-                                            title: newsItem.title,
+                                            title: newsItem .title,
                                         })}
-                                        className="btn btn-outline-primary d-flex align-items-center justify-content-center mt-2 group"
-                                        style={{ fontSize: "0.85em" }}
+                                        className="btn pointer read_more_btn d-flex align-items-center justify-content-center mt-2  "
+                                        style={{ fontSize: "0.85em", backgroundColor: "#FF69A8", color: "#fff" }}
                                     >
-                                        Read More
+                                        READ MORE
                                         <svg
                                             className="ms-1 transition-all ease-in-out group-hover:translate-x-1"
                                             width="16"

@@ -17,8 +17,8 @@ export default function EventCreate() {
     }
 
     return (
-        <div className="container-fluid py-4">
-            <div className="card">
+        <div className="container-fluid py-4 ">
+            <div className="card border-0 shadow-sm">
                 <div className="card-header">
                     <h2 className="h4 font-weight-bold mb-0">Create Event</h2>
                 </div>
@@ -50,7 +50,7 @@ export default function EventCreate() {
                             {errors.description && <div className="invalid-feedback">{errors.description}</div>}
                         </div>
 
-                        <div className="mb-3">
+                        {/* <div className="mb-3">
                             <label htmlFor="category" className="form-label">Category</label>
                             <select 
                                 value={data.category} 
@@ -65,7 +65,7 @@ export default function EventCreate() {
                                 <option value="Community Events">Community Events</option>
                             </select>
                             {errors.category && <div className="invalid-feedback">{errors.category}</div>}
-                        </div>
+                        </div> */}
 
                         <div className="mb-3">
                             <label htmlFor="date" className="form-label">Event Date</label>

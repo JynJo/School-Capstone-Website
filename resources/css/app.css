@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;*/
 @import url('https://fonts.googleapis.com/css2?family=Parisienne&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 :root {
     --primary-color: #E41B70;
@@ -271,6 +272,27 @@ a:hover {
 
 .acc {
     background-color: var(--primary-color);
+}
+
+.news-nav {
+    transition: all .3s ease;   
+    cursor: pointer;
+}
+.news-nav.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: underline;
+}
+.news-nav:hover {
+    text-decoration: underline;
+    color: var(--primary-color);
+}
+.read_more_btn {
+    transition: all .3s ease;   
+    cursor: pointer !important;
+}
+.read_more_btn:hover{
+    background-color: var(--primary-color) !important;
 }
 
 /*@media only screen and (max-width: 768px) {
