@@ -7,20 +7,20 @@ import { HSStaticMethods } from "preline";
 import 'react-photo-view/dist/react-photo-view.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-HSStaticMethods.autoInit();
+// HSStaticMethods.autoInit();
 
-const observer = new MutationObserver((mutationsList) => {
-    for (const mutation of mutationsList) {
-        HSStaticMethods.autoInit();
-    }
-});
+// const observer = new MutationObserver((mutationsList) => {
+//     for (const mutation of mutationsList) {
+//         HSStaticMethods.autoInit();
+//     }
+// });
 
-observer.observe(document.body, {
-    attributes: true,
-    subtree: true,
-    childList: true,
-    characterData: true,
-});
+// observer.observe(document.body, {
+//     attributes: true,
+//     subtree: true,
+//     childList: true,
+//     characterData: true,
+// });
 createInertiaApp({
     title: title => title ? `${title} - Lourdes College` : 'Lourdes College',
     resolve: name => {

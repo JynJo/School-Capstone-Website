@@ -3,7 +3,8 @@ import { useForm } from "@inertiajs/react";
 
 export default function AdminPortalModal({ show, onHide }) {
     const { post, data, setData, errors, processing } = useForm({
-        pin: "",
+        password: "",
+        email: ""
     });
 
     const submitHandler = (e) => {
@@ -27,17 +28,32 @@ export default function AdminPortalModal({ show, onHide }) {
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={submitHandler}>
+
+                <Form.Group className="mb-3">
+                        <Form.Control
+                            type="email"
+                            placeholder="Email address"
+                            value={data.email}
+                            onChange={(e) => setData("email", e.target.value)}
+                            className="py-2"
+                            isInvalid={!!errors.email}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.email}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+
                     <Form.Group className="mb-3">
                         <Form.Control
                             type="password"
-                            placeholder="Enter PIN"
-                            value={data.pin}
-                            onChange={(e) => setData("pin", e.target.value)}
+                            placeholder="Enter password"
+                            value={data.password}
+                            onChange={(e) => setData("password", e.target.value)}
                             className="py-2"
-                            isInvalid={!!errors.pin}
+                            isInvalid={!!errors.password}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.pin}
+                            {errors.password}
                         </Form.Control.Feedback>
                     </Form.Group>
 

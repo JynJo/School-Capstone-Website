@@ -13,7 +13,9 @@ use App\Http\Controllers\Admin\ScheduleController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\TwoFactorController;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 
 Route::middleware('guest')->group(function () {
     Route::get('/home', [PageController::class, 'index'])->name('home');
@@ -23,12 +25,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/news', [PageController::class, 'news'])->name('news');
     Route::get('/news/{title}', [NewsController::class, 'show'])->name('news.show');
 
-    Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::get('admin/login', [AdminController::class, 'login']);
     Route::get('portal', [App\Http\Controllers\StudentController::class, 'login'])->name('student.portal');
 });
-
-// Student Auth
-// Admin Auth
 
 Route::middleware(['throttle:5,1'])->group(function () {
     Route::post('/login', [App\Http\Controllers\StudentController::class, 'authenticate'])->name('login');
@@ -36,6 +35,15 @@ Route::middleware(['throttle:5,1'])->group(function () {
     Route::post('admin/login', [AdminController::class, 'authenticate'])->name('admin.login');
     Route::post('admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
+
+// Route::get('/test-email', function () {
+//     Mail::raw('This is a test email.', function ($message) {
+//         $message->to('your_email@example.com') // Replace with your email
+//                 ->subject('Test Email');
+//     });
+
+//     return 'Email sent!';
+// });
 
 
 // Announcement
@@ -46,8 +54,14 @@ Route::get('/student/home', [PageController::class, 'student_page'])
     ->middleware('student.guard')
     ->name('student.home');
 
+// routes/web.php
+Route::get('/2fa', [TwoFactorController::class, 'index'])->name('2fa.index');
+Route::post('/2fa', [TwoFactorController::class, 'store'])->name('2fa.store');
 
-Route::prefix('admin')->middleware('admin.guard')->group(function () {
+Route::prefix('admin')->middleware(['admin.guard', '2fa'])->group(function () {
+    Route::get('account', [AdminController::class, 'account'])->name('admin.account');
+    Route::put('account/email-update', [AdminController::class, 'update_email'])->name('admin.email.update');
+    // Route::put('account/password-update', [AdminController::class, 'update_email'])->name('admin.email.update');
     // admin/student-specific routes go here
     Route::prefix('student')->group(function () {
         Route::get('list', [StudentController::class, 'index'])->name('student.index');

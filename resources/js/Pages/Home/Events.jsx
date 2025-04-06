@@ -1,10 +1,10 @@
 import React from "react";
 import Layout from "./Layouts/Layout.jsx";
 import { Container, Row, Col, Card, Pagination } from "react-bootstrap";
-import { Link } from "@inertiajs/react"; // Assuming Inertia.js is used
-
+import { Link, Head } from "@inertiajs/react"; // Assuming Inertia.js is used
 const Events = ({ events }) => {
-    return (
+    return (<>
+        <Head title='Events'/>
         <div data-aos="fade-up">
             <div
                 style={{
@@ -121,6 +121,7 @@ const Events = ({ events }) => {
                 </div>
             </Container>
         </div>
+        </>
     );
 };
 

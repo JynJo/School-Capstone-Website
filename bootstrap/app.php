@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin.guard' => \App\Http\Middleware\CheckAdmin::class,
             'student.guard' => \App\Http\Middleware\CheckStudent::class,
             'guest' => \App\Http\Middleware\Guest::class,
+            '2fa' => \App\Http\Middleware\TwoFactorAuthenticated::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Container, Nav, Card, Row, Col } from "react-bootstrap";
 import Layout from "./Layouts/Layout.jsx";
-import { usePage } from "@inertiajs/react";
+import { usePage, Head } from "@inertiajs/react";
 import NewsCard from "./Components/News/NewsCard.jsx";
 const NewsPage = ({ news }) => {
     const { url } = usePage();
-    return (
+    return (<>
+    <Head title='News'/>
         <div data-aos="fade-up">
             <div
                 style={{
@@ -47,6 +48,7 @@ const NewsPage = ({ news }) => {
                 {news && news.map((item) => <NewsCard item={item} />)}
             </Container>
         </div>
+        </>
     );
 };
 

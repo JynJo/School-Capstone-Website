@@ -87,6 +87,18 @@ export default function Header() {
                             </Nav.Link>
                             <Nav.Link
                                 as={Link}
+                                href={route("admin.account")}
+                                className={isActive("/admin/announcement/index") ? "active nav-item" : "nav-item"}
+                                style={
+                                    isActive("/account")
+                                        ? { color: "#E41B70" }
+                                        : {}
+                                }
+                            >
+                                Account
+                            </Nav.Link>
+                            <Nav.Link
+                                as={Link}
                                 href="/admission"
                                 onClick={logoutHandler}
                             >

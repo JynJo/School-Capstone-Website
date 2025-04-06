@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "@inertiajs/react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css"; // Import Splide's default styles
+import "@splidejs/react-splide/css"; 
 
 const LatestNews = ({ news }) => {
     return (
@@ -40,7 +40,7 @@ const LatestNews = ({ news }) => {
                         <SplideSlide key={index}>
                             <div
                                 className="card rounded-0 border-0 shadow-sm mb-4"
-                                style={{ width: "22rem", backgroundColor: '#FFE4EC' }}
+                                style={{ width: "19rem", backgroundColor: '#FFE4EC' }}
                             >
                                 <img
                                     className="object-fit-cover"
